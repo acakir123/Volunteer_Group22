@@ -14,6 +14,9 @@
 		9DF9D79F2D4822B800AEAA82 /* Volunteer_Group22Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9D79E2D4822B800AEAA82 /* Volunteer_Group22Tests.swift */; };
 		9DF9D7A92D4822B800AEAA82 /* Volunteer_Group22UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9D7A82D4822B800AEAA82 /* Volunteer_Group22UITests.swift */; };
 		9DF9D7AB2D4822B800AEAA82 /* Volunteer_Group22UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9D7AA2D4822B800AEAA82 /* Volunteer_Group22UITestsLaunchTests.swift */; };
+		EB12720A2D484E17004F04B7 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1272092D484E14004F04B7 /* SignInView.swift */; };
+		EB12720C2D484E1F004F04B7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB12720B2D484E1C004F04B7 /* SignUpView.swift */; };
+		EB12720E2D484E43004F04B7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB12720D2D484E3F004F04B7 /* AuthViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		9DF9D7A42D4822B800AEAA82 /* Volunteer_Group22UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Volunteer_Group22UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DF9D7A82D4822B800AEAA82 /* Volunteer_Group22UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volunteer_Group22UITests.swift; sourceTree = "<group>"; };
 		9DF9D7AA2D4822B800AEAA82 /* Volunteer_Group22UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volunteer_Group22UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EB1272092D484E14004F04B7 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		EB12720B2D484E1C004F04B7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		EB12720D2D484E3F004F04B7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +100,9 @@
 		9DF9D78C2D4822B300AEAA82 /* Volunteer_Group22 */ = {
 			isa = PBXGroup;
 			children = (
+				EB1272062D484DFC004F04B7 /* ViewModels */,
+				EB1272052D484DF5004F04B7 /* MainViews */,
 				9DF9D78D2D4822B300AEAA82 /* Volunteer_Group22App.swift */,
-				9DF9D78F2D4822B300AEAA82 /* ContentView.swift */,
 				9DF9D7912D4822B800AEAA82 /* Assets.xcassets */,
 				9DF9D7932D4822B800AEAA82 /* Preview Content */,
 			);
@@ -125,6 +132,24 @@
 				9DF9D7AA2D4822B800AEAA82 /* Volunteer_Group22UITestsLaunchTests.swift */,
 			);
 			path = Volunteer_Group22UITests;
+			sourceTree = "<group>";
+		};
+		EB1272052D484DF5004F04B7 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				9DF9D78F2D4822B300AEAA82 /* ContentView.swift */,
+				EB1272092D484E14004F04B7 /* SignInView.swift */,
+				EB12720B2D484E1C004F04B7 /* SignUpView.swift */,
+			);
+			path = MainViews;
+			sourceTree = "<group>";
+		};
+		EB1272062D484DFC004F04B7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EB12720D2D484E3F004F04B7 /* AuthViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +282,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB12720E2D484E43004F04B7 /* AuthViewModel.swift in Sources */,
+				EB12720C2D484E1F004F04B7 /* SignUpView.swift in Sources */,
+				EB12720A2D484E17004F04B7 /* SignInView.swift in Sources */,
 				9DF9D7902D4822B300AEAA82 /* ContentView.swift in Sources */,
 				9DF9D78E2D4822B300AEAA82 /* Volunteer_Group22App.swift in Sources */,
 			);
@@ -417,7 +445,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Volunteer_Group22/Preview Content\"";
-				DEVELOPMENT_TEAM = W9BKK57GSC;
+				DEVELOPMENT_TEAM = H349G2ZH8B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -446,7 +474,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Volunteer_Group22/Preview Content\"";
-				DEVELOPMENT_TEAM = W9BKK57GSC;
+				DEVELOPMENT_TEAM = H349G2ZH8B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
