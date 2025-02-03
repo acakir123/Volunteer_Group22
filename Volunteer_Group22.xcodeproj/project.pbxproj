@@ -24,6 +24,7 @@
 		EB7A15842D5162C2009A3DED /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB7A15832D5162C2009A3DED /* FirebaseFirestore */; };
 		EB7A15862D5162C2009A3DED /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = EB7A15852D5162C2009A3DED /* FirebaseFunctions */; };
 		EB7A15882D5162C2009A3DED /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EB7A15872D5162C2009A3DED /* FirebaseStorage */; };
+		EBCDF6EB2D5167F10067800A /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCDF6EA2D5167EF0067800A /* Home.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		EB12720B2D484E1C004F04B7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		EB12720D2D484E3F004F04B7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		EB7A157A2D51624E009A3DED /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EBCDF6EA2D5167EF0067800A /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		EB1272052D484DF5004F04B7 /* MainViews */ = {
 			isa = PBXGroup;
 			children = (
+				EBCDF6EA2D5167EF0067800A /* Home.swift */,
 				9DF9D78F2D4822B300AEAA82 /* ContentView.swift */,
 				EB1272092D484E14004F04B7 /* SignInView.swift */,
 				EB12720B2D484E1C004F04B7 /* SignUpView.swift */,
@@ -231,7 +234,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					9DF9D7892D4822B300AEAA82 = {
 						CreatedOnToolsVersion = 14.2;
@@ -305,6 +308,7 @@
 				EB12720C2D484E1F004F04B7 /* SignUpView.swift in Sources */,
 				EB12720A2D484E17004F04B7 /* SignInView.swift in Sources */,
 				9DF9D7902D4822B300AEAA82 /* ContentView.swift in Sources */,
+				EBCDF6EB2D5167F10067800A /* Home.swift in Sources */,
 				9DF9D78E2D4822B300AEAA82 /* Volunteer_Group22App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,6 +382,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -438,6 +443,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -517,7 +523,6 @@
 		9DF9D7B22D4822B800AEAA82 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -537,7 +542,6 @@
 		9DF9D7B32D4822B800AEAA82 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -557,7 +561,6 @@
 		9DF9D7B52D4822B800AEAA82 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W9BKK57GSC;
@@ -575,7 +578,6 @@
 		9DF9D7B62D4822B800AEAA82 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W9BKK57GSC;
