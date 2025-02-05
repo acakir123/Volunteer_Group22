@@ -24,7 +24,22 @@
 		EB7A15842D5162C2009A3DED /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB7A15832D5162C2009A3DED /* FirebaseFirestore */; };
 		EB7A15862D5162C2009A3DED /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = EB7A15852D5162C2009A3DED /* FirebaseFunctions */; };
 		EB7A15882D5162C2009A3DED /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EB7A15872D5162C2009A3DED /* FirebaseStorage */; };
-		EBCDF6EB2D5167F10067800A /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCDF6EA2D5167EF0067800A /* Home.swift */; };
+		EBF463782D52DAB7008BE921 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463772D52DAB0008BE921 /* ForgotPasswordView.swift */; };
+		EBF4637A2D52DB4A008BE921 /* AdminMainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463792D52DB45008BE921 /* AdminMainTabView.swift */; };
+		EBF4637C2D52DB56008BE921 /* VolunteerMainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF4637B2D52DB4F008BE921 /* VolunteerMainTabView.swift */; };
+		EBF463802D52DBD7008BE921 /* VolunteerProfileSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF4637F2D52DBD1008BE921 /* VolunteerProfileSetupView.swift */; };
+		EBF463842D52DC9E008BE921 /* VolunteerProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463832D52DC98008BE921 /* VolunteerProfileEditView.swift */; };
+		EBF463862D52DCAB008BE921 /* VolunteerHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463852D52DCA5008BE921 /* VolunteerHistoryView.swift */; };
+		EBF463882D52DCB6008BE921 /* VolunteerEventSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463872D52DCB1008BE921 /* VolunteerEventSearchView.swift */; };
+		EBF4638A2D52DD7F008BE921 /* AdminProfileSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463892D52DD79008BE921 /* AdminProfileSetupView.swift */; };
+		EBF4638C2D52DDC4008BE921 /* AdminProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF4638B2D52DDC0008BE921 /* AdminProfileEditView.swift */; };
+		EBF4638E2D52DE2E008BE921 /* AdminEventManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF4638D2D52DE24008BE921 /* AdminEventManagementView.swift */; };
+		EBF463902D52DE3A008BE921 /* AdminCreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF4638F2D52DE39008BE921 /* AdminCreateEventView.swift */; };
+		EBF463922D52DE40008BE921 /* AdminEditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463912D52DE40008BE921 /* AdminEditEventView.swift */; };
+		EBF463942D52DE52008BE921 /* AdminVolunteerMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463932D52DE50008BE921 /* AdminVolunteerMatchView.swift */; };
+		EBF463962D52DE5A008BE921 /* AdminReportingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463952D52DE59008BE921 /* AdminReportingView.swift */; };
+		EBF463982D52E110008BE921 /* AdminDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463972D52E10B008BE921 /* AdminDashboardView.swift */; };
+		EBF4639A2D52E2AC008BE921 /* VolunteerDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463992D52E2A4008BE921 /* VolunteerDashboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +74,22 @@
 		EB12720B2D484E1C004F04B7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		EB12720D2D484E3F004F04B7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		EB7A157A2D51624E009A3DED /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EBCDF6EA2D5167EF0067800A /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		EBF463772D52DAB0008BE921 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		EBF463792D52DB45008BE921 /* AdminMainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMainTabView.swift; sourceTree = "<group>"; };
+		EBF4637B2D52DB4F008BE921 /* VolunteerMainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerMainTabView.swift; sourceTree = "<group>"; };
+		EBF4637F2D52DBD1008BE921 /* VolunteerProfileSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerProfileSetupView.swift; sourceTree = "<group>"; };
+		EBF463832D52DC98008BE921 /* VolunteerProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerProfileEditView.swift; sourceTree = "<group>"; };
+		EBF463852D52DCA5008BE921 /* VolunteerHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerHistoryView.swift; sourceTree = "<group>"; };
+		EBF463872D52DCB1008BE921 /* VolunteerEventSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerEventSearchView.swift; sourceTree = "<group>"; };
+		EBF463892D52DD79008BE921 /* AdminProfileSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminProfileSetupView.swift; sourceTree = "<group>"; };
+		EBF4638B2D52DDC0008BE921 /* AdminProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminProfileEditView.swift; sourceTree = "<group>"; };
+		EBF4638D2D52DE24008BE921 /* AdminEventManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminEventManagementView.swift; sourceTree = "<group>"; };
+		EBF4638F2D52DE39008BE921 /* AdminCreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminCreateEventView.swift; sourceTree = "<group>"; };
+		EBF463912D52DE40008BE921 /* AdminEditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminEditEventView.swift; sourceTree = "<group>"; };
+		EBF463932D52DE50008BE921 /* AdminVolunteerMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminVolunteerMatchView.swift; sourceTree = "<group>"; };
+		EBF463952D52DE59008BE921 /* AdminReportingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminReportingView.swift; sourceTree = "<group>"; };
+		EBF463972D52E10B008BE921 /* AdminDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDashboardView.swift; sourceTree = "<group>"; };
+		EBF463992D52E2A4008BE921 /* VolunteerDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerDashboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +146,9 @@
 		9DF9D78C2D4822B300AEAA82 /* Volunteer_Group22 */ = {
 			isa = PBXGroup;
 			children = (
+				EBF4637E2D52DBC8008BE921 /* AdminViews */,
+				EBF4637D2D52DBC0008BE921 /* VolunteerViews */,
+				EBF463762D52DAA3008BE921 /* AuthViews */,
 				EB1272062D484DFC004F04B7 /* ViewModels */,
 				EB1272052D484DF5004F04B7 /* MainViews */,
 				9DF9D78D2D4822B300AEAA82 /* Volunteer_Group22App.swift */,
@@ -154,10 +187,7 @@
 		EB1272052D484DF5004F04B7 /* MainViews */ = {
 			isa = PBXGroup;
 			children = (
-				EBCDF6EA2D5167EF0067800A /* Home.swift */,
 				9DF9D78F2D4822B300AEAA82 /* ContentView.swift */,
-				EB1272092D484E14004F04B7 /* SignInView.swift */,
-				EB12720B2D484E1C004F04B7 /* SignUpView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -168,6 +198,45 @@
 				EB12720D2D484E3F004F04B7 /* AuthViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EBF463762D52DAA3008BE921 /* AuthViews */ = {
+			isa = PBXGroup;
+			children = (
+				EBF463772D52DAB0008BE921 /* ForgotPasswordView.swift */,
+				EB1272092D484E14004F04B7 /* SignInView.swift */,
+				EB12720B2D484E1C004F04B7 /* SignUpView.swift */,
+			);
+			path = AuthViews;
+			sourceTree = "<group>";
+		};
+		EBF4637D2D52DBC0008BE921 /* VolunteerViews */ = {
+			isa = PBXGroup;
+			children = (
+				EBF4637B2D52DB4F008BE921 /* VolunteerMainTabView.swift */,
+				EBF4637F2D52DBD1008BE921 /* VolunteerProfileSetupView.swift */,
+				EBF463992D52E2A4008BE921 /* VolunteerDashboardView.swift */,
+				EBF463832D52DC98008BE921 /* VolunteerProfileEditView.swift */,
+				EBF463852D52DCA5008BE921 /* VolunteerHistoryView.swift */,
+				EBF463872D52DCB1008BE921 /* VolunteerEventSearchView.swift */,
+			);
+			path = VolunteerViews;
+			sourceTree = "<group>";
+		};
+		EBF4637E2D52DBC8008BE921 /* AdminViews */ = {
+			isa = PBXGroup;
+			children = (
+				EBF463792D52DB45008BE921 /* AdminMainTabView.swift */,
+				EBF463892D52DD79008BE921 /* AdminProfileSetupView.swift */,
+				EBF463972D52E10B008BE921 /* AdminDashboardView.swift */,
+				EBF4638B2D52DDC0008BE921 /* AdminProfileEditView.swift */,
+				EBF4638D2D52DE24008BE921 /* AdminEventManagementView.swift */,
+				EBF463912D52DE40008BE921 /* AdminEditEventView.swift */,
+				EBF4638F2D52DE39008BE921 /* AdminCreateEventView.swift */,
+				EBF463932D52DE50008BE921 /* AdminVolunteerMatchView.swift */,
+				EBF463952D52DE59008BE921 /* AdminReportingView.swift */,
+			);
+			path = AdminViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,12 +373,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBF4638E2D52DE2E008BE921 /* AdminEventManagementView.swift in Sources */,
+				EBF463882D52DCB6008BE921 /* VolunteerEventSearchView.swift in Sources */,
+				EBF463802D52DBD7008BE921 /* VolunteerProfileSetupView.swift in Sources */,
+				EBF463982D52E110008BE921 /* AdminDashboardView.swift in Sources */,
+				EBF463922D52DE40008BE921 /* AdminEditEventView.swift in Sources */,
+				EBF4637C2D52DB56008BE921 /* VolunteerMainTabView.swift in Sources */,
+				EBF4637A2D52DB4A008BE921 /* AdminMainTabView.swift in Sources */,
 				EB12720E2D484E43004F04B7 /* AuthViewModel.swift in Sources */,
+				EBF4638A2D52DD7F008BE921 /* AdminProfileSetupView.swift in Sources */,
+				EBF463782D52DAB7008BE921 /* ForgotPasswordView.swift in Sources */,
 				EB12720C2D484E1F004F04B7 /* SignUpView.swift in Sources */,
+				EBF463862D52DCAB008BE921 /* VolunteerHistoryView.swift in Sources */,
 				EB12720A2D484E17004F04B7 /* SignInView.swift in Sources */,
+				EBF463962D52DE5A008BE921 /* AdminReportingView.swift in Sources */,
+				EBF4638C2D52DDC4008BE921 /* AdminProfileEditView.swift in Sources */,
+				EBF463842D52DC9E008BE921 /* VolunteerProfileEditView.swift in Sources */,
 				9DF9D7902D4822B300AEAA82 /* ContentView.swift in Sources */,
-				EBCDF6EB2D5167F10067800A /* Home.swift in Sources */,
 				9DF9D78E2D4822B300AEAA82 /* Volunteer_Group22App.swift in Sources */,
+				EBF4639A2D52E2AC008BE921 /* VolunteerDashboardView.swift in Sources */,
+				EBF463902D52DE3A008BE921 /* AdminCreateEventView.swift in Sources */,
+				EBF463942D52DE52008BE921 /* AdminVolunteerMatchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
