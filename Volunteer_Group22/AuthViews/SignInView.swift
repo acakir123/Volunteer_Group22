@@ -29,6 +29,19 @@ struct SignInView: View {
                 SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
+                // Forgot Password Link
+                HStack {
+                    Spacer() // Pushes the link to the right
+                    NavigationLink {
+                        ForgotPasswordView()
+                            .navigationBarBackButtonHidden(true)
+                    } label: {
+                        Text("Forgot Password?")
+                            .font(.system(size: 14))
+                            .foregroundColor(.blue)
+                    }
+                }
+                
                 // Error Message
                 if showError {
                     Text(errorMessage)
