@@ -6,7 +6,9 @@ struct ContentView: View {
     var body: some View {
         Group {
             if authViewModel.userSession != nil {
-                VolunteerMainTabView()
+                
+                
+                SignInView()
                 
                 
                 /* if user.role == admin {
@@ -16,7 +18,7 @@ struct ContentView: View {
                  }
                  */ 
             } else {
-                SignInView()
+                VolunteerMainTabView()
             }
         }
     }
