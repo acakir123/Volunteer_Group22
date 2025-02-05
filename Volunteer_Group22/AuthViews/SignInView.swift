@@ -11,11 +11,12 @@ struct SignInView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
-                // Title
-                Text("Voluntir")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(.bottom, 30)
+                // Logo
+                Image("Voluntir-Logo")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 150, height: 100)
+                    .padding(.vertical, 32)
                 
                 // Email Field
                 TextField("Email", text: $email)
