@@ -17,12 +17,14 @@ class AuthViewModel: ObservableObject {
     }
     
     // Create New User -- More Properties Can Be Added
-    func createUser(withEmail email: String, password: String) async throws {
+    func signUp(withEmail email: String, password: String) async throws {
         print("Sign Up")
     }
     func resetPassword(withEmail email: String) async throws {
         print("Reset Password")
     }
+    
+    
     // Sign Out Current User
     func signOut() {
         print("Sign Out")
