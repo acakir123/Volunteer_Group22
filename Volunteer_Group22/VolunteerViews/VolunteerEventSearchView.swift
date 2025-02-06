@@ -170,32 +170,32 @@ struct VolunteerEventSearchView: View {
                     VolunteerEventSearchView()
                         .navigationBarBackButtonHidden(true)
                 } label: {
-                    Text("Search")
                     Image(systemName: "magnifyingglass.circle")
+                    Text("Search")
                 }
                 
                 NavigationLink {
                     VolunteerProfileSetupView()
                         .navigationBarBackButtonHidden(true)
                 } label: {
-                    Text("Profile")
                     Image(systemName: "person.crop.circle")
+                    Text("Profile")
                 }
                 
                 NavigationLink {
                     VolunteerHistoryView()
                         .navigationBarBackButtonHidden(true)
                 } label: {
-                    Text("History")
                     Image(systemName: "document.viewfinder.fill")
+                    Text("History")
                 }
                 
                 NavigationLink {
                     VolunteerProfileEditView()
                         .navigationBarBackButtonHidden(true)
                 } label: {
-                    Text("Settings")
                     Image(systemName: "gear")
+                    Text("Settings")
                 }
             }
             
