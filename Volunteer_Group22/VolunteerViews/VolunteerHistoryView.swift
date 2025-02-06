@@ -17,5 +17,5 @@ struct VolunteerHistoryView: View {
 
 
 #Preview {
-        VolunteerHistoryView()
+    VolunteerHistoryView()
 }

@@ -35,6 +35,9 @@ struct UserStats: View {
 
 // Volunteer Dashboard View
 struct VolunteerDashboardView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
+    
     var body: some View {
         ScrollView{
             VStack(spacing : 24){
