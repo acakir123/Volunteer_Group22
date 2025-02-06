@@ -93,13 +93,10 @@ struct SettingsRow: View {
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
+struct VolunteerProfileEdit_Previews: PreviewProvider {
     static var previews: some View {
         VolunteerProfileEditView()
     }
 }
 
-
-#Preview {
-    VolunteerProfileEditView()
-}
+//No need for regular #Preview {}
