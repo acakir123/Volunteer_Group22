@@ -165,10 +165,42 @@ struct VolunteerEventSearchView: View {
                     }
                 }
             }
+            HStack {
+                NavigationLink {
+                    VolunteerEventSearchView()
+                        .navigationBarBackButtonHidden(true)
+                } label: {
+                    Text("Search")
+                    Image(systemName: "magnifyingglass.circle")
+                }
+                
+                NavigationLink {
+                    VolunteerProfileSetupView()
+                        .navigationBarBackButtonHidden(true)
+                } label: {
+                    Text("Profile")
+                    Image(systemName: "person.crop.circle")
+                }
+                
+                NavigationLink {
+                    VolunteerHistoryView()
+                        .navigationBarBackButtonHidden(true)
+                } label: {
+                    Text("History")
+                    Image(systemName: "document.viewfinder.fill")
+                }
+                
+                NavigationLink {
+                    VolunteerProfileEditView()
+                        .navigationBarBackButtonHidden(true)
+                } label: {
+                    Text("Settings")
+                    Image(systemName: "gear")
+                }
+            }
+            
         }
-        
-        
-        
+
         
         
     }   //End of body
