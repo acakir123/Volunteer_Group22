@@ -175,18 +175,18 @@ struct VolunteerEventSearchView: View {
                 }
                 
                 NavigationLink {
-                    VolunteerProfileSetupView()
+                    VolunteerDashboardView()
                         .navigationBarBackButtonHidden(true)
                 } label: {
-                    Image(systemName: "person.crop.circle")
-                    Text("Profile")
+                    Image(systemName: "list.bullet.clipboard")
+                    Text("Dashboard")
                 }
                 
                 NavigationLink {
                     VolunteerHistoryView()
                         .navigationBarBackButtonHidden(true)
                 } label: {
-                    Image(systemName: "document.viewfinder.fill")
+                    Image(systemName: "clock")
                     Text("History")
                 }
                 

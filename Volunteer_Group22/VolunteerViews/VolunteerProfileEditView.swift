@@ -5,7 +5,7 @@ struct VolunteerProfileEditView: View {
         NavigationView {
             VStack {
                 VStack {
-                    Image(systemName: "person.crop.circle") // Replace with actual image asset
+                    Image("Voluntir-Logo") // Replace with actual image asset
                         .resizable()
                         .scaledToFill()
                         .frame(width: 80, height: 80)
