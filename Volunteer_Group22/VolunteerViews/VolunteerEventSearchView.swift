@@ -40,7 +40,7 @@ struct VolunteerEventSearchView: View {
                 .padding(.horizontal, 16) // Extra horizontal padding for alignment
                 
                 HStack(spacing: 10) {    //Single stack for search results
-                    Text("Search Results")
+                    Text("Results")
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.bottom, 10)
@@ -103,10 +103,104 @@ struct VolunteerEventSearchView: View {
                                 .font(.subheadline)
                         }
                     }
+                    HStack {
+                        Image("event3")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(10)
+                        
+                        VStack(alignment: .leading) {
+                            Text("Event 3")
+                                .font(.headline)
+                            
+                            Text("Description of Event 3")
+                                .font(.subheadline)
+                        }
+                    }
+                    HStack {
+                        Image("event3")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(10)
+                        
+                        VStack(alignment: .leading) {
+                            Text("Event 3")
+                                .font(.headline)
+                            
+                            Text("Description of Event 3")
+                                .font(.subheadline)
+                        }
+                    }
+                    HStack {
+                        Image("event3")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(10)
+                        
+                        VStack(alignment: .leading) {
+                            Text("Event 3")
+                                .font(.headline)
+                            
+                            Text("Description of Event 3")
+                                .font(.subheadline)
+                        }
+                    }
+                    HStack {
+                        Image("event3")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(10)
+                        
+                        VStack(alignment: .leading) {
+                            Text("Event 3")
+                                .font(.headline)
+                            
+                            Text("Description of Event 3")
+                                .font(.subheadline)
+                        }
+                    }
                 }
             }
+            HStack {
+                NavigationLink {
+                    VolunteerEventSearchView()
+                        .navigationBarBackButtonHidden(true)
+                } label: {
+                    Image(systemName: "magnifyingglass.circle")
+                    Text("Search")
+                }
+                
+                NavigationLink {
+                    VolunteerProfileSetupView()
+                        .navigationBarBackButtonHidden(true)
+                } label: {
+                    Image(systemName: "person.crop.circle")
+                    Text("Profile")
+                }
+                
+                NavigationLink {
+                    VolunteerHistoryView()
+                        .navigationBarBackButtonHidden(true)
+                } label: {
+                    Image(systemName: "document.viewfinder.fill")
+                    Text("History")
+                }
+                
+                NavigationLink {
+                    VolunteerProfileEditView()
+                        .navigationBarBackButtonHidden(true)
+                } label: {
+                    Image(systemName: "gear")
+                    Text("Settings")
+                }
+            }
+            
         }
-        
+
         
         
     }   //End of body
@@ -116,5 +210,4 @@ struct VolunteerEventSearchView: View {
 
 #Preview{
     VolunteerEventSearchView()
-    
 }
