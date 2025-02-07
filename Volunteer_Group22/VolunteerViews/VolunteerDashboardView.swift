@@ -100,6 +100,4 @@ struct VolunteerDashboardView: View {
 }
 
 
-#Preview {
-    VolunteerDashboardView()
-}
+

@@ -154,7 +154,4 @@ struct VolunteerProfileSetupView: View {
     }
 }
 
-#Preview {
-    VolunteerProfileSetupView()
-}
 

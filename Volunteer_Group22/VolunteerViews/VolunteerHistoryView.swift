@@ -65,6 +65,4 @@ struct VolunteerHistoryView: View {
 }   //End of VolunteerHistoryView
 
 
-#Preview {
-    VolunteerHistoryView()
-}
+

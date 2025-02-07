@@ -154,7 +154,3 @@ struct AdminProfileSetupView: View {
     }
 }
 
-#Preview {
-    AdminProfileSetupView()
-}
-

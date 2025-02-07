@@ -91,7 +91,4 @@ struct SignInView: View {
     }
 }
 
-#Preview {
-    SignInView()
-        .environmentObject(AuthViewModel())
-}
+

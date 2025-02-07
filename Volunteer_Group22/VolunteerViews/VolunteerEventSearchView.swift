@@ -208,6 +208,4 @@ struct VolunteerEventSearchView: View {
                 
                 
 
-#Preview{
-    VolunteerEventSearchView()
-}
+

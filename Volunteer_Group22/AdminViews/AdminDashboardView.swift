@@ -272,9 +272,3 @@ struct AdminDashboardView: View {
     }
 }
 
-#Preview {
-    NavigationView {
-        AdminDashboardView()
-            .environmentObject(AuthViewModel())
-    }
-}
