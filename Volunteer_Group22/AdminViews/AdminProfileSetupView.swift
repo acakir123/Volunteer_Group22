@@ -154,3 +154,8 @@ struct AdminProfileSetupView: View {
     }
 }
 
+struct AdminProfileSetupView_Previews: PreviewProvider {
+    static var previews: some View {
+        AdminProfileSetupView()
+    }
+}
