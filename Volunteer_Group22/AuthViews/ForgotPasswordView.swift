@@ -9,19 +9,44 @@ struct ForgotPasswordView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
-        VStack(spacing: 20) {
-            // Title
-            Text("Forgot Password")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding(.bottom, 30)
+        VStack(alignment: .leading, spacing: 16) {
+            // Back Button
+            Button(action: {
+                // Add back navigation logic here
+            }) {
+                Image(systemName: "chevron.left")
+                    .font(.title2)
+                    .foregroundColor(.black)
+                    .padding()
+                    .background(Color(.systemGray5))
+                    .clipShape(Circle())
+            }
             
+            // Title
+            Text("Forgot password")
+                .font(.title)
+                .fontWeight(.bold)
+                
+            Text("Please enter your email to reset the password")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+                
             // Email Field
-            TextField("Email", text: $email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
-                .keyboardType(.emailAddress)
-                .disableAutocorrection(true)
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Your Email")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                
+                TextField("Enter your email", text: $email)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .padding()
+                    .frame(height: 50)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(12)
+                    .autocapitalization(.none)
+                    .keyboardType(.emailAddress)
+                    .disableAutocorrection(true)
+            }
             
             // Error Message
             if showError {
@@ -53,17 +78,22 @@ struct ForgotPasswordView: View {
             } label: {
                 Text("Reset Password")
                     .frame(maxWidth: .infinity)
-                    .padding()
+                    .frame(height: 50)
                     .background(Color.blue)
                     .foregroundColor(.white)
-                    .cornerRadius(10)
+                    .cornerRadius(12)
+                    .font(.headline)
             }
             
             Spacer()
         }
         .padding()
-        .navigationTitle("Forgot Password")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
+struct ForgotPasswordView_Previews: PreviewProvider {
+    static var previews: some View {
+        ForgotPasswordView()
+            .environmentObject(AuthViewModel())
+    }
+}
