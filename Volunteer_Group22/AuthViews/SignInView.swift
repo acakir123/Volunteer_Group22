@@ -9,86 +9,107 @@ struct SignInView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 20) {
-                // Logo
-                Image("Voluntir-Logo")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 150, height: 100)
-                    .padding(.vertical, 32)
-                
-                // Email Field
+        VStack {
+            // Logo
+            Image("Voluntir-Logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 150, height: 150)
+                .padding(.top, 30)
+                .padding(.bottom, 30)
+            
+          
+            
+            // Input Fields
+            VStack(spacing: 16) {
                 TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .padding()
+                    .frame(height: 50)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(12)
                     .autocapitalization(.none)
                     .keyboardType(.emailAddress)
                     .disableAutocorrection(true)
                 
-                // Password Field
                 SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                // Forgot Password Link
-                HStack {
-                    Spacer() // Pushes the link to the right
-                    NavigationLink {
-                        ForgotPasswordView()
-                            .navigationBarBackButtonHidden(true)
-                    } label: {
-                        Text("Forgot Password?")
-                            .font(.system(size: 14))
-                            .foregroundColor(.blue)
-                    }
-                }
-                
-                // Error Message
-                if showError {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .font(.caption)
-                }
-                
-                // Sign In Button
-                Button {
-                    Task {
-                        do {
-                            try await authViewModel.signIn(withEmail: email, password: password)
-                        } catch {
-                            showError = true
-                            errorMessage = error.localizedDescription
-                        }
-                    }
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .padding()
+                    .frame(height: 50)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(12)
+            }
+            .padding(.horizontal, 24)
+            
+            // Forgot Password
+            HStack {
+                Spacer()
+                NavigationLink {
+                    ForgotPasswordView()
+                        .navigationBarBackButtonHidden(true)
                 } label: {
-                    Text("Sign In")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                    Text("Forgot Password?")
+                        .font(.footnote)
+                        .foregroundColor(.blue)
                 }
-                
-                // Navigate to Sign Up View
+            }
+            .padding(.horizontal, 24)
+            .padding(.top, 8)
+            
+            // Error Message
+            if showError {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .font(.caption)
+                    .padding(.top, 8)
+            }
+            
+            // Sign In Button
+            Button {
+                Task {
+                    do {
+                        try await authViewModel.signIn(withEmail: email, password: password)
+                    } catch {
+                        showError = true
+                        errorMessage = error.localizedDescription
+                    }
+                }
+            } label: {
+                Text("Sign In")
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 50)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
+                    .font(.headline)
+            }
+            .padding(.horizontal, 24)
+            .padding(.top, 20)
+            
+            // Sign Up Navigation
+            HStack(spacing: 4) {
+                Text("Don't have an account?")
+                    .font(.footnote)
                 NavigationLink {
                     SignUpView()
                         .navigationBarBackButtonHidden(true)
                 } label: {
-                    VStack {
-                        Text("Don't have an account?")
-                        Text("Sign up here")
-                            .fontWeight(.bold)
-                            .foregroundColor(.blue)
-                    }
-                    .font(.system(size: 14))
+                    Text("Sign up here")
+                        .fontWeight(.bold)
+                        .foregroundColor(.blue)
                 }
-                
-                Spacer()
             }
-            .padding()
-            .navigationTitle("Sign In")
-            .navigationBarTitleDisplayMode(.inline)
+            .padding(.top, 16)
+            
+            Spacer() // This spacer ensures the content above (text fields) stays centered
         }
+        .padding()
     }
 }
 
-
+struct SignInView_Previews: PreviewProvider {
+    static var previews: some View {
+        SignInView()
+            .environmentObject(AuthViewModel())
+    }
+}
