@@ -16,6 +16,9 @@ struct AdminProfileEditView: View {
     @State private var showError = false
     @State private var errorMessage = ""
     
+    // Environment object for authentication
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     // List of states (2-character codes)
     private let states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
     
@@ -112,6 +115,21 @@ struct AdminProfileEditView: View {
                     }
                 }
                 
+                // Sign Out Button
+                Section {
+                    Button(action: {
+                        authViewModel.signOut()
+                    }) {
+                        Text("Sign Out")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(10)
+                    }
+                }
+                
                 // Error Message
                 if showError {
                     Text(errorMessage)
@@ -187,5 +205,6 @@ struct AdminProfileEditView: View {
 struct AdminProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
         AdminProfileEditView()
+            .environmentObject(AuthViewModel()) // Provide a mock AuthViewModel for preview
     }
 }
