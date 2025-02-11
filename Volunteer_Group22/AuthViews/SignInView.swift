@@ -18,8 +18,6 @@ struct SignInView: View {
                 .padding(.top, 30)
                 .padding(.bottom, 30)
             
-          
-            
             // Input Fields
             VStack(spacing: 16) {
                 TextField("Email", text: $email)

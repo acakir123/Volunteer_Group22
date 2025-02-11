@@ -23,6 +23,7 @@
 		EB12720C2D484E1F004F04B7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB12720B2D484E1C004F04B7 /* SignUpView.swift */; };
 		EB12720E2D484E43004F04B7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB12720D2D484E3F004F04B7 /* AuthViewModel.swift */; };
 		EB7A157B2D51624E009A3DED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB7A157A2D51624E009A3DED /* GoogleService-Info.plist */; };
+		EBC9088A2D5B09130015DAC3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC908892D5B09070015DAC3 /* NotificationManager.swift */; };
 		EBF463782D52DAB7008BE921 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463772D52DAB0008BE921 /* ForgotPasswordView.swift */; };
 		EBF4637A2D52DB4A008BE921 /* AdminMainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463792D52DB45008BE921 /* AdminMainTabView.swift */; };
 		EBF4637C2D52DB56008BE921 /* VolunteerMainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF4637B2D52DB4F008BE921 /* VolunteerMainTabView.swift */; };
@@ -73,6 +74,7 @@
 		EB12720B2D484E1C004F04B7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		EB12720D2D484E3F004F04B7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		EB7A157A2D51624E009A3DED /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EBC908892D5B09070015DAC3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		EBF463772D52DAB0008BE921 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		EBF463792D52DB45008BE921 /* AdminMainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMainTabView.swift; sourceTree = "<group>"; };
 		EBF4637B2D52DB4F008BE921 /* VolunteerMainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerMainTabView.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 		EB1272062D484DFC004F04B7 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				EBC908892D5B09070015DAC3 /* NotificationManager.swift */,
 				EB12720D2D484E3F004F04B7 /* AuthViewModel.swift */,
 			);
 			path = ViewModels;
@@ -382,6 +385,7 @@
 				EBF463882D52DCB6008BE921 /* VolunteerEventSearchView.swift in Sources */,
 				EBF463802D52DBD7008BE921 /* VolunteerProfileSetupView.swift in Sources */,
 				EBF463982D52E110008BE921 /* AdminDashboardView.swift in Sources */,
+				EBC9088A2D5B09130015DAC3 /* NotificationManager.swift in Sources */,
 				EBF463922D52DE40008BE921 /* AdminEditEventView.swift in Sources */,
 				EBF4637C2D52DB56008BE921 /* VolunteerMainTabView.swift in Sources */,
 				EBF4637A2D52DB4A008BE921 /* AdminMainTabView.swift in Sources */,
@@ -556,12 +560,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Volunteer_Group22/Volunteer_Group22.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Volunteer_Group22/Preview Content\"";
 				DEVELOPMENT_TEAM = H349G2ZH8B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Volunteer-Group22-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -585,12 +591,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Volunteer_Group22/Volunteer_Group22.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Volunteer_Group22/Preview Content\"";
 				DEVELOPMENT_TEAM = H349G2ZH8B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Volunteer-Group22-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

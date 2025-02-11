@@ -272,3 +272,10 @@ struct AdminDashboardView: View {
     }
 }
 
+
+struct AdminDashboardView_Previews: PreviewProvider {
+    static var previews: some View {
+        AdminDashboardView()
+    }
+}
+
