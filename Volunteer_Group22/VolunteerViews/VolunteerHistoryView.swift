@@ -1,68 +1,123 @@
 import SwiftUI
 
-
-struct PastActivity {
-    let title: String
-    let timestamp: String
-    let type: ActivityType
+// Model for past activities
+struct PastActivity: Identifiable {
+    let id = UUID()
+    let eventTitle: String
+    let eventDescription: String
+    let eventDate: String
+    let eventLocation: String
+    let participationStatus: ParticipationStatus
     
-    enum ActivityType {
-        case event
-        var icon : String {
-            switch self {
-            
-            case .event:
-                return "calendar"
-            }
-        }
+    enum ParticipationStatus: String {
+        case attended = "Attended"
+        case canceled = "Canceled"
+        case noShow = "No Show"
         
         var color: Color {
             switch self {
-            case .event:
-                return .blue
+            case .attended:
+                return .green
+            case .canceled:
+                return .orange
+            case .noShow:
+                return .red
             }
         }
     }
 }
 
-
-
-
 struct VolunteerHistoryView: View {
-    
     @EnvironmentObject var authViewModel: AuthViewModel
     
-    // Sample activities - will be replaced with real data from backend
+    // Sample data for past activities (replace with real data from backend)
     @State private var activities: [PastActivity] = [
-    PastActivity(title: "Past Events You Participated", timestamp: "2 days ago", type: .event)
+        PastActivity(
+            eventTitle: "Community Cleanup",
+            eventDescription: "Helped clean up local parks and streets.",
+            eventDate: "Oct 15, 2023",
+            eventLocation: "Central Park, NY",
+            participationStatus: .attended
+        ),
+        PastActivity(
+            eventTitle: "Food Drive",
+            eventDescription: "Collected and distributed food to local shelters.",
+            eventDate: "Sep 30, 2023",
+            eventLocation: "Brooklyn Food Bank, NY",
+            participationStatus: .canceled
+        ),
+        PastActivity(
+            eventTitle: "Charity Run",
+            eventDescription: "Participated in a 5K run to raise funds for charity.",
+            eventDate: "Aug 20, 2023",
+            eventLocation: "Prospect Park, NY",
+            participationStatus: .noShow
+        )
     ]
-        
+    
     var body: some View {
-        
         NavigationView {
             VStack {
-                HStack {    //HStack for the title
+                // Header
+                HStack {
                     Text("Past Activities")
                         .font(.system(size: 24, weight: .bold))
-                        .frame(maxWidth: .infinity, alignment: .center) // Center the text
+                        .padding(.top, 16)
                     Spacer()
                 }
-
-                List{
-                    Text("Item 1")
-                    Text("Item 2")
-                    Text("Item 3")
-                    
-                    
-                }   //End of list
-                .navigationBarTitle("History", displayMode: .inline)
+                .padding(.horizontal)
+                
+                // List of past activities
+                List(activities) { activity in
+                    VStack(alignment: .leading, spacing: 8) {
+                        // Event Title
+                        Text(activity.eventTitle)
+                            .font(.headline)
+                        
+                        // Event Description
+                        Text(activity.eventDescription)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        
+                        // Event Date and Location
+                        HStack {
+                            Image(systemName: "calendar")
+                                .foregroundColor(.blue)
+                            Text(activity.eventDate)
+                                .font(.caption)
+                            
+                            Spacer()
+                            
+                            Image(systemName: "mappin.and.ellipse")
+                                .foregroundColor(.blue)
+                            Text(activity.eventLocation)
+                                .font(.caption)
+                        }
+                        
+                        // Participation Status
+                        HStack {
+                            Text("Status:")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            Text(activity.participationStatus.rawValue)
+                                .font(.caption)
+                                .foregroundColor(activity.participationStatus.color)
+                        }
+                    }
+                    .padding(.vertical, 8)
+                }
+                .listStyle(PlainListStyle())
             }
+            .navigationTitle("History")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        
-        
-        
-    }   //End of body
-}   //End of VolunteerHistoryView
+    }
+}
 
-
+struct VolunteerHistoryView_Previews: PreviewProvider {
+    static var previews: some View {
+        VolunteerHistoryView()
+            .environmentObject(AuthViewModel()) // Provide a mock AuthViewModel for preview
+    }
+}
 
