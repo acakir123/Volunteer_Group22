@@ -107,7 +107,7 @@ struct VolunteerProfileSetupView: View {
                         .padding()
                 }
             }
-            .navigationTitle("Admin Profile Setup")
+            .navigationTitle("User Profile Setup")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
@@ -154,4 +154,6 @@ struct VolunteerProfileSetupView: View {
     }
 }
 
-
+#Preview {
+    VolunteerProfileSetupView()
+}

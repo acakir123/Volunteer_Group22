@@ -266,3 +266,8 @@ struct AdminEventManagementView: View {
 extension Event.EventStatus: CaseIterable {
     static var allCases: [Event.EventStatus] = [.upcoming, .inProgress, .completed, .cancelled]
 }
+
+#Preview {
+    AdminEventManagementView()
+        
+}

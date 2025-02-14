@@ -213,3 +213,7 @@ struct AdminCreateEventView: View {
         showingSuccessAlert = true
     }
 }
+
+#Preview {
+    AdminCreateEventView()
+}

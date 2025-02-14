@@ -32,11 +32,72 @@ struct UserStats: View {
     }
 }
 
+struct IDCardView: View {
+    var body: some View {
+        VStack {
+            ZStack {
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(Color.white)
+                    .shadow(radius: 5)
+                    .frame(width: 350, height: 200)
+
+                VStack(alignment: .leading, spacing: 5) {
+                    HStack {
+                        Text("Voluntiir")
+                            .font(.largeTitle)
+                            .bold()
+                            .foregroundColor(.blue)
+                        Text("Volunteer ID Card")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    
+                    HStack {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("First Name:").font(.caption).bold()
+                            Text("John")
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.black)
+
+                            Text("Last Name:").font(.caption).bold()
+                            Text("Doe")
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.black)
+
+                            Text("DOB:").font(.caption).bold()
+                            Text("06/03/1981")
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.black)
+                        }
+                        
+                        Spacer()
+                        
+                        Image(.a) // Replace with actual profile image
+                            .resizable()
+                            .frame(width: 90, height: 90)
+                            .clipShape(Rectangle())
+                            .overlay(Rectangle().stroke(Color.black, lineWidth: 2))
+                            .padding(.trailing, 10)
+                    }
+                }
+                .padding(15)
+            }
+            .frame(width: 350, height: 200)
+            
+            Spacer()
+        }
+    }
+}
+
+
 
 // Volunteer Dashboard View
 struct VolunteerDashboardView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-    
+    @State private var selectedTab = 0
     
     var body: some View {
         ScrollView{
@@ -44,27 +105,29 @@ struct VolunteerDashboardView: View {
                 //Header section for the dashboard
                 VStack(spacing: 4) {
                     HStack {
-                        Text("Ready, Player One!")
+                        Text("Hello, John!")
                             .font(.system(size: 32, weight: .bold))
                         
                         Spacer()
                         
-                        NavigationLink(destination: AdminProfileEditView()) {
+                        NavigationLink(destination: VolunteerProfileEditView()) {
                             Image(systemName: "person.circle.fill")
                                 .font(.system(size: 32))
                                 .foregroundColor(.blue)
                         }
                     }
                     
-                    HStack {
-                        Text("Here's what's happening today")
-                            .font(.system(size: 17))
-                            .foregroundColor(.secondary)
-                        Spacer()
-                    }
+//                    HStack {
+//                        Text("Here's what's happening today")
+//                            .font(.system(size: 17))
+//                            .foregroundColor(.secondary)
+//                        Spacer()
+//                    }
                 }
                 .padding(.horizontal)
                 .padding(.top, 8)
+                
+                IDCardView()
                 
                 // Overview section with key statistics
                 VStack(alignment: .leading, spacing: 16) {
@@ -91,13 +154,59 @@ struct VolunteerDashboardView: View {
                     }
                     .padding(.horizontal)
                 }   //End of Overview section
-                
-                
-                
+
             }
+            
+        }
+        
+    }//end of body
+
+}
+
+
+
+struct HomeView: View {
+    var body: some View {
+        NavigationStack {
+            Text("Home Screen")
+                .font(.largeTitle)
+                .navigationTitle("Home")
+        }
+    }
+}
+
+struct SearchView: View {
+    var body: some View {
+        NavigationStack {
+            Text("Search Screen")
+                .font(.largeTitle)
+                .navigationTitle("Search")
+        }
+    }
+}
+
+struct HistoryView: View {
+    var body: some View {
+        NavigationStack {
+            Text("History Screen")
+                .font(.largeTitle)
+                .navigationTitle("History")
+        }
+    }
+}
+
+struct ProfileView: View {
+    var body: some View {
+        NavigationStack {
+            Text("Profile Screen")
+                .font(.largeTitle)
+                .navigationTitle("Profile")
         }
     }
 }
 
 
-
+#Preview {
+    VolunteerDashboardView()
+        .environmentObject(AuthViewModel())
+}
