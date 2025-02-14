@@ -5,7 +5,7 @@ struct VolunteerProfileEditView: View {
         NavigationView {
             VStack {
                 VStack {
-                    Image("Voluntir-Logo") // Replace with actual image asset
+                    Image(.a) // Replace with actual image asset
                         .resizable()
                         .scaledToFill()
                         .frame(width: 80, height: 80)
@@ -24,10 +24,24 @@ struct VolunteerProfileEditView: View {
                 List {
                     Section {
                         NavigationLink(destination: Text("Personal Information")) {
-                            SettingsRow(icon: "person.crop.circle", title: "Personal Information")
+                            HStack {
+                                SettingsRow(icon: "person.crop.circle", title: "Personal Information")
+                                Spacer()
+                                Text("")
+                                    .foregroundColor(.gray)
+                                    .font(.subheadline)
+                            }
+                            
                         }
                         NavigationLink(destination: Text("Sign-In & Security")) {
-                            SettingsRow(icon: "lock.fill", title: "Sign-In & Security")
+                            HStack {
+                                SettingsRow(icon: "lock.fill", title: "Sign-In & Security")
+                                Spacer()
+                                Text("")
+                                    .foregroundColor(.gray)
+                                    .font(.subheadline)
+                            }
+                            
                         }
                         NavigationLink(destination: Text("Payment & Shipping")) {
                             HStack {
@@ -38,38 +52,36 @@ struct VolunteerProfileEditView: View {
                                     .font(.subheadline)
                             }
                         }
-                        NavigationLink(destination: Text("Subscriptions")) {
-                            SettingsRow(icon: "clock.fill", title: "Subscriptions")
+                        NavigationLink(destination: Text("Preferences & Availability")) {
+                            HStack {
+                                SettingsRow(icon: "calendar", title: "Preferences & Availability")
+                                Spacer()
+                                Text("")
+                                    .foregroundColor(.gray)
+                                    .font(.subheadline)
+                            }
                         }
                     }
                     
                     Section {
-                        NavigationLink(destination: Text("iCloud")) {
+                        NavigationLink(destination: Text("Manage Skills")) {
                             HStack {
-                                SettingsRow(icon: "icloud.fill", title: "iCloud")
+                                SettingsRow(icon: "books.vertical.fill", title: "Manage Skills")
                                 Spacer()
                                 Text("")
                                     .foregroundColor(.gray)
                                     .font(.subheadline)
                             }
                         }
-                        NavigationLink(destination: Text("Family")) {
+                        
+                        NavigationLink(destination: Text("Location Services")) {
                             HStack {
-                                SettingsRow(icon: "person.3.fill", title: "Family")
+                                SettingsRow(icon: "location.fill", title: "Location Services")
                                 Spacer()
                                 Text("")
                                     .foregroundColor(.gray)
                                     .font(.subheadline)
                             }
-                        }
-                        NavigationLink(destination: Text("Find My")) {
-                            SettingsRow(icon: "location.fill", title: "Find My")
-                        }
-                        NavigationLink(destination: Text("Media & Purchases")) {
-                            SettingsRow(icon: "applelogo", title: "Media & Purchases")
-                        }
-                        NavigationLink(destination: Text("Sign in with Apple")) {
-                            SettingsRow(icon: "applelogo", title: "Sign in with Apple")
                         }
                     }
                 }
