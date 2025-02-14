@@ -8,20 +8,27 @@ struct EventFormValidation {
     var skillsError: String?
     var dateError: String?
     
+    private let maxNameLength = 100
+    private let minDescriptionLength = 20
+    private let maxDescriptionLength = 1000
+    private let maxLocationLength = 200
+    private let maxSkillsCount = 5
+    
+    
     var hasErrors: Bool {
         return nameError != nil ||
-            descriptionError != nil ||
-            locationError != nil ||
-            skillsError != nil ||
-            dateError != nil
+        descriptionError != nil ||
+        locationError != nil ||
+        skillsError != nil ||
+        dateError != nil
     }
     
     mutating func validate(event: EventFormData) {
         // Name validation
         if event.name.isEmpty {
             nameError = "Event name is required"
-        } else if event.name.count > 100 {
-            nameError = "Event name must be less than 100 characters"
+        } else if event.name.count > maxNameLength {
+            nameError = "Event name must be less than \(maxNameLength) characters"
         } else {
             nameError = nil
         }
@@ -29,6 +36,10 @@ struct EventFormValidation {
         // Description validation
         if event.description.isEmpty {
             descriptionError = "Event description is required"
+        } else if event.description.count < minDescriptionLength {
+            descriptionError = "Description must be at least \(minDescriptionLength) characters"
+        } else if event.description.count > maxDescriptionLength {
+            descriptionError = "Description must be less than \(maxDescriptionLength) characters"
         } else {
             descriptionError = nil
         }
@@ -36,6 +47,8 @@ struct EventFormValidation {
         // Location validation
         if event.location.isEmpty {
             locationError = "Location is required"
+        } else if event.location.count > maxLocationLength {
+            locationError = "Location must be less than \(maxLocationLength) characters"
         } else {
             locationError = nil
         }
@@ -43,12 +56,15 @@ struct EventFormValidation {
         // Skills validation
         if event.requiredSkills.isEmpty {
             skillsError = "At least one skill is required"
+        } else if event.requiredSkills.count > maxSkillsCount {
+            skillsError = "Maximum of \(maxSkillsCount) skills allowed"
         } else {
             skillsError = nil
         }
         
         // Date validation
-        if event.date < Date() {
+        let calendar = Calendar.current
+        if event.date < calendar.startOfDay(for: Date()) {
             dateError = "Event date must be in the future"
         } else {
             dateError = nil
@@ -79,10 +95,20 @@ struct EventFormData {
 }
 
 // Custom form field components
-struct FormField: View {
+struct FormField<Content: View>: View {
     let title: String
     let error: String?
-    let content: AnyView
+    let content: Content
+    
+    init(
+        title: String,
+        error: String? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.title = title
+        self.error = error
+        self.content = content()
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -136,103 +162,104 @@ struct AdminEditEventView: View {
                     // Event Name
                     FormField(
                         title: "Event Name",
-                        error: validation.nameError,
-                        content: AnyView(
-                            TextField("Enter event name", text: $formData.name)
-                                .textFieldStyle(.roundedBorder)
-                        )
-                    )
+                        error: validation.nameError
+                    ) {
+                        TextField("Enter event name", text: $formData.name)
+                            .textFieldStyle(.roundedBorder)
+                    }
                     
                     // Description
                     FormField(
                         title: "Description",
-                        error: validation.descriptionError,
-                        content: AnyView(
-                            TextEditor(text: $formData.description)
-                                .frame(height: 100)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(Color.gray.opacity(0.2))
-                                )
-                        )
-                    )
+                        error: validation.descriptionError
+                    ) {
+                        TextEditor(text: $formData.description)
+                            .frame(height: 100)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray.opacity(0.2))
+                            )
+                    }
                     
                     // Location
                     FormField(
                         title: "Location",
-                        error: validation.locationError,
-                        content: AnyView(
-                            TextField("Enter location", text: $formData.location)
-                                .textFieldStyle(.roundedBorder)
-                        )
-                    )
+                        error: validation.locationError
+                    ) {
+                        TextField("Enter location", text: $formData.location)
+                            .textFieldStyle(.roundedBorder)
+                    }
                     
                     // Required Skills
                     FormField(
                         title: "Required Skills",
-                        error: validation.skillsError,
-                        content: AnyView(
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack {
-                                    ForEach(availableSkills, id: \.self) { skill in
-                                        SkillToggleButton(
-                                            skill: skill,
-                                            isSelected: formData.requiredSkills.contains(skill),
-                                            action: {
-                                                if formData.requiredSkills.contains(skill) {
-                                                    formData.requiredSkills.remove(skill)
-                                                } else {
-                                                    formData.requiredSkills.insert(skill)
-                                                }
+                        error: validation.skillsError
+                    ) {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(availableSkills, id: \.self) { skill in
+                                    SkillToggleButton(
+                                        skill: skill,
+                                        isSelected: formData.requiredSkills.contains(skill),
+                                        action: {
+                                            if formData.requiredSkills.contains(skill) {
+                                                formData.requiredSkills.remove(skill)
+                                            } else {
+                                                formData.requiredSkills.insert(skill)
                                             }
-                                        )
-                                    }
+                                        }
+                                    )
                                 }
                             }
-                        )
-                    )
+                        }
+                    }
                     
                     // Urgency
                     FormField(
                         title: "Urgency Level",
-                        error: nil,
-                        content: AnyView(
-                            Picker("Urgency", selection: $formData.urgency) {
-                                ForEach(Event.UrgencyLevel.allCases, id: \.self) { level in
-                                    Text(level.rawValue).tag(level)
-                                }
+                        error: nil
+                    ) {
+                        Picker("Urgency", selection: $formData.urgency) {
+                            ForEach(Event.UrgencyLevel.allCases, id: \.self) { level in
+                                Text(level.rawValue).tag(level)
                             }
-                            .pickerStyle(.segmented)
-                        )
-                    )
+                        }
+                        .pickerStyle(.segmented)
+                    }
                     
                     // Event Date
                     FormField(
                         title: "Event Date",
-                        error: validation.dateError,
-                        content: AnyView(
-                            DatePicker(
-                                "Select date",
-                                selection: $formData.date,
-                                displayedComponents: [.date]
-                            )
-                            .datePickerStyle(.graphical)
+                        error: validation.dateError
+                    ) {
+                        DatePicker(
+                            "Select date",
+                            selection: $formData.date,
+                            displayedComponents: [.date]
                         )
-                    )
+                        .datePickerStyle(.graphical)
+                    }
                     
                     // Status
                     FormField(
                         title: "Event Status",
-                        error: nil,
-                        content: AnyView(
-                            Picker("Status", selection: $formData.status) {
-                                ForEach(Event.EventStatus.allCases, id: \.self) { status in
-                                    Text(status.rawValue).tag(status)
-                                }
+                        error: nil
+                    ) {
+                        Picker("Status", selection: $formData.status) {
+                            ForEach(Event.EventStatus.allCases, id: \.self) { status in
+                                Text(status.rawValue).tag(status)
                             }
-                            .pickerStyle(.menu)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(Color(uiColor: .systemBackground))
+                        .cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.gray.opacity(0.2))
                         )
-                    )
+                    }
                 }
                 .padding()
                 .background(Color(uiColor: .systemBackground))
@@ -326,6 +353,22 @@ struct SkillToggleButton: View {
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(isSelected ? Color.blue : Color.gray.opacity(0.3))
                 )
+        }
+    }
+}
+
+struct AdminEditEventView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            AdminEditEventView(event: Event(
+                name: "Beach Cleanup",
+                description: "Community beach cleanup event",
+                location: "Santa Monica Beach",
+                requiredSkills: ["Physical Labor", "Environmental"],
+                urgency: .medium,
+                date: Date().addingTimeInterval(86400 * 7),
+                status: .upcoming
+            ))
         }
     }
 }

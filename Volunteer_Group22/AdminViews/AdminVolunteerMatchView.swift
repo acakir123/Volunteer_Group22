@@ -317,7 +317,6 @@ struct AdminVolunteerMatchView: View {
 }
 
 // MARK: - Supporting Views
-
 struct VolunteerCard: View {
     let volunteer: Volunteer
     let isSelected: Bool
@@ -325,7 +324,7 @@ struct VolunteerCard: View {
     
     var body: some View {
         Button(action: action) {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 12) {
                 Text(volunteer.name)
                     .font(.headline)
                 
@@ -334,7 +333,7 @@ struct VolunteerCard: View {
                     .foregroundColor(.secondary)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
+                    HStack(spacing: 8) {
                         ForEach(Array(volunteer.skills), id: \.self) { skill in
                             Text(skill)
                                 .font(.caption)
@@ -347,7 +346,7 @@ struct VolunteerCard: View {
                     }
                 }
             }
-            .padding()
+            .padding(16)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(isSelected ? Color.blue.opacity(0.1) : Color(uiColor: .systemBackground))
             .cornerRadius(12)
@@ -367,7 +366,7 @@ struct EventCard: View {
     
     var body: some View {
         Button(action: action) {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 12) {
                 HStack {
                     Text(event.name)
                         .font(.headline)
@@ -384,7 +383,7 @@ struct EventCard: View {
                     .foregroundColor(.secondary)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
+                    HStack(spacing: 8) {
                         ForEach(event.requiredSkills, id: \.self) { skill in
                             Text(skill)
                                 .font(.caption)
@@ -397,7 +396,7 @@ struct EventCard: View {
                     }
                 }
             }
-            .padding()
+            .padding(16)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(isSelected ? Color.blue.opacity(0.1) : Color(uiColor: .systemBackground))
             .cornerRadius(12)
