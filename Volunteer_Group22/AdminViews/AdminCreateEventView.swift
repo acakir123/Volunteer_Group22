@@ -5,6 +5,9 @@ struct AdminCreateEventView: View {
     @State private var formData: EventFormData
     @State private var validation = EventFormValidation()
     @State private var showingSuccessAlert = false
+    @State private var showingErrorAlert = false
+    @State private var errorMessage = ""
+    @State private var isLoading = false
     
     // Available skills (will come from backend)
     let availableSkills = [
@@ -54,104 +57,104 @@ struct AdminCreateEventView: View {
                     // Event Name
                     FormField(
                         title: "Event Name",
-                        error: validation.nameError,
-                        content: AnyView(
-                            TextField("Enter event name", text: $formData.name)
-                                .textFieldStyle(.roundedBorder)
-                        )
-                    )
+                        error: validation.nameError
+                    ) {
+                        TextField("Enter event name", text: $formData.name)
+                            .textFieldStyle(.roundedBorder)
+                            .disabled(isLoading)
+                    }
                     
                     // Description
                     FormField(
                         title: "Description",
-                        error: validation.descriptionError,
-                        content: AnyView(
-                            TextEditor(text: $formData.description)
-                                .frame(height: 100)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(Color.gray.opacity(0.2))
-                                )
-                        )
-                    )
+                        error: validation.descriptionError
+                    ) {
+                        TextEditor(text: $formData.description)
+                            .frame(height: 100)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray.opacity(0.2))
+                            )
+                            .disabled(isLoading)
+                    }
                     
                     // Location
                     FormField(
                         title: "Location",
-                        error: validation.locationError,
-                        content: AnyView(
-                            TextField("Enter location", text: $formData.location)
-                                .textFieldStyle(.roundedBorder)
-                        )
-                    )
+                        error: validation.locationError
+                    ) {
+                        TextField("Enter location", text: $formData.location)
+                            .textFieldStyle(.roundedBorder)
+                            .disabled(isLoading)
+                    }
                     
                     // Required Skills
                     FormField(
                         title: "Required Skills",
-                        error: validation.skillsError,
-                        content: AnyView(
-                            VStack(alignment: .leading, spacing: 12) {
-                                Text("Select all that apply")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack {
-                                        ForEach(availableSkills, id: \.self) { skill in
-                                            SkillToggleButton(
-                                                skill: skill,
-                                                isSelected: formData.requiredSkills.contains(skill),
-                                                action: {
+                        error: validation.skillsError
+                    ) {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Select all that apply")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    ForEach(availableSkills, id: \.self) { skill in
+                                        SkillToggleButton(
+                                            skill: skill,
+                                            isSelected: formData.requiredSkills.contains(skill),
+                                            action: {
+                                                if !isLoading {
                                                     if formData.requiredSkills.contains(skill) {
                                                         formData.requiredSkills.remove(skill)
                                                     } else {
                                                         formData.requiredSkills.insert(skill)
                                                     }
                                                 }
-                                            )
-                                        }
+                                            }
+                                        )
+                                        .opacity(isLoading ? 0.5 : 1)
                                     }
                                 }
                             }
-                        )
-                    )
+                        }
+                    }
                     
                     // Urgency
                     FormField(
                         title: "Urgency Level",
-                        error: nil,
-                        content: AnyView(
-                            VStack(alignment: .leading, spacing: 8) {
-                                Picker("Urgency", selection: $formData.urgency) {
-                                    ForEach(Event.UrgencyLevel.allCases, id: \.self) { level in
-                                        HStack {
-                                            Circle()
-                                                .fill(level.color)
-                                                .frame(width: 12, height: 12)
-                                            Text(level.rawValue)
-                                        }
-                                        .tag(level)
-                                    }
+                        error: nil
+                    ) {
+                        Picker("Urgency", selection: $formData.urgency) {
+                            ForEach(Event.UrgencyLevel.allCases, id: \.self) { level in
+                                HStack {
+                                    Circle()
+                                        .fill(level.color)
+                                        .frame(width: 12, height: 12)
+                                    Text(level.rawValue)
                                 }
-                                .pickerStyle(.segmented)
+                                .tag(level)
                             }
-                        )
-                    )
+                        }
+                        .pickerStyle(.segmented)
+                        .disabled(isLoading)
+                    }
                     
                     // Event Date
                     FormField(
                         title: "Event Date",
-                        error: validation.dateError,
-                        content: AnyView(
-                            DatePicker(
-                                "Select date",
-                                selection: $formData.date,
-                                in: Date()...,
-                                displayedComponents: [.date]
-                            )
-                            .datePickerStyle(.graphical)
+                        error: validation.dateError
+                    ) {
+                        DatePicker(
+                            "Select date",
+                            selection: $formData.date,
+                            in: Date()...,
+                            displayedComponents: [.date]
                         )
-                    )
+                        .datePickerStyle(.graphical)
+                        .disabled(isLoading)
+                    }
                 }
                 .padding()
                 .background(Color(uiColor: .systemBackground))
@@ -160,7 +163,11 @@ struct AdminCreateEventView: View {
                 // Action buttons
                 HStack(spacing: 16) {
                     // Cancel button
-                    Button(action: { dismiss() }) {
+                    Button(action: {
+                        if !isLoading {
+                            dismiss()
+                        }
+                    }) {
                         HStack {
                             Image(systemName: "xmark")
                             Text("Cancel")
@@ -171,12 +178,18 @@ struct AdminCreateEventView: View {
                         .background(Color(uiColor: .systemBackground))
                         .cornerRadius(12)
                     }
+                    .disabled(isLoading)
                     
                     // Create button
                     Button(action: createEvent) {
                         HStack {
-                            Image(systemName: "plus")
-                            Text("Create Event")
+                            if isLoading {
+                                ProgressView()
+                                    .tint(.white)
+                            } else {
+                                Image(systemName: "plus")
+                                Text("Create Event")
+                            }
                         }
                         .foregroundColor(.white)
                         .padding()
@@ -184,6 +197,7 @@ struct AdminCreateEventView: View {
                         .background(Color.blue)
                         .cornerRadius(12)
                     }
+                    .disabled(isLoading)
                 }
                 .padding(.horizontal)
             }
@@ -197,20 +211,55 @@ struct AdminCreateEventView: View {
         } message: {
             Text("Event has been created successfully.")
         }
+        .alert("Error", isPresented: $showingErrorAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(errorMessage)
+        }
         .navigationTitle("Create Event")
         .navigationBarTitleDisplayMode(.inline)
+        .disabled(isLoading)
     }
     
     private func createEvent() {
+        // First validate the form
         validation.validate(event: formData)
         
         guard !validation.hasErrors else {
             return
         }
         
-        // Here we will save to the backend
+        // Set loading state
+        isLoading = true
         
-        showingSuccessAlert = true
+        // Simulate API call with a delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            do {
+                // Here would be the actual call to Firebase
+                // For now, just simulate success/failure
+                let shouldSucceed = true // Simulate API response
+                
+                if shouldSucceed {
+                    showingSuccessAlert = true
+                } else {
+                    throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to create event"])
+                }
+            } catch {
+                errorMessage = error.localizedDescription
+                showingErrorAlert = true
+            }
+            
+            // Reset loading state
+            isLoading = false
+        }
+    }
+}
+
+struct AdminCreateEventView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            AdminCreateEventView()
+        }
     }
 }
 

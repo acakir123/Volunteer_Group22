@@ -174,8 +174,8 @@ struct AdminEventManagementView: View {
     var filteredEvents: [Event] {
         events.filter { event in
             let matchesSearch = searchText.isEmpty ||
-                event.name.localizedCaseInsensitiveContains(searchText) ||
-                event.location.localizedCaseInsensitiveContains(searchText)
+            event.name.localizedCaseInsensitiveContains(searchText) ||
+            event.location.localizedCaseInsensitiveContains(searchText)
             
             let matchesFilter = selectedFilter == nil || event.status == selectedFilter
             
@@ -214,15 +214,31 @@ struct AdminEventManagementView: View {
                 .padding(.horizontal)
                 
                 // Events list
-                LazyVStack(spacing: 16) {
-                    ForEach(filteredEvents) { event in
-                        NavigationLink(destination: AdminEditEventView(event: event)) {
-                            EventListItem(event: event)
-                        }
-                        .buttonStyle(PlainButtonStyle())
+                if filteredEvents.isEmpty {
+                    VStack(spacing: 10) {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 40))
+                            .foregroundColor(.gray)
+                        Text("No matching events.")
+                            .font(.headline)
+                        Text("Try adjusting your search or filters.")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
                     }
+                    .padding(.top, 50)
+                    .padding()
+                } else {
+                    LazyVStack(spacing: 16) {
+                        ForEach(filteredEvents) { event in
+                            NavigationLink(destination: AdminEditEventView(event: event)) {
+                                EventListItem(event: event)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
             }
             .padding(.vertical)
         }
@@ -258,7 +274,7 @@ struct AdminEventManagementView: View {
                 date: Date().addingTimeInterval(86400 * 2),
                 status: .upcoming
             ),
-            // Add more sample events 
+            // Add more sample events
         ]
     }
 }
@@ -267,7 +283,14 @@ extension Event.EventStatus: CaseIterable {
     static var allCases: [Event.EventStatus] = [.upcoming, .inProgress, .completed, .cancelled]
 }
 
+<<<<<<< HEAD
 #Preview {
     AdminEventManagementView()
         
+=======
+struct AdminEventManagementView_Previews: PreviewProvider {
+    static var previews: some View {
+        AdminEventManagementView()
+    }
+>>>>>>> main
 }

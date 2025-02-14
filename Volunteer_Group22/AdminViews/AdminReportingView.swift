@@ -96,10 +96,20 @@ struct CircleProgressView: View {
     }
 }
 
-struct ChartCard: View {
+struct ChartCard<Content: View>: View {
     let title: String
     let subtitle: String?
-    let content: AnyView
+    let content: Content
+    
+    init(
+        title: String,
+        subtitle: String? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.content = content()
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -184,7 +194,7 @@ struct AdminReportingView: View {
                         .cornerRadius(8)
                     }
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal)
                 
                 // Date range picker
                 HStack {
@@ -242,32 +252,37 @@ struct AdminReportingView: View {
                     // Event Status Distribution
                     ChartCard(
                         title: "Event Status Distribution",
-                        subtitle: "Current event status breakdown",
-                        content: AnyView(
-                            HStack(spacing: 20) {
-                                ForEach(eventStatus, id: \.0) { status in
-                                    CircleProgressView(
-                                        percentage: status.1,
-                                        color: status.0 == "Completed" ? .green :
-                                              status.0 == "In Progress" ? .blue : .orange,
-                                        label: status.0
-                                    )
+                        subtitle: "Current event status breakdown"
+                    ) {
+                        HStack(spacing: 0) {
+                            Spacer(minLength: 0)
+                            ForEach(eventStatus, id: \.0) { status in
+                                CircleProgressView(
+                                    percentage: status.1,
+                                    color: status.0 == "Completed" ? .green :
+                                          status.0 == "In Progress" ? .blue : .orange,
+                                    label: status.0
+                                )
+                                if status.0 != eventStatus.last?.0 {
+                                    Spacer(minLength: 0)
                                 }
                             }
-                        )
-                    )
+                            Spacer(minLength: 0)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical)
+                    }
                     
                     // Skill Distribution
                     ChartCard(
                         title: "Volunteer Skills",
-                        subtitle: "Distribution of volunteer skills",
-                        content: AnyView(
-                            SimpleBarChart(
-                                data: skillDistribution,
-                                maxValue: skillDistribution.map { $0.1 }.max() ?? 100
-                            )
+                        subtitle: "Distribution of volunteer skills"
+                    ) {
+                        SimpleBarChart(
+                            data: skillDistribution,
+                            maxValue: skillDistribution.map { $0.1 }.max() ?? 100
                         )
-                    )
+                    }
                 }
                 .padding(.horizontal)
             }
@@ -310,9 +325,10 @@ struct AdminReportingView: View {
     }
 }
 
-
 struct AdminReportingView_Previews: PreviewProvider {
     static var previews: some View {
-        AdminReportingView()
+        
+            AdminReportingView()
+        
     }
 }
