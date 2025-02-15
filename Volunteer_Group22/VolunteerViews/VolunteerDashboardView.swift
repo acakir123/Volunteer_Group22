@@ -94,6 +94,9 @@ struct IDCardView: View {
 
 
 
+
+
+
 // Volunteer Dashboard View
 struct VolunteerDashboardView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -151,12 +154,48 @@ struct VolunteerDashboardView: View {
                             icon: "clock",
                             color: .orange
                         )
+                        UserStats(
+                            title: "People",
+                            value: "500+",
+                            icon: "person.3",
+                            color: .green
+                        )
+                        UserStats(
+                            title: "Points",
+                            value: "7",
+                            icon: "chart.line.text.clipboard",
+                            color: .purple
+                        )
                     }
                     .padding(.horizontal)
                 }   //End of Overview section
+                
+                VStack {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("About Us")
+                                .font(.system(size: 24, weight: .bold))
+                            
+                            Spacer()
+                            
+                            Text("Voluntiir connects passionate volunteers with meaningful opportunities, making giving back easier and more social. Whether you're an individual or an organization, we help you engage, collaborate, and make an impact—together.")
+                                .font(.system(size: 16))
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                        
+    //                    Button(action: { showingCreateEvent = true }) {
+    //                        Image(systemName: "plus.circle.fill")
+    //                            .font(.system(size: 32))
+    //                            .foregroundColor(.blue)
+    //                    }
+                    }
+                    .padding(.horizontal)
+                }
+                
 
             }
-            
         }
         
     }//end of body
