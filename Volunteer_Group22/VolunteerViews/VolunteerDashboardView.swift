@@ -36,9 +36,12 @@ struct IDCardView: View {
     var body: some View {
         VStack {
             ZStack {
-                RoundedRectangle(cornerRadius: 15)
+                RoundedRectangle(cornerRadius: 16)
                     .fill(Color.white)
-                    .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+                    .shadow(
+                        color: .blue,
+                                                    radius: CGFloat(0),
+                                                    x: CGFloat(5), y: CGFloat(5))
                     .frame(width: 350, height: 200)
 
                 VStack(alignment: .leading, spacing: 5) {
