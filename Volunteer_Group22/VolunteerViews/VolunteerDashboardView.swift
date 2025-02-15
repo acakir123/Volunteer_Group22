@@ -38,7 +38,7 @@ struct IDCardView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)
                     .fill(Color.white)
-                    .shadow(radius: 5)
+                    .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
                     .frame(width: 350, height: 200)
 
                 VStack(alignment: .leading, spacing: 5) {
