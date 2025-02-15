@@ -2,92 +2,58 @@ import SwiftUI
 
 struct VolunteerProfileEditView: View {
     var body: some View {
-        NavigationView {
+        VStack {
             VStack {
-                VStack {
-                    Image(.a) // Replace with actual image asset
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 80, height: 80)
-                        .clipShape(Circle())
-                        .padding(.bottom, 5)
-                    
-                    Text("John Doe")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                    Text("johndoe123@gmail.com")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                }
-                .padding()
+                Image(systemName: "person.circle")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 80, height: 80)
+                    .clipShape(Circle())
+                    .padding(.bottom, 5)
                 
-                List {
-                    Section {
-                        NavigationLink(destination: Text("Personal Information")) {
-                            HStack {
-                                SettingsRow(icon: "person.crop.circle", title: "Personal Information")
-                                Spacer()
-                                Text("")
-                                    .foregroundColor(.gray)
-                                    .font(.subheadline)
-                            }
-                            
-                        }
-                        NavigationLink(destination: Text("Sign-In & Security")) {
-                            HStack {
-                                SettingsRow(icon: "lock.fill", title: "Sign-In & Security")
-                                Spacer()
-                                Text("")
-                                    .foregroundColor(.gray)
-                                    .font(.subheadline)
-                            }
-                            
-                        }
-                        NavigationLink(destination: Text("Payment & Shipping")) {
-                            HStack {
-                                SettingsRow(icon: "creditcard.fill", title: "Payment & Shipping")
-                                Spacer()
-                                Text("")
-                                    .foregroundColor(.gray)
-                                    .font(.subheadline)
-                            }
-                        }
-                        NavigationLink(destination: Text("Preferences & Availability")) {
-                            HStack {
-                                SettingsRow(icon: "calendar", title: "Preferences & Availability")
-                                Spacer()
-                                Text("")
-                                    .foregroundColor(.gray)
-                                    .font(.subheadline)
-                            }
-                        }
+                Text("John Doe")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                Text("johndoe123@gmail.com")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+            }
+            .padding()
+            
+            List {
+                Section {
+                    NavigationLink(destination: Text("Personal Information")) {
+                        SettingsRow(icon: "person.crop.circle", title: "Personal Information")
                     }
                     
-                    Section {
-                        NavigationLink(destination: Text("Manage Skills")) {
-                            HStack {
-                                SettingsRow(icon: "books.vertical.fill", title: "Manage Skills")
-                                Spacer()
-                                Text("")
-                                    .foregroundColor(.gray)
-                                    .font(.subheadline)
-                            }
-                        }
-                        
-                        NavigationLink(destination: Text("Location Services")) {
-                            HStack {
-                                SettingsRow(icon: "location.fill", title: "Location Services")
-                                Spacer()
-                                Text("")
-                                    .foregroundColor(.gray)
-                                    .font(.subheadline)
-                            }
-                        }
+                    NavigationLink(destination: Text("Sign-In & Security")) {
+                        SettingsRow(icon: "lock.fill", title: "Sign-In & Security")
+                    }
+                    
+                    NavigationLink(destination: Text("Payment & Shipping")) {
+                        SettingsRow(icon: "creditcard.fill", title: "Payment & Shipping")
+                    }
+                    
+                    NavigationLink(destination: Text("Preferences & Availability")) {
+                        SettingsRow(icon: "calendar", title: "Preferences & Availability")
+                    }
+                }
+                
+                Section {
+                    NavigationLink(destination: Text("Manage Skills")) {
+                        SettingsRow(icon: "books.vertical.fill", title: "Manage Skills")
+                    }
+                    
+                    NavigationLink(destination: Text("Location Services")) {
+                        SettingsRow(icon: "location.fill", title: "Location Services")
                     }
                 }
             }
-            .navigationBarTitle("Voluntiir Account", displayMode: .inline)
+            .listStyle(InsetGroupedListStyle())
         }
+        .navigationTitle("Voluntiir Account")
+        .navigationBarTitleDisplayMode(.inline)
+        .background(Color(uiColor: .systemGroupedBackground))
     }
 }
 
@@ -107,8 +73,8 @@ struct SettingsRow: View {
 
 struct VolunteerProfileEdit_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerProfileEditView()
+        NavigationStack {
+            VolunteerProfileEditView()
+        }
     }
 }
-
-//No need for regular #Preview {}
