@@ -3,6 +3,7 @@ import SwiftUI
 struct SignUpView: View {
     @State private var email = ""
     @State private var password = ""
+    @State private var role = "Volunteer"
     @State private var showError = false
     @State private var errorMessage = ""
     
@@ -36,6 +37,44 @@ struct SignUpView: View {
                     .frame(height: 50)
                     .background(Color(.systemGray6))
                     .cornerRadius(12)
+                
+                // Role Selection with Circular Buttons
+                HStack {
+                    Button(action: { role = "Administrator" }) {
+                        HStack {
+                            Circle()
+                                .stroke(Color.blue, lineWidth: 2)
+                                .frame(width: 20, height: 20)
+                                .overlay(
+                                    Circle()
+                                        .fill(role == "Administrator" ? Color.blue : Color.clear)
+                                        .frame(width: 10, height: 10)
+                                )
+                            Text("Administrator")
+                                .foregroundColor(.primary)
+                        }
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
+                    Spacer()
+                    
+                    Button(action: { role = "Volunteer" }) {
+                        HStack {
+                            Circle()
+                                .stroke(Color.blue, lineWidth: 2)
+                                .frame(width: 20, height: 20)
+                                .overlay(
+                                    Circle()
+                                        .fill(role == "Volunteer" ? Color.blue : Color.clear)
+                                        .frame(width: 10, height: 10)
+                                )
+                            Text("Volunteer")
+                                .foregroundColor(.primary)
+                        }
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .padding(.horizontal, 24)
             }
             .padding(.horizontal, 24)
             
@@ -84,7 +123,7 @@ struct SignUpView: View {
             }
             .padding(.top, 16)
             
-            Spacer() // This spacer ensures the content above stays centered
+            Spacer()
         }
         .padding()
     }
