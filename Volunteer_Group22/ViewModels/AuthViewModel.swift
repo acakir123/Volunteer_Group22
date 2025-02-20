@@ -1,41 +1,70 @@
 import SwiftUI
 import FirebaseAuth
 
-
 @MainActor
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
-    @Published var currentUser: User?
     
     init() {
-        
+        self.userSession = Auth.auth().currentUser
     }
     
     // Sign In Existing User
     func signIn(withEmail email: String, password: String) async throws {
-        print("Sign In")
+        do {
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            self.userSession = result.user
+        } catch {
+            print("failed to sign in: \(error.localizedDescription)")
+            throw error
+        }
     }
     
-    // Create New User -- More Properties Can Be Added
+    // Create New User
     func signUp(withEmail email: String, password: String) async throws {
-        print("Sign Up")
-    }
-    func resetPassword(withEmail email: String) async throws {
-        print("Reset Password")
+        do {
+            let result = try await Auth.auth().createUser(withEmail: email, password: password)
+            self.userSession = result.user
+        } catch {
+            print("failed to create user: \(error.localizedDescription)")
+            throw error
+        }
     }
     
+    // Send password reset email
+    func resetPassword(withEmail email: String) async throws {
+        do {
+            try await Auth.auth().sendPasswordReset(withEmail: email)
+        } catch {
+            print("Error sending password reset email: \(error.localizedDescription)")
+            throw error
+        }
+    }
     
     // Sign Out Current User
     func signOut() {
-        print("Sign Out")
+        do {
+            try Auth.auth().signOut()
+            self.userSession = nil
+        } catch {
+            print("failed to sign out: \(error.localizedDescription)")
+        }
     }
     
     // Delete Current Users Account
-    func deleteAccount() {
-        print("Delete Account")
+    func deleteAccount() async throws {
+        do {
+            guard let currentUser = Auth.auth().currentUser else { return }
+            try await currentUser.delete()
+            self.userSession = nil
+        } catch {
+            print("Error deleting account: \(error.localizedDescription)")
+            throw error
+        }
     }
+
     
-    // Fetch Current User
+    // Fetch current user from Firestore, this is where we get actual user info like name, location, etc. Feeds into User struct and is available anywhere in the app
     func fetchUser() async {
         
     }
