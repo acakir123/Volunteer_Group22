@@ -1,35 +1,69 @@
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
+
 
 @MainActor
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
+        @Published var isEmailVerified: Bool = false
+        @Published var profileCompleted: Bool = false
+        @Published var user: User?
+
+        private let db = Firestore.firestore()
+        private var userRole: String = ""
     
     init() {
         self.userSession = Auth.auth().currentUser
+    }
+    
+    // Check if profile is complete
+    var isProfileComplete: Bool {
+        guard let fullName = user?.fullName, !fullName.isEmpty else { return false }
+        return true
     }
     
     // Sign In Existing User
     func signIn(withEmail email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            try await result.user.reload()
             self.userSession = result.user
+            self.isEmailVerified = result.user.isEmailVerified
         } catch {
             print("failed to sign in: \(error.localizedDescription)")
             throw error
         }
     }
     
-    // Create New User
-    func signUp(withEmail email: String, password: String) async throws {
+    // Create New User and Add to Firestore
+    func signUp(withEmail email: String, password: String, role: String) async throws {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
+            let userId = result.user.uid
+            self.userRole = role
+            
+            // Create initial user document in Firestore
+            try await createUserDocument(userId: userId, email: email, role: role)
         } catch {
-            print("failed to create user: \(error.localizedDescription)")
+            print("Failed to create user: \(error.localizedDescription)")
             throw error
         }
     }
+
+    // Function to Create Firestore User Document
+    private func createUserDocument(userId: String, email: String, role: String) async throws {
+        let userData: [String: Any] = [
+            "email": email,
+            "createdAt": Timestamp(date: Date()),
+            "emailVerified": false,
+            "role": role
+        ]
+        
+        try await db.collection("users").document(userId).setData(userData)
+    }
+    
     
     // Send password reset email
     func resetPassword(withEmail email: String) async throws {
@@ -64,9 +98,55 @@ class AuthViewModel: ObservableObject {
     }
 
     
-    // Fetch current user from Firestore, this is where we get actual user info like name, location, etc. Feeds into User struct and is available anywhere in the app
+    // Fetch user profile data from Firestore
     func fetchUser() async {
-        
+        guard let uid = userSession?.uid else { return }
+        do {
+            let snapshot = try await db.collection("users").document(uid).getDocument()
+            if let data = snapshot.data() {
+                let username = data["username"] as? String ?? ""
+                let fullName = data["fullName"] as? String ?? ""
+                let email = data["email"] as? String ?? ""
+                let emailVerified = data["emailVerified"] as? Bool ?? false
+                let createdAt = (data["createdAt"] as? Timestamp)?.dateValue() ?? Date()
+                let role = data["role"] as? String ?? ""
+                let preferences = data["preferences"] as? [String] ?? []
+                let skills = data["skills"] as? [String] ?? []
+                
+                let locationData = data["location"] as? [String: Any] ?? [:]
+                let address = locationData["address"] as? String ?? ""
+                let city = locationData["city"] as? String ?? ""
+                let country = locationData["country"] as? String ?? ""
+                let state = locationData["state"] as? String ?? ""
+                let zipCode = locationData["zipCode"] as? String ?? ""
+                let location = User.Location(address: address, city: city, country: country, state: state, zipCode: zipCode)
+                
+                let availabilityData = data["availability"] as? [String: [String: String]] ?? [:]
+                var availability: [String: User.Availability] = [:]
+                for (key, value) in availabilityData {
+                    let startTime = value["startTime"] ?? ""
+                    let endTime = value["endTime"] ?? ""
+                    availability[key] = User.Availability(startTime: startTime, endTime: endTime)
+                }
+                
+                self.user = User(
+                    uid: uid,
+                    username: username,
+                    fullName: fullName,
+                    email: email,
+                    emailVerified: emailVerified,
+                    createdAt: createdAt,
+                    role: role,
+                    preferences: preferences,
+                    skills: skills,
+                    location: location,
+                    availability: availability
+                )
+            }
+        } catch {
+            print("Error fetching user data: \(error.localizedDescription)")
+        }
     }
+
     
 }

@@ -1,6 +1,9 @@
 import SwiftUI
+import FirebaseFirestore
 
 struct AdminProfileSetupView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel  // To get the current user’s UID
+    
     // State variables for form fields
     @State private var fullName: String = ""
     @State private var address1: String = ""
@@ -10,14 +13,22 @@ struct AdminProfileSetupView: View {
     @State private var zipCode: String = ""
     @State private var selectedSkills: Set<String> = []
     @State private var preferences: String = ""
-    @State private var availability: Set<Date> = []
+    // For simplicity, we use an array for availability; here a button adds today’s date
+    @State private var availability: [Date] = []
     
-    // State for validation errors
-    @State private var showError = false
-    @State private var errorMessage = ""
+    // State for validation errors or success messages
+    @State private var showMessage = false
+    @State private var messageText = ""
+    @State private var isError = false
     
     // List of states (2-character codes)
-    private let states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
+    private let states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE",
+                          "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS",
+                          "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS",
+                          "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY",
+                          "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+                          "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV",
+                          "WI", "WY"]
     
     // List of skills (multi-select)
     private let skills = ["Teaching", "Cooking", "First Aid", "Event Planning", "Fundraising", "Public Speaking", "Graphic Design", "Social Media Management"]
@@ -80,10 +91,14 @@ struct AdminProfileSetupView: View {
                         .frame(height: 100)
                 }
                 
-                // Availability (Date Picker)
+                // Availability (Example: add today’s date)
                 Section(header: Text("Availability")) {
-                    DatePicker("Select Available Dates", selection: .constant(Date()), displayedComponents: .date)
-                        .datePickerStyle(GraphicalDatePickerStyle())
+                    Button("Add Today") {
+                        availability.append(Date())
+                    }
+                    ForEach(availability, id: \.self) { date in
+                        Text("\(date, formatter: dateFormatter)")
+                    }
                 }
                 
                 // Save Button
@@ -99,10 +114,10 @@ struct AdminProfileSetupView: View {
                     }
                 }
                 
-                // Error Message
-                if showError {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
+                // Message display
+                if showMessage {
+                    Text(messageText)
+                        .foregroundColor(isError ? .red : .green)
                         .font(.caption)
                         .padding()
                 }
@@ -112,44 +127,85 @@ struct AdminProfileSetupView: View {
         }
     }
     
-    // Save profile function (mock for front-end)
+    // Date formatter for displaying dates in the availability section
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter
+    }
+    
+    // Save profile function that pushes data to Firestore
     private func saveProfile() {
         // Validate required fields
         if fullName.isEmpty {
-            errorMessage = "Full Name is required."
-            showError = true
-        } else if address1.isEmpty {
-            errorMessage = "Address Line 1 is required."
-            showError = true
-        } else if city.isEmpty {
-            errorMessage = "City is required."
-            showError = true
-        } else if state.isEmpty {
-            errorMessage = "State is required."
-            showError = true
-        } else if zipCode.count < 5 {
-            errorMessage = "Zip Code must be at least 5 characters."
-            showError = true
-        } else if selectedSkills.isEmpty {
-            errorMessage = "At least one skill is required."
-            showError = true
-        } else {
-            // Mock save action
-            let profileData: [String: Any] = [
-                "fullName": fullName,
-                "address1": address1,
-                "address2": address2,
-                "city": city,
-                "state": state,
-                "zipCode": zipCode,
-                "skills": Array(selectedSkills),
-                "preferences": preferences,
-                "availability": Array(availability)
-            ]
-            
-            print("Mock Profile Data Saved: \(profileData)")
-            errorMessage = "Profile saved successfully!"
-            showError = true
+            messageText = "Full Name is required."
+            isError = true
+            showMessage = true
+            return
+        }
+        if address1.isEmpty {
+            messageText = "Address Line 1 is required."
+            isError = true
+            showMessage = true
+            return
+        }
+        if city.isEmpty {
+            messageText = "City is required."
+            isError = true
+            showMessage = true
+            return
+        }
+        if state.isEmpty {
+            messageText = "State is required."
+            isError = true
+            showMessage = true
+            return
+        }
+        if zipCode.count < 5 {
+            messageText = "Zip Code must be at least 5 characters."
+            isError = true
+            showMessage = true
+            return
+        }
+        if selectedSkills.isEmpty {
+            messageText = "At least one skill is required."
+            isError = true
+            showMessage = true
+            return
+        }
+        
+        // Construct profile data to update
+        let profileData: [String: Any] = [
+            "fullName": fullName,
+            "address1": address1,
+            "address2": address2,
+            "city": city,
+            "state": state,
+            "zipCode": zipCode,
+            "skills": Array(selectedSkills),
+            "preferences": preferences,
+            // Save availability as an array of Timestamps
+            "availability": availability.map { Timestamp(date: $0) }
+        ]
+        
+        // Get the current user’s UID from the AuthViewModel
+        guard let uid = authViewModel.userSession?.uid else {
+            messageText = "User not found."
+            isError = true
+            showMessage = true
+            return
+        }
+        
+        let db = Firestore.firestore()
+        db.collection("users").document(uid).updateData(profileData) { error in
+            if let error = error {
+                messageText = "Error saving profile: \(error.localizedDescription)"
+                isError = true
+            } else {
+                messageText = "Profile saved successfully!"
+                isError = false
+            }
+            showMessage = true
         }
     }
 }
@@ -157,5 +213,6 @@ struct AdminProfileSetupView: View {
 struct AdminProfileSetupView_Previews: PreviewProvider {
     static var previews: some View {
         AdminProfileSetupView()
+            .environmentObject(AuthViewModel())
     }
 }

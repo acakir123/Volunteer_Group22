@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAuth
 
 struct SignUpView: View {
     @State private var email = ""
@@ -91,7 +92,15 @@ struct SignUpView: View {
                 Button {
                     Task {
                         do {
-                            try await authViewModel.signUp(withEmail: email, password: password)
+                            try await authViewModel.signUp(withEmail: email, password: password, role: role)
+                            
+                            if let user = Auth.auth().currentUser {
+                                user.sendEmailVerification { error in
+                                    if let error = error {
+                                        print("Error sending email verification: \(error.localizedDescription)")
+                                    }
+                                }
+                            }
                         } catch {
                             showError = true
                             errorMessage = error.localizedDescription
