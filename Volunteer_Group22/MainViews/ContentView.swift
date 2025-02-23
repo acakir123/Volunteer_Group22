@@ -12,7 +12,7 @@ struct ContentView: View {
                 // if user signed in, check email verification
                 if !authViewModel.isEmailVerified {
                     emailVerificationView()
-                } else if !authViewModel.profileCompleted {
+                } else if !authViewModel.isProfileComplete {
                     // route to appropriate profile setup view
                     if authViewModel.user?.role == "Administrator" {
                         AdminProfileSetupView()
@@ -22,16 +22,22 @@ struct ContentView: View {
                 } else {
                     // route to appropriate main view
                     if authViewModel.user?.role == "Administrator" {
-                        AdminDashboardView()
+                        AdminMainTabView()
                     } else {
-                        VolunteerDashboardView()
+                        VolunteerMainTabView()
                     }
+                }
+            }
+        }
+        .onAppear {
+            Task {
+                if authViewModel.userSession != nil {
+                    await authViewModel.fetchUser()
                 }
             }
         }
     }
 }
-
 
 struct emailVerificationView: View {
     @EnvironmentObject var authViewModel: AuthViewModel

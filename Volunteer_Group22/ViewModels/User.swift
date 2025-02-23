@@ -18,7 +18,6 @@ struct User: Codable {
     var username: String
     var fullName: String
     var email: String
-    var emailVerified: Bool
     var createdAt: Date
     var role: String
     var preferences: [String]

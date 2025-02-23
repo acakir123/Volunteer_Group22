@@ -2,7 +2,8 @@ import SwiftUI
 import FirebaseFirestore
 
 struct AdminProfileSetupView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel  // To get the current user’s UID
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @Environment(\.presentationMode) var presentationMode
     
     // State variables for form fields
     @State private var fullName: String = ""
@@ -13,7 +14,6 @@ struct AdminProfileSetupView: View {
     @State private var zipCode: String = ""
     @State private var selectedSkills: Set<String> = []
     @State private var preferences: String = ""
-    // For simplicity, we use an array for availability; here a button adds today’s date
     @State private var availability: [Date] = []
     
     // State for validation errors or success messages
@@ -22,16 +22,18 @@ struct AdminProfileSetupView: View {
     @State private var isError = false
     
     // List of states (2-character codes)
-    private let states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE",
-                          "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS",
-                          "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS",
-                          "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY",
-                          "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
-                          "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV",
-                          "WI", "WY"]
+    private let states = [
+        "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN",
+        "IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV",
+        "NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN",
+        "TX","UT","VT","VA","WA","WV","WI","WY"
+    ]
     
     // List of skills (multi-select)
-    private let skills = ["Teaching", "Cooking", "First Aid", "Event Planning", "Fundraising", "Public Speaking", "Graphic Design", "Social Media Management"]
+    private let skills = [
+        "Teaching","Cooking","First Aid","Event Planning","Fundraising","Public Speaking",
+        "Graphic Design","Social Media Management"
+    ]
     
     var body: some View {
         NavigationStack {
@@ -138,39 +140,27 @@ struct AdminProfileSetupView: View {
     private func saveProfile() {
         // Validate required fields
         if fullName.isEmpty {
-            messageText = "Full Name is required."
-            isError = true
-            showMessage = true
+            showValidationError("Full Name is required.")
             return
         }
         if address1.isEmpty {
-            messageText = "Address Line 1 is required."
-            isError = true
-            showMessage = true
+            showValidationError("Address Line 1 is required.")
             return
         }
         if city.isEmpty {
-            messageText = "City is required."
-            isError = true
-            showMessage = true
+            showValidationError("City is required.")
             return
         }
         if state.isEmpty {
-            messageText = "State is required."
-            isError = true
-            showMessage = true
+            showValidationError("State is required.")
             return
         }
         if zipCode.count < 5 {
-            messageText = "Zip Code must be at least 5 characters."
-            isError = true
-            showMessage = true
+            showValidationError("Zip Code must be at least 5 characters.")
             return
         }
         if selectedSkills.isEmpty {
-            messageText = "At least one skill is required."
-            isError = true
-            showMessage = true
+            showValidationError("At least one skill is required.")
             return
         }
         
@@ -190,9 +180,7 @@ struct AdminProfileSetupView: View {
         
         // Get the current user’s UID from the AuthViewModel
         guard let uid = authViewModel.userSession?.uid else {
-            messageText = "User not found."
-            isError = true
-            showMessage = true
+            showValidationError("User not found.")
             return
         }
         
@@ -204,15 +192,22 @@ struct AdminProfileSetupView: View {
             } else {
                 messageText = "Profile saved successfully!"
                 isError = false
+                
+                Task {
+                    await authViewModel.fetchUser()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
             }
             showMessage = true
         }
     }
-}
-
-struct AdminProfileSetupView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdminProfileSetupView()
-            .environmentObject(AuthViewModel())
+    
+    private func showValidationError(_ text: String) {
+        messageText = text
+        isError = true
+        showMessage = true
     }
 }

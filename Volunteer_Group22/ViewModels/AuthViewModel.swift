@@ -7,7 +7,6 @@ import FirebaseFirestore
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
         @Published var isEmailVerified: Bool = false
-        @Published var profileCompleted: Bool = false
         @Published var user: User?
 
         private let db = Firestore.firestore()
@@ -15,6 +14,19 @@ class AuthViewModel: ObservableObject {
     
     init() {
         self.userSession = Auth.auth().currentUser
+        
+        if let user = self.userSession {
+            Task {
+                do {
+                    try await user.reload()
+                    self.isEmailVerified = user.isEmailVerified
+                    
+                    await fetchUser()
+                } catch {
+                    print("Error reloading user: \(error.localizedDescription)")
+                }
+            }
+        }
     }
     
     // Check if profile is complete
@@ -30,6 +42,8 @@ class AuthViewModel: ObservableObject {
             try await result.user.reload()
             self.userSession = result.user
             self.isEmailVerified = result.user.isEmailVerified
+            
+            await fetchUser()
         } catch {
             print("failed to sign in: \(error.localizedDescription)")
             throw error
@@ -57,7 +71,6 @@ class AuthViewModel: ObservableObject {
         let userData: [String: Any] = [
             "email": email,
             "createdAt": Timestamp(date: Date()),
-            "emailVerified": false,
             "role": role
         ]
         
@@ -107,7 +120,6 @@ class AuthViewModel: ObservableObject {
                 let username = data["username"] as? String ?? ""
                 let fullName = data["fullName"] as? String ?? ""
                 let email = data["email"] as? String ?? ""
-                let emailVerified = data["emailVerified"] as? Bool ?? false
                 let createdAt = (data["createdAt"] as? Timestamp)?.dateValue() ?? Date()
                 let role = data["role"] as? String ?? ""
                 let preferences = data["preferences"] as? [String] ?? []
@@ -134,7 +146,6 @@ class AuthViewModel: ObservableObject {
                     username: username,
                     fullName: fullName,
                     email: email,
-                    emailVerified: emailVerified,
                     createdAt: createdAt,
                     role: role,
                     preferences: preferences,
@@ -142,6 +153,8 @@ class AuthViewModel: ObservableObject {
                     location: location,
                     availability: availability
                 )
+            } else {
+                print("DEBUG: Document for \(uid) returned no data.")
             }
         } catch {
             print("Error fetching user data: \(error.localizedDescription)")

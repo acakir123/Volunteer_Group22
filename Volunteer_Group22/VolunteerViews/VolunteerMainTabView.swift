@@ -33,12 +33,5 @@ struct VolunteerMainTabView: View {
             .tag(2)
         }
     }
-    // if user profile not setup -> VolunteerProfileSetupView()
-
-    /* TabView
-     VolunteerDashboardView -- VolunteerProfileEditView
-     VolunteerHistoryView
-     VolunteerEventSearchView
-     */
 }
 
