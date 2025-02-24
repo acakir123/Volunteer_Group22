@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct VolunteerProfileEditView: View {
+    @State var user: User?
+    
     var body: some View {
         VStack {
             VStack {
