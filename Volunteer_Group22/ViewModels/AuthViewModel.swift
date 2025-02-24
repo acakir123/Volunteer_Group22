@@ -6,11 +6,11 @@ import FirebaseFirestore
 @MainActor
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
-        @Published var isEmailVerified: Bool = false
-        @Published var user: User?
-
-        private let db = Firestore.firestore()
-        private var userRole: String = ""
+    @Published var isEmailVerified: Bool = false
+    @Published var user: User?
+    
+    private let db = Firestore.firestore()
+    private var userRole: String = ""
     
     init() {
         self.userSession = Auth.auth().currentUser
@@ -65,7 +65,7 @@ class AuthViewModel: ObservableObject {
             throw error
         }
     }
-
+    
     // Function to Create Firestore User Document
     private func createUserDocument(userId: String, email: String, role: String) async throws {
         let userData: [String: Any] = [
@@ -109,7 +109,7 @@ class AuthViewModel: ObservableObject {
             throw error
         }
     }
-
+    
     
     // Fetch user profile data from Firestore
     func fetchUser() async {
@@ -135,10 +135,14 @@ class AuthViewModel: ObservableObject {
                 
                 let availabilityData = data["availability"] as? [String: [String: String]] ?? [:]
                 var availability: [String: User.Availability] = [:]
-                for (key, value) in availabilityData {
-                    let startTime = value["startTime"] ?? ""
-                    let endTime = value["endTime"] ?? ""
-                    availability[key] = User.Availability(startTime: startTime, endTime: endTime)
+                
+                for (day, dict) in availabilityData {
+                    let startTime = dict["startTime"] ?? ""
+                    let endTime   = dict["endTime"] ?? ""
+                    availability[day] = User.Availability(
+                        startTime: startTime,
+                        endTime:   endTime
+                    )
                 }
                 
                 self.user = User(
@@ -160,6 +164,4 @@ class AuthViewModel: ObservableObject {
             print("Error fetching user data: \(error.localizedDescription)")
         }
     }
-
-    
 }
