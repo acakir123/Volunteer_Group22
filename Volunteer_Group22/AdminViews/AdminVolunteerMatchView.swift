@@ -261,7 +261,8 @@ struct AdminVolunteerMatchView: View {
                 requiredSkills: ["Physical Labor", "Environmental"],
                 urgency: .medium,
                 date: Date().addingTimeInterval(86400 * 7),
-                status: .upcoming
+                status: .upcoming,
+                volunteerRequirements: 0
             ),
             Event(
                 name: "Homeless Shelter",
@@ -270,7 +271,8 @@ struct AdminVolunteerMatchView: View {
                 requiredSkills: ["Cooking", "Environmental"],
                 urgency: .medium,
                 date: Date().addingTimeInterval(86400 * 7),
-                status: .upcoming
+                status: .upcoming,
+                volunteerRequirements: 1
             ),
             // Add more sample events
         ]

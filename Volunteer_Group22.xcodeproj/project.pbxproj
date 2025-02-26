@@ -19,6 +19,7 @@
 		9DF9D79F2D4822B800AEAA82 /* Volunteer_Group22Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9D79E2D4822B800AEAA82 /* Volunteer_Group22Tests.swift */; };
 		9DF9D7A92D4822B800AEAA82 /* Volunteer_Group22UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9D7A82D4822B800AEAA82 /* Volunteer_Group22UITests.swift */; };
 		9DF9D7AB2D4822B800AEAA82 /* Volunteer_Group22UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9D7AA2D4822B800AEAA82 /* Volunteer_Group22UITestsLaunchTests.swift */; };
+		EB03A5592D6FB9D400E38D27 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB03A5582D6FB9D200E38D27 /* Events.swift */; };
 		EB12720A2D484E17004F04B7 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1272092D484E14004F04B7 /* SignInView.swift */; };
 		EB12720C2D484E1F004F04B7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB12720B2D484E1C004F04B7 /* SignUpView.swift */; };
 		EB12720E2D484E43004F04B7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB12720D2D484E3F004F04B7 /* AuthViewModel.swift */; };
@@ -72,6 +73,7 @@
 		9DF9D7A42D4822B800AEAA82 /* Volunteer_Group22UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Volunteer_Group22UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DF9D7A82D4822B800AEAA82 /* Volunteer_Group22UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volunteer_Group22UITests.swift; sourceTree = "<group>"; };
 		9DF9D7AA2D4822B800AEAA82 /* Volunteer_Group22UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volunteer_Group22UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EB03A5582D6FB9D200E38D27 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		EB1272092D484E14004F04B7 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		EB12720B2D484E1C004F04B7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		EB12720D2D484E3F004F04B7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 		EB1272062D484DFC004F04B7 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				EB03A5582D6FB9D200E38D27 /* Events.swift */,
 				EB799EC02D6AD0AE002F540C /* User.swift */,
 				EBC908892D5B09070015DAC3 /* NotificationManager.swift */,
 				EB12720D2D484E3F004F04B7 /* AuthViewModel.swift */,
@@ -400,6 +403,7 @@
 				EBF4638A2D52DD7F008BE921 /* AdminProfileSetupView.swift in Sources */,
 				EBF463782D52DAB7008BE921 /* ForgotPasswordView.swift in Sources */,
 				EB12720C2D484E1F004F04B7 /* SignUpView.swift in Sources */,
+				EB03A5592D6FB9D400E38D27 /* Events.swift in Sources */,
 				EBF463862D52DCAB008BE921 /* VolunteerHistoryView.swift in Sources */,
 				EB12720A2D484E17004F04B7 /* SignInView.swift in Sources */,
 				EBF463962D52DE5A008BE921 /* AdminReportingView.swift in Sources */,

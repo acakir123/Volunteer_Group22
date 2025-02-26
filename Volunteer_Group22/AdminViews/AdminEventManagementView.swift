@@ -1,104 +1,5 @@
 import SwiftUI
 
-// Model for events
-struct Event: Identifiable {
-    let id = UUID()
-    var name: String
-    var description: String
-    var location: String
-    var requiredSkills: [String]
-    var urgency: UrgencyLevel
-    var date: Date
-    var status: EventStatus
-    
-    enum UrgencyLevel: String, CaseIterable {
-        case low = "Low"
-        case medium = "Medium"
-        case high = "High"
-        
-        var color: Color {
-            switch self {
-            case .low: return .green
-            case .medium: return .orange
-            case .high: return .red
-            }
-        }
-    }
-    
-    enum EventStatus: String {
-        case upcoming = "Upcoming"
-        case inProgress = "In Progress"
-        case completed = "Completed"
-        case cancelled = "Cancelled"
-    }
-}
-
-// Event list item component
-struct EventListItem: View {
-    let event: Event
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text(event.name)
-                    .font(.headline)
-                Spacer()
-                StatusBadge(urgency: event.urgency)
-            }
-            
-            HStack {
-                Image(systemName: "mappin.circle.fill")
-                    .foregroundColor(.gray)
-                Text(event.location)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-            
-            HStack {
-                Image(systemName: "calendar")
-                    .foregroundColor(.gray)
-                Text(event.date, style: .date)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(event.requiredSkills, id: \.self) { skill in
-                        Text(skill)
-                            .font(.caption)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(Color.blue.opacity(0.1))
-                            .foregroundColor(.blue)
-                            .cornerRadius(8)
-                    }
-                }
-            }
-        }
-        .padding()
-        .background(Color(uiColor: .systemBackground))
-        .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
-    }
-}
-
-// Status badge component
-struct StatusBadge: View {
-    let urgency: Event.UrgencyLevel
-    
-    var body: some View {
-        Text(urgency.rawValue)
-            .font(.caption)
-            .fontWeight(.medium)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(urgency.color.opacity(0.1))
-            .foregroundColor(urgency.color)
-            .cornerRadius(8)
-    }
-}
-
 // Search and filter bar
 struct EventSearchBar: View {
     @Binding var searchText: String
@@ -166,10 +67,14 @@ struct FilterChip: View {
 
 // Main view
 struct AdminEventManagementView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     @State private var searchText = ""
     @State private var selectedFilter: Event.EventStatus?
     @State private var showingCreateEvent = false
-    @State private var events: [Event] = [] // Sample data here
+    @State private var events: [Event] = []
+    @State private var isLoading = false
+    @State private var errorMessage: String?
     
     var filteredEvents: [Event] {
         events.filter { event in
@@ -184,107 +89,213 @@ struct AdminEventManagementView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                // Header
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Event Management")
-                            .font(.system(size: 32, weight: .bold))
-                        Text("Manage and track all events")
-                            .font(.system(size: 17))
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    Spacer()
-                    
-                    Button(action: { showingCreateEvent = true }) {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.system(size: 32))
-                            .foregroundColor(.blue)
-                    }
-                }
-                .padding(.horizontal)
-                
-                // Search and filters
-                EventSearchBar(
-                    searchText: $searchText,
-                    selectedFilter: $selectedFilter
-                )
-                .padding(.horizontal)
-                
-                // Events list
-                if filteredEvents.isEmpty {
-                    VStack(spacing: 10) {
-                        Image(systemName: "magnifyingglass")
-                            .font(.system(size: 40))
-                            .foregroundColor(.gray)
-                        Text("No matching events.")
-                            .font(.headline)
-                        Text("Try adjusting your search or filters.")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                    .padding(.top, 50)
-                    .padding()
-                } else {
-                    LazyVStack(spacing: 16) {
-                        ForEach(filteredEvents) { event in
-                            NavigationLink(destination: AdminEditEventView(event: event)) {
-                                EventListItem(event: event)
-                            }
-                            .buttonStyle(PlainButtonStyle())
+        ZStack {
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Header
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Event Management")
+                                .font(.system(size: 32, weight: .bold))
+                            Text("Manage and track all events")
+                                .font(.system(size: 17))
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                        
+                        Button(action: { showingCreateEvent = true }) {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.system(size: 32))
+                                .foregroundColor(.blue)
                         }
                     }
                     .padding(.horizontal)
+                    
+                    // Search and filters
+                    EventSearchBar(
+                        searchText: $searchText,
+                        selectedFilter: $selectedFilter
+                    )
+                    .padding(.horizontal)
+                    
+                    // Events list
+                    if errorMessage != nil {
+                        // Error view
+                        VStack(spacing: 16) {
+                            Image(systemName: "exclamationmark.triangle")
+                                .font(.system(size: 40))
+                                .foregroundColor(.orange)
+                            Text("Error loading events")
+                                .font(.headline)
+                            if let error = errorMessage {
+                                Text(error)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal)
+                            }
+                            Button(action: fetchEvents) {
+                                Text("Try Again")
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 24)
+                                    .padding(.vertical, 12)
+                                    .background(Color.blue)
+                                    .cornerRadius(8)
+                            }
+                        }
+                        .padding(.top, 50)
+                        .padding()
+                    } else if isLoading && events.isEmpty {
+                        // Loading view (only show if no events are loaded)
+                        VStack(spacing: 16) {
+                            ProgressView()
+                                .scaleEffect(1.5)
+                                .padding(.bottom)
+                            Text("Loading events...")
+                                .font(.headline)
+                                .foregroundColor(.secondary)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.top, 50)
+                    } else if filteredEvents.isEmpty {
+                        // No events view
+                        VStack(spacing: 16) {
+                            if events.isEmpty {
+                                // No events at all
+                                Image(systemName: "calendar.badge.plus")
+                                    .font(.system(size: 40))
+                                    .foregroundColor(.gray)
+                                Text("No events found")
+                                    .font(.headline)
+                                Text("Click the + button to create your first event.")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .multilineTextAlignment(.center)
+                            } else {
+                                // No events matching filters
+                                Image(systemName: "magnifyingglass")
+                                    .font(.system(size: 40))
+                                    .foregroundColor(.gray)
+                                Text("No matching events")
+                                    .font(.headline)
+                                Text("Try adjusting your search or filters.")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .multilineTextAlignment(.center)
+                            }
+                        }
+                        .padding(.top, 50)
+                        .padding()
+                    } else {
+                        // Events list
+                        LazyVStack(spacing: 16) {
+                            ForEach(filteredEvents) { event in
+                                NavigationLink(destination: AdminEditEventView(event: event)) {
+                                    EventListItem(event: event)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                        }
+                        .padding(.horizontal)
+                        
+                        // Only show refresh button if events are loaded
+                        if !events.isEmpty {
+                            Button(action: fetchEvents) {
+                                Label("Refresh Events", systemImage: "arrow.clockwise")
+                                    .font(.subheadline)
+                                    .foregroundColor(.blue)
+                            }
+                            .padding(.top, 8)
+                            .padding(.bottom, 16)
+                            .disabled(isLoading)
+                            .opacity(isLoading ? 0.5 : 1)
+                        }
+                    }
+                }
+                .padding(.vertical)
+            }
+            .background(Color(uiColor: .systemGroupedBackground))
+            .sheet(isPresented: $showingCreateEvent) {
+                NavigationView {
+                    AdminCreateEventView()
+                        .environmentObject(authViewModel)
+                        .onDisappear {
+                            // Refresh the events when returning from creating a new event
+                            fetchEvents()
+                        }
                 }
             }
-            .padding(.vertical)
-        }
-        .background(Color(uiColor: .systemGroupedBackground))
-        .sheet(isPresented: $showingCreateEvent) {
-            NavigationView {
-                AdminCreateEventView()
+            .refreshable {
+                await refreshEvents()
             }
-        }
-        .onAppear {
-            // Load sample data
-            loadSampleEvents()
+            .onAppear {
+                fetchEvents()
+            }
+            
+            // Overlay loading indicator
+            if isLoading && !events.isEmpty {
+                ProgressView()
+                    .scaleEffect(1.2)
+                    .padding()
+                    .background(Color(uiColor: .systemBackground).opacity(0.8))
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
+            }
         }
     }
     
-    private func loadSampleEvents() {
-        events = [
-            Event(
-                name: "Beach Cleanup",
-                description: "Community beach cleanup event",
-                location: "Santa Monica Beach",
-                requiredSkills: ["Physical Labor", "Environmental"],
-                urgency: .medium,
-                date: Date().addingTimeInterval(86400 * 7),
-                status: .upcoming
-            ),
-            Event(
-                name: "Food Bank Distribution",
-                description: "Weekly food distribution",
-                location: "Downtown Food Bank",
-                requiredSkills: ["Organization", "Customer Service"],
-                urgency: .high,
-                date: Date().addingTimeInterval(86400 * 2),
-                status: .upcoming
-            ),
-            // Add more sample events
-        ]
+    private func fetchEvents() {
+        isLoading = true
+        errorMessage = nil
+        
+        Task {
+            do {
+                // Access the Firestore db from the AuthViewModel
+                let fetchedEvents = try await authViewModel.fetchEvents(db: authViewModel.db)
+                
+                await MainActor.run {
+                    events = fetchedEvents
+                    isLoading = false
+                }
+            } catch {
+                await MainActor.run {
+                    errorMessage = error.localizedDescription
+                    isLoading = false
+                }
+                print("Error fetching events: \(error.localizedDescription)")
+            }
+        }
     }
-}
-
-extension Event.EventStatus: CaseIterable {
-    static var allCases: [Event.EventStatus] = [.upcoming, .inProgress, .completed, .cancelled]
+    
+    private func refreshEvents() async {
+        isLoading = true
+        errorMessage = nil
+        
+        do {
+            // Access the Firestore db from the AuthViewModel
+            let fetchedEvents = try await authViewModel.fetchEvents(db: authViewModel.db)
+            
+            await MainActor.run {
+                events = fetchedEvents
+                isLoading = false
+            }
+        } catch {
+            await MainActor.run {
+                errorMessage = error.localizedDescription
+                isLoading = false
+            }
+            print("Error refreshing events: \(error.localizedDescription)")
+        }
+    }
 }
 
 struct AdminEventManagementView_Previews: PreviewProvider {
     static var previews: some View {
-        AdminEventManagementView()
+        NavigationView {
+            AdminEventManagementView()
+                .environmentObject(AuthViewModel())
+        }
     }
 }
+

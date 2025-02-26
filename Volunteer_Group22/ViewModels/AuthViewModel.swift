@@ -9,7 +9,7 @@ class AuthViewModel: ObservableObject {
     @Published var isEmailVerified: Bool = false
     @Published var user: User?
     
-    private let db = Firestore.firestore()
+    public let db = Firestore.firestore()
     private var userRole: String = ""
     
     init() {
@@ -29,12 +29,8 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    // Check if profile is complete
-    var isProfileComplete: Bool {
-        guard let fullName = user?.fullName, !fullName.isEmpty else { return false }
-        return true
-    }
     
+    // MARK: Account management
     // Sign In Existing User
     func signIn(withEmail email: String, password: String) async throws {
         do {
@@ -77,6 +73,11 @@ class AuthViewModel: ObservableObject {
         try await db.collection("users").document(userId).setData(userData)
     }
     
+    // Check if profile is complete
+    var isProfileComplete: Bool {
+        guard let fullName = user?.fullName, !fullName.isEmpty else { return false }
+        return true
+    }
     
     // Send password reset email
     func resetPassword(withEmail email: String) async throws {
@@ -109,7 +110,6 @@ class AuthViewModel: ObservableObject {
             throw error
         }
     }
-    
     
     // Fetch user profile data from Firestore
     func fetchUser() async {
@@ -163,5 +163,156 @@ class AuthViewModel: ObservableObject {
         } catch {
             print("Error fetching user data: \(error.localizedDescription)")
         }
+    }
+    
+    
+    // MARK: Event management
+    // Create an event
+    public func createEvent(
+        name: String,
+        description: String,
+        date: Date,
+        address: String,
+        city: String,
+        state: String,
+        country: String,
+        zipCode: String,
+        requiredSkills: [String],
+        urgency: Event.UrgencyLevel,
+        volunteerRequirements: Int
+    ) async throws {
+        
+        // Convert urgency enum to string value
+        let urgencyString = urgency.rawValue
+        
+        // Create location data map directly from the separate fields
+        let locationData: [String: String] = [
+            "address": address,
+            "city": city,
+            "state": state,
+            "country": country,
+            "zipCode": zipCode
+        ]
+        
+        // Create event data for Firebase
+        let eventData: [String: Any] = [
+            "name": name,
+            "description": description,
+            "dateTime": Timestamp(date: date),
+            "location": locationData,
+            "requiredSkills": requiredSkills,
+            "urgency": urgencyString,
+            "volunteerRequirements": volunteerRequirements,
+            "assignedVolunteers": [],
+            "status": Event.EventStatus.upcoming.rawValue,
+            "createdAt": Timestamp(date: Date())
+        ]
+        
+        try await db.collection("events").addDocument(data: eventData)
+    }
+    
+    // Update an event
+    public func updateEvent(
+        eventId: String,
+        name: String,
+        description: String,
+        date: Date,
+        address: String,
+        city: String,
+        state: String,
+        country: String,
+        zipCode: String,
+        requiredSkills: [String],
+        urgency: Event.UrgencyLevel,
+        volunteerRequirements: Int,
+        status: Event.EventStatus
+    ) async throws {
+        
+        // Convert urgency enum to string value
+        let urgencyString = urgency.rawValue
+        let statusString = status.rawValue
+        
+        // Create location data map directly from the separate fields
+        let locationData: [String: String] = [
+            "address": address,
+            "city": city,
+            "state": state,
+            "country": country,
+            "zipCode": zipCode
+        ]
+        
+        // Create event data for Firebase
+        let eventData: [String: Any] = [
+            "name": name,
+            "description": description,
+            "dateTime": Timestamp(date: date),
+            "location": locationData,
+            "requiredSkills": requiredSkills,
+            "urgency": urgencyString,
+            "volunteerRequirements": volunteerRequirements,
+            "status": statusString,
+            "updatedAt": Timestamp(date: Date())
+        ]
+        
+        // Update the document in Firestore
+        try await db.collection("events").document(eventId).updateData(eventData)
+    }
+    
+    // Delete an event
+    public func deleteEvent(eventId: String) async throws {
+        try await db.collection("events").document(eventId).delete()
+    }
+    
+    // Fetch events 
+    public func fetchEvents(db: Firestore) async throws -> [Event] {
+        let snapshot = try await db.collection("events").getDocuments()
+        
+        return snapshot.documents.map { document in
+            return Event(documentId: document.documentID, data: document.data())
+        }
+    }
+    
+    // Fetch single event
+    public func fetchEvent(db: Firestore, documentId: String) async throws -> Event? {
+        let document = try await db.collection("events").document(documentId).getDocument()
+        
+        guard document.exists, let data = document.data() else {
+            return nil
+        }
+        
+        return Event(documentId: document.documentID, data: data)
+    }
+    
+    
+    // Fetch filtered events
+    public func fetchFilteredEvents(
+        db: Firestore,
+        status: Event.EventStatus? = nil,
+        searchText: String? = nil
+    ) async throws -> [Event] {
+        var query: Query = db.collection("events")
+        
+        // Apply status filter if provided
+        if let status = status {
+            query = query.whereField("status", isEqualTo: status.rawValue)
+        }
+        
+        let snapshot = try await query.getDocuments()
+        
+        var events = snapshot.documents.map { document in
+            return Event(documentId: document.documentID, data: document.data())
+        }
+        
+        // Apply text search filter if provided
+        if let searchText = searchText, !searchText.isEmpty {
+            let lowercasedSearch = searchText.lowercased()
+            events = events.filter { event in
+                event.name.lowercased().contains(lowercasedSearch) ||
+                event.description.lowercased().contains(lowercasedSearch) ||
+                event.location.lowercased().contains(lowercasedSearch)
+            }
+        }
+        
+        return events
     }
 }

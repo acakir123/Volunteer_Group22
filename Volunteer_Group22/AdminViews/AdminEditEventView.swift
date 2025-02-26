@@ -1,99 +1,5 @@
 import SwiftUI
 
-// Form field validation
-struct EventFormValidation {
-    var nameError: String?
-    var descriptionError: String?
-    var locationError: String?
-    var skillsError: String?
-    var dateError: String?
-    
-    private let maxNameLength = 100
-    private let minDescriptionLength = 20
-    private let maxDescriptionLength = 1000
-    private let maxLocationLength = 200
-    private let maxSkillsCount = 5
-    
-    
-    var hasErrors: Bool {
-        return nameError != nil ||
-        descriptionError != nil ||
-        locationError != nil ||
-        skillsError != nil ||
-        dateError != nil
-    }
-    
-    mutating func validate(event: EventFormData) {
-        // Name validation
-        if event.name.isEmpty {
-            nameError = "Event name is required"
-        } else if event.name.count > maxNameLength {
-            nameError = "Event name must be less than \(maxNameLength) characters"
-        } else {
-            nameError = nil
-        }
-        
-        // Description validation
-        if event.description.isEmpty {
-            descriptionError = "Event description is required"
-        } else if event.description.count < minDescriptionLength {
-            descriptionError = "Description must be at least \(minDescriptionLength) characters"
-        } else if event.description.count > maxDescriptionLength {
-            descriptionError = "Description must be less than \(maxDescriptionLength) characters"
-        } else {
-            descriptionError = nil
-        }
-        
-        // Location validation
-        if event.location.isEmpty {
-            locationError = "Location is required"
-        } else if event.location.count > maxLocationLength {
-            locationError = "Location must be less than \(maxLocationLength) characters"
-        } else {
-            locationError = nil
-        }
-        
-        // Skills validation
-        if event.requiredSkills.isEmpty {
-            skillsError = "At least one skill is required"
-        } else if event.requiredSkills.count > maxSkillsCount {
-            skillsError = "Maximum of \(maxSkillsCount) skills allowed"
-        } else {
-            skillsError = nil
-        }
-        
-        // Date validation
-        let calendar = Calendar.current
-        if event.date < calendar.startOfDay(for: Date()) {
-            dateError = "Event date must be in the future"
-        } else {
-            dateError = nil
-        }
-    }
-}
-
-// Form data model
-struct EventFormData {
-    var name: String
-    var description: String
-    var location: String
-    var requiredSkills: Set<String>
-    var urgency: Event.UrgencyLevel
-    var date: Date
-    var status: Event.EventStatus
-    
-    // Initialize from Event model
-    init(from event: Event) {
-        self.name = event.name
-        self.description = event.description
-        self.location = event.location
-        self.requiredSkills = Set(event.requiredSkills)
-        self.urgency = event.urgency
-        self.date = event.date
-        self.status = event.status
-    }
-}
-
 // Custom form field components
 struct FormField<Content: View>: View {
     let title: String
@@ -127,15 +33,20 @@ struct FormField<Content: View>: View {
     }
 }
 
+// Main view
 struct AdminEditEventView: View {
     let event: Event
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var formData: EventFormData
     @State private var validation = EventFormValidation()
     @State private var showingDeleteConfirmation = false
     @State private var showingSuccessAlert = false
+    @State private var showingErrorAlert = false
+    @State private var errorMessage = ""
+    @State private var isLoading = false
     
-    // Available skills (will come from backend)
+    // Available skills
     let availableSkills = [
         "Physical Labor",
         "Customer Service",
@@ -166,6 +77,7 @@ struct AdminEditEventView: View {
                     ) {
                         TextField("Enter event name", text: $formData.name)
                             .textFieldStyle(.roundedBorder)
+                            .disabled(isLoading)
                     }
                     
                     // Description
@@ -179,15 +91,70 @@ struct AdminEditEventView: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.gray.opacity(0.2))
                             )
+                            .disabled(isLoading)
                     }
                     
-                    // Location
-                    FormField(
-                        title: "Location",
-                        error: validation.locationError
+                    // Location Section
+                    GroupBox(
+                        label: Text("Location")
+                            .font(.headline)
                     ) {
-                        TextField("Enter location", text: $formData.location)
-                            .textFieldStyle(.roundedBorder)
+                        VStack(spacing: 16) {
+                            // Street Address
+                            FormField(
+                                title: "Street Address",
+                                error: validation.addressError
+                            ) {
+                                TextField("Enter street address", text: $formData.address)
+                                    .textFieldStyle(.roundedBorder)
+                                    .disabled(isLoading)
+                            }
+                            
+                            // City
+                            FormField(
+                                title: "City",
+                                error: validation.cityError
+                            ) {
+                                TextField("Enter city", text: $formData.city)
+                                    .textFieldStyle(.roundedBorder)
+                                    .disabled(isLoading)
+                            }
+                            
+                            // State and Zip in the same row
+                            HStack(spacing: 16) {
+                                // State/Province
+                                FormField(
+                                    title: "State/Province",
+                                    error: validation.stateError
+                                ) {
+                                    TextField("Enter state", text: $formData.state)
+                                        .textFieldStyle(.roundedBorder)
+                                        .disabled(isLoading)
+                                }
+                                
+                                // ZIP/Postal Code
+                                FormField(
+                                    title: "ZIP/Postal Code",
+                                    error: nil
+                                ) {
+                                    TextField("Enter ZIP code", text: $formData.zipCode)
+                                        .textFieldStyle(.roundedBorder)
+                                        .disabled(isLoading)
+                                        .keyboardType(.numberPad)
+                                }
+                            }
+                            
+                            // Country
+                            FormField(
+                                title: "Country",
+                                error: nil
+                            ) {
+                                TextField("Enter country", text: $formData.country)
+                                    .textFieldStyle(.roundedBorder)
+                                    .disabled(isLoading)
+                            }
+                        }
+                        .padding(.vertical, 8)
                     }
                     
                     // Required Skills
@@ -202,13 +169,16 @@ struct AdminEditEventView: View {
                                         skill: skill,
                                         isSelected: formData.requiredSkills.contains(skill),
                                         action: {
-                                            if formData.requiredSkills.contains(skill) {
-                                                formData.requiredSkills.remove(skill)
-                                            } else {
-                                                formData.requiredSkills.insert(skill)
+                                            if !isLoading {
+                                                if formData.requiredSkills.contains(skill) {
+                                                    formData.requiredSkills.remove(skill)
+                                                } else {
+                                                    formData.requiredSkills.insert(skill)
+                                                }
                                             }
                                         }
                                     )
+                                    .opacity(isLoading ? 0.5 : 1)
                                 }
                             }
                         }
@@ -221,10 +191,55 @@ struct AdminEditEventView: View {
                     ) {
                         Picker("Urgency", selection: $formData.urgency) {
                             ForEach(Event.UrgencyLevel.allCases, id: \.self) { level in
-                                Text(level.rawValue).tag(level)
+                                HStack {
+                                    Circle()
+                                        .fill(level.color)
+                                        .frame(width: 12, height: 12)
+                                    Text(level.rawValue)
+                                }
+                                .tag(level)
                             }
                         }
                         .pickerStyle(.segmented)
+                        .disabled(isLoading)
+                    }
+                    
+                    // Volunteer Requirements
+                    FormField(
+                        title: "Number of Volunteers Needed",
+                        error: validation.volunteerRequirementsError
+                    ) {
+                        HStack {
+                            Button(action: {
+                                if !isLoading && formData.volunteerRequirements > 1 {
+                                    formData.volunteerRequirements -= 1
+                                }
+                            }) {
+                                Image(systemName: "minus.circle.fill")
+                                    .foregroundColor(.blue)
+                                    .font(.title2)
+                            }
+                            .disabled(formData.volunteerRequirements <= 1 || isLoading)
+                            
+                            Text("\(formData.volunteerRequirements)")
+                                .font(.title3)
+                                .frame(width: 50)
+                                .padding(.horizontal)
+                            
+                            Button(action: {
+                                if !isLoading && formData.volunteerRequirements < 100 {
+                                    formData.volunteerRequirements += 1
+                                }
+                            }) {
+                                Image(systemName: "plus.circle.fill")
+                                    .foregroundColor(.blue)
+                                    .font(.title2)
+                            }
+                            .disabled(formData.volunteerRequirements >= 100 || isLoading)
+                        }
+                        .padding()
+                        .background(Color(uiColor: .systemGray6))
+                        .cornerRadius(8)
                     }
                     
                     // Event Date
@@ -238,6 +253,7 @@ struct AdminEditEventView: View {
                             displayedComponents: [.date]
                         )
                         .datePickerStyle(.graphical)
+                        .disabled(isLoading)
                     }
                     
                     // Status
@@ -259,6 +275,7 @@ struct AdminEditEventView: View {
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.gray.opacity(0.2))
                         )
+                        .disabled(isLoading)
                     }
                 }
                 .padding()
@@ -279,12 +296,18 @@ struct AdminEditEventView: View {
                         .background(Color(uiColor: .systemBackground))
                         .cornerRadius(12)
                     }
+                    .disabled(isLoading)
                     
                     // Save button
                     Button(action: saveEvent) {
                         HStack {
-                            Image(systemName: "checkmark")
-                            Text("Save Changes")
+                            if isLoading {
+                                ProgressView()
+                                    .tint(.white)
+                            } else {
+                                Image(systemName: "checkmark")
+                                Text("Save Changes")
+                            }
                         }
                         .foregroundColor(.white)
                         .padding()
@@ -292,6 +315,7 @@ struct AdminEditEventView: View {
                         .background(Color.blue)
                         .cornerRadius(12)
                     }
+                    .disabled(isLoading)
                 }
                 .padding(.horizontal)
             }
@@ -315,22 +339,93 @@ struct AdminEditEventView: View {
         } message: {
             Text("Event has been updated successfully.")
         }
+        .alert("Error", isPresented: $showingErrorAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(errorMessage)
+        }
+        .disabled(isLoading)
     }
     
     private func saveEvent() {
+        // First validate the form
         validation.validate(event: formData)
         
         guard !validation.hasErrors else {
             return
         }
         
-        // Here we will save to the backend
-        showingSuccessAlert = true
+        // Ensure we have a document ID
+        guard let documentId = event.documentId else {
+            errorMessage = "Cannot update event: missing document ID"
+            showingErrorAlert = true
+            return
+        }
+        
+        // Set loading state
+        isLoading = true
+        
+        // Call the AuthViewModel updateEvent method
+        Task {
+            do {
+                try await authViewModel.updateEvent(
+                    eventId: documentId,
+                    name: formData.name,
+                    description: formData.description,
+                    date: formData.date,
+                    address: formData.address,
+                    city: formData.city,
+                    state: formData.state,
+                    country: formData.country,
+                    zipCode: formData.zipCode,
+                    requiredSkills: Array(formData.requiredSkills),
+                    urgency: formData.urgency,
+                    volunteerRequirements: formData.volunteerRequirements,
+                    status: formData.status
+                )
+                
+                // Show success alert on the main thread
+                await MainActor.run {
+                    isLoading = false
+                    showingSuccessAlert = true
+                }
+            } catch {
+                // Show error alert on the main thread
+                await MainActor.run {
+                    isLoading = false
+                    errorMessage = error.localizedDescription
+                    showingErrorAlert = true
+                }
+            }
+        }
     }
     
     private func deleteEvent() {
-        // Here we will delete from the backend
-        dismiss()
+        // Ensure we have a document ID
+        guard let documentId = event.documentId else {
+            errorMessage = "Cannot delete event: missing document ID"
+            showingErrorAlert = true
+            return
+        }
+        
+        isLoading = true
+        
+        Task {
+            do {
+                try await authViewModel.deleteEvent(eventId: documentId)
+                
+                await MainActor.run {
+                    isLoading = false
+                    dismiss()
+                }
+            } catch {
+                await MainActor.run {
+                    isLoading = false
+                    errorMessage = error.localizedDescription
+                    showingErrorAlert = true
+                }
+            }
+        }
     }
 }
 
@@ -367,7 +462,8 @@ struct AdminEditEventView_Previews: PreviewProvider {
                 requiredSkills: ["Physical Labor", "Environmental"],
                 urgency: .medium,
                 date: Date().addingTimeInterval(86400 * 7),
-                status: .upcoming
+                status: .upcoming,
+                volunteerRequirements: 1
             ))
         }
     }

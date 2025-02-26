@@ -2,6 +2,8 @@ import SwiftUI
 
 struct AdminCreateEventView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     @State private var formData: EventFormData
     @State private var validation = EventFormValidation()
     @State private var showingSuccessAlert = false
@@ -32,7 +34,8 @@ struct AdminCreateEventView: View {
             requiredSkills: [],
             urgency: .medium,
             date: Date().addingTimeInterval(86400), // Tomorrow
-            status: .upcoming
+            status: .upcoming,
+            volunteerRequirements: 1
         )
         // Initialize the form data with the empty event
         _formData = State(initialValue: EventFormData(from: emptyEvent))
@@ -78,14 +81,67 @@ struct AdminCreateEventView: View {
                             .disabled(isLoading)
                     }
                     
-                    // Location
-                    FormField(
-                        title: "Location",
-                        error: validation.locationError
+                    // Location Section
+                    GroupBox(
+                        label: Text("Location")
+                            .font(.headline)
                     ) {
-                        TextField("Enter location", text: $formData.location)
-                            .textFieldStyle(.roundedBorder)
-                            .disabled(isLoading)
+                        VStack(spacing: 16) {
+                            // Street Address
+                            FormField(
+                                title: "Street Address",
+                                error: validation.addressError
+                            ) {
+                                TextField("Enter street address", text: $formData.address)
+                                    .textFieldStyle(.roundedBorder)
+                                    .disabled(isLoading)
+                            }
+                            
+                            // City
+                            FormField(
+                                title: "City",
+                                error: validation.cityError
+                            ) {
+                                TextField("Enter city", text: $formData.city)
+                                    .textFieldStyle(.roundedBorder)
+                                    .disabled(isLoading)
+                            }
+                            
+                            // State and Zip in the same row
+                            HStack(spacing: 16) {
+                                // State/Province
+                                FormField(
+                                    title: "State/Province",
+                                    error: validation.stateError
+                                ) {
+                                    TextField("Enter state", text: $formData.state)
+                                        .textFieldStyle(.roundedBorder)
+                                        .disabled(isLoading)
+                                }
+                                
+                                // ZIP/Postal Code
+                                FormField(
+                                    title: "ZIP/Postal Code",
+                                    error: nil
+                                ) {
+                                    TextField("Enter ZIP code", text: $formData.zipCode)
+                                        .textFieldStyle(.roundedBorder)
+                                        .disabled(isLoading)
+                                        .keyboardType(.numberPad)
+                                }
+                            }
+                            
+                            // Country
+                            FormField(
+                                title: "Country",
+                                error: nil
+                            ) {
+                                TextField("Enter country", text: $formData.country)
+                                    .textFieldStyle(.roundedBorder)
+                                    .disabled(isLoading)
+                            }
+                        }
+                        .padding(.vertical, 8)
                     }
                     
                     // Required Skills
@@ -139,6 +195,44 @@ struct AdminCreateEventView: View {
                         }
                         .pickerStyle(.segmented)
                         .disabled(isLoading)
+                    }
+                    
+                    // Volunteer Requirements
+                    FormField(
+                        title: "Number of Volunteers Needed",
+                        error: validation.volunteerRequirementsError
+                    ) {
+                        HStack {
+                            Button(action: {
+                                if !isLoading && formData.volunteerRequirements > 1 {
+                                    formData.volunteerRequirements -= 1
+                                }
+                            }) {
+                                Image(systemName: "minus.circle.fill")
+                                    .foregroundColor(.blue)
+                                    .font(.title2)
+                            }
+                            .disabled(formData.volunteerRequirements <= 1 || isLoading)
+                            
+                            Text("\(formData.volunteerRequirements)")
+                                .font(.title3)
+                                .frame(width: 50)
+                                .padding(.horizontal)
+                            
+                            Button(action: {
+                                if !isLoading && formData.volunteerRequirements < 100 {
+                                    formData.volunteerRequirements += 1
+                                }
+                            }) {
+                                Image(systemName: "plus.circle.fill")
+                                    .foregroundColor(.blue)
+                                    .font(.title2)
+                            }
+                            .disabled(formData.volunteerRequirements >= 100 || isLoading)
+                        }
+                        .padding()
+                        .background(Color(uiColor: .systemGray6))
+                        .cornerRadius(8)
                     }
                     
                     // Event Date
@@ -232,33 +326,36 @@ struct AdminCreateEventView: View {
         // Set loading state
         isLoading = true
         
-        // Simulate API call with a delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        // Call the AuthViewModel createEvent method with separate location fields
+        Task {
             do {
-                // Here would be the actual call to Firebase
-                // For now, just simulate success/failure
-                let shouldSucceed = true // Simulate API response
+                try await authViewModel.createEvent(
+                    name: formData.name,
+                    description: formData.description,
+                    date: formData.date,
+                    address: formData.address,
+                    city: formData.city,
+                    state: formData.state,
+                    country: formData.country,
+                    zipCode: formData.zipCode,
+                    requiredSkills: Array(formData.requiredSkills),
+                    urgency: formData.urgency,
+                    volunteerRequirements: formData.volunteerRequirements
+                )
                 
-                if shouldSucceed {
+                // Show success alert on the main thread
+                await MainActor.run {
+                    isLoading = false
                     showingSuccessAlert = true
-                } else {
-                    throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to create event"])
                 }
             } catch {
-                errorMessage = error.localizedDescription
-                showingErrorAlert = true
+                // Show error alert on the main thread
+                await MainActor.run {
+                    isLoading = false
+                    errorMessage = error.localizedDescription
+                    showingErrorAlert = true
+                }
             }
-            
-            // Reset loading state
-            isLoading = false
-        }
-    }
-}
-
-struct AdminCreateEventView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            AdminCreateEventView()
         }
     }
 }
