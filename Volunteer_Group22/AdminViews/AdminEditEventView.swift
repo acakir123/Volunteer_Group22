@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseFirestore
 
 // Custom form field components
 struct FormField<Content: View>: View {
@@ -46,6 +47,12 @@ struct AdminEditEventView: View {
     @State private var errorMessage = ""
     @State private var isLoading = false
     
+    // State for assigned volunteers section
+    @State private var assignedVolunteers: [User] = []
+    @State private var isLoadingVolunteers = false
+    @State private var showingConfirmation = false
+    @State private var confirmationDialog: ConfirmationDialog?
+    
     // Available skills
     let availableSkills = [
         "Physical Labor",
@@ -68,6 +75,9 @@ struct AdminEditEventView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
+                // Assigned Volunteers Section
+                assignedVolunteersSection
+                
                 // Form fields
                 VStack(spacing: 20) {
                     // Event Name
@@ -132,7 +142,7 @@ struct AdminEditEventView: View {
                                         .disabled(isLoading)
                                 }
                                 
-                                // ZIP/Postal Code
+                                // ZIP Code
                                 FormField(
                                     title: "ZIP/Postal Code",
                                     error: nil
@@ -344,28 +354,38 @@ struct AdminEditEventView: View {
         } message: {
             Text(errorMessage)
         }
+        .alert(confirmationDialog?.title ?? "", isPresented: $showingConfirmation) {
+            Button("Cancel", role: .cancel) { }
+            Button(confirmationDialog?.primaryButtonText ?? "Confirm", role: .destructive) {
+                confirmationDialog?.primaryAction()
+            }
+        } message: {
+            Text(confirmationDialog?.message ?? "")
+        }
         .disabled(isLoading)
+        .onAppear {
+            // Automatically load volunteers if there are any assigned
+            if !event.assignedVolunteers.isEmpty {
+                fetchAssignedVolunteers()
+            }
+        }
     }
     
     private func saveEvent() {
-        // First validate the form
         validation.validate(event: formData)
         
         guard !validation.hasErrors else {
             return
         }
         
-        // Ensure we have a document ID
         guard let documentId = event.documentId else {
             errorMessage = "Cannot update event: missing document ID"
             showingErrorAlert = true
             return
         }
         
-        // Set loading state
         isLoading = true
         
-        // Call the AuthViewModel updateEvent method
         Task {
             do {
                 try await authViewModel.updateEvent(
@@ -384,13 +404,11 @@ struct AdminEditEventView: View {
                     status: formData.status
                 )
                 
-                // Show success alert on the main thread
                 await MainActor.run {
                     isLoading = false
                     showingSuccessAlert = true
                 }
             } catch {
-                // Show error alert on the main thread
                 await MainActor.run {
                     isLoading = false
                     errorMessage = error.localizedDescription
@@ -401,7 +419,6 @@ struct AdminEditEventView: View {
     }
     
     private func deleteEvent() {
-        // Ensure we have a document ID
         guard let documentId = event.documentId else {
             errorMessage = "Cannot delete event: missing document ID"
             showingErrorAlert = true
@@ -427,6 +444,301 @@ struct AdminEditEventView: View {
             }
         }
     }
+}
+
+
+extension AdminEditEventView {
+    
+    // Assigned volunteer display structure
+    struct AssignedVolunteerView: View {
+        let volunteer: User
+        let onRemove: () -> Void
+        
+        var body: some View {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(volunteer.fullName.isEmpty ? "Unnamed Volunteer" : volunteer.fullName)
+                        .font(.headline)
+                    
+                    Text(volunteer.email)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    // Show skills if available
+                    if !volunteer.skills.isEmpty {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 8) {
+                                ForEach(volunteer.skills, id: \.self) { skill in
+                                    Text(skill)
+                                        .font(.caption)
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 4)
+                                        .background(Color.blue.opacity(0.1))
+                                        .foregroundColor(.blue)
+                                        .cornerRadius(8)
+                                }
+                            }
+                        }
+                        .padding(.top, 4)
+                    }
+                }
+                
+                Spacer()
+                
+                Button(action: onRemove) {
+                    Image(systemName: "minus.circle.fill")
+                        .foregroundColor(.red)
+                        .font(.title2)
+                }
+            }
+            .padding()
+            .background(Color(UIColor.systemBackground))
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+            )
+        }
+    }
+    
+    // Load assigned volunteers
+    func fetchAssignedVolunteers() {
+        guard event.documentId != nil else { return }
+        
+        guard !event.assignedVolunteers.isEmpty else {
+            assignedVolunteers = []
+            return
+        }
+        
+        isLoadingVolunteers = true
+        
+        Task {
+            do {
+                var loadedVolunteers: [User] = []
+                
+                // Fetch each volunteer by ID
+                for volunteerId in event.assignedVolunteers {
+                    guard !volunteerId.isEmpty else {
+                        print("Empty volunteerId found in assignedVolunteers array")
+                        continue
+                    }
+                    
+                    // Fetch the user document
+                    do {
+                        let userDoc = try await authViewModel.db.collection("users").document(volunteerId).getDocument()
+                        
+                        if userDoc.exists, let userData = userDoc.data() {
+                            let uid = userDoc.documentID
+                            let username = userData["username"] as? String ?? ""
+                            let fullName = userData["fullName"] as? String ?? userData["name"] as? String ?? "Unnamed Volunteer"
+                            let email = userData["email"] as? String ?? ""
+                            let createdAt = (userData["createdAt"] as? Timestamp)?.dateValue() ?? Date()
+                            let role = userData["role"] as? String ?? ""
+                            let preferences = userData["preferences"] as? [String] ?? []
+                            let skills = userData["skills"] as? [String] ?? []
+                            
+                            var location: User.Location
+                            if let locationData = userData["location"] as? [String: Any] {
+                                location = User.Location(
+                                    address: locationData["address"] as? String ?? "",
+                                    city: locationData["city"] as? String ?? "",
+                                    country: locationData["country"] as? String ?? "",
+                                    state: locationData["state"] as? String ?? "",
+                                    zipCode: locationData["zipCode"] as? String ?? ""
+                                )
+                            } else {
+                                location = User.Location(
+                                    address: userData["address1"] as? String ?? userData["address"] as? String ?? "",
+                                    city: userData["city"] as? String ?? "",
+                                    country: userData["country"] as? String ?? "",
+                                    state: userData["state"] as? String ?? "",
+                                    zipCode: userData["zipCode"] as? String ?? ""
+                                )
+                            }
+                            
+                            // Handle availability data
+                            var availability: [String: User.Availability] = [:]
+                            if let availabilityData = userData["availability"] as? [String: [String: String]] {
+                                for (day, dict) in availabilityData {
+                                    let startTime = dict["startTime"] ?? ""
+                                    let endTime = dict["endTime"] ?? ""
+                                    availability[day] = User.Availability(
+                                        startTime: startTime,
+                                        endTime: endTime
+                                    )
+                                }
+                            } else {
+                                // Default availability for every day
+                                let weekdays = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+                                for day in weekdays {
+                                    availability[day] = User.Availability(startTime: "09:00", endTime: "17:00")
+                                }
+                            }
+                            
+                            let user = User(
+                                uid: uid,
+                                username: username,
+                                fullName: fullName,
+                                email: email,
+                                createdAt: createdAt,
+                                role: role,
+                                preferences: preferences,
+                                skills: skills,
+                                location: location,
+                                availability: availability
+                            )
+                            
+                            loadedVolunteers.append(user)
+                        } else {
+                            print("User document \(volunteerId) exists but contains no data")
+                        }
+                    } catch {
+                        // Handle error for this specific volunteer without crashing the entire function
+                        print("Error fetching volunteer \(volunteerId): \(error.localizedDescription)")
+                    }
+                }
+                
+                await MainActor.run {
+                    assignedVolunteers = loadedVolunteers
+                    isLoadingVolunteers = false
+                }
+            }
+        }
+    }
+    
+    // Function to remove a volunteer from the event
+    func removeVolunteer(with uid: String) {
+        guard let documentId = event.documentId else { return }
+        
+        isLoadingVolunteers = true
+        
+        Task {
+            do {
+                let updatedVolunteers = event.assignedVolunteers.filter { $0 != uid }
+                
+                try await authViewModel.db.collection("events").document(documentId).updateData([
+                    "assignedVolunteers": updatedVolunteers
+                ])
+                
+                await MainActor.run {
+                    var updatedEvent = event
+                    updatedEvent.assignedVolunteers = updatedVolunteers
+                    
+                    assignedVolunteers = assignedVolunteers.filter { $0.uid != uid }
+                    isLoadingVolunteers = false
+                }
+            } catch {
+                print("Error removing volunteer: \(error.localizedDescription)")
+                await MainActor.run {
+                    isLoadingVolunteers = false
+                    errorMessage = "Error removing volunteer: \(error.localizedDescription)"
+                    showingErrorAlert = true
+                }
+            }
+        }
+    }
+    
+    // Assigned Volunteers Section View
+    var assignedVolunteersSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            // Section header with count
+            HStack {
+                Text("Assigned Volunteers (\(event.assignedVolunteers.count))")
+                    .font(.headline)
+                
+                Spacer()
+                
+                if isLoadingVolunteers {
+                    ProgressView()
+                        .scaleEffect(0.8)
+                } else {
+                    Button(action: fetchAssignedVolunteers) {
+                        Image(systemName: "arrow.clockwise")
+                            .foregroundColor(.blue)
+                    }
+                }
+            }
+            
+            // Empty state
+            if event.assignedVolunteers.isEmpty {
+                HStack {
+                    Spacer()
+                    VStack(spacing: 8) {
+                        Image(systemName: "person.badge.plus")
+                            .font(.system(size: 32))
+                            .foregroundColor(.gray)
+                        Text("No volunteers assigned")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        Text("Use the Volunteer Matching screen to assign volunteers")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding()
+                    Spacer()
+                }
+            }
+            // Loading state
+            else if isLoadingVolunteers && assignedVolunteers.isEmpty {
+                HStack {
+                    Spacer()
+                    VStack(spacing: 12) {
+                        ProgressView()
+                            .padding()
+                        Text("Loading volunteers...")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    Spacer()
+                }
+            }
+            // Volunteer list
+            else {
+                if assignedVolunteers.isEmpty {
+                    Button(action: fetchAssignedVolunteers) {
+                        HStack {
+                            Image(systemName: "person.2.fill")
+                            Text("Load \(event.assignedVolunteers.count) assigned volunteers")
+                        }
+                        .foregroundColor(.blue)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color(UIColor.systemBackground))
+                        .cornerRadius(12)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                } else {
+                    VStack(spacing: 12) {
+                        ForEach(assignedVolunteers, id: \.uid) { volunteer in
+                            AssignedVolunteerView(volunteer: volunteer) {
+                                confirmationDialog = ConfirmationDialog(
+                                    title: "Remove Volunteer",
+                                    message: "Are you sure you want to remove \(volunteer.fullName) from this event?",
+                                    primaryButtonText: "Remove",
+                                    primaryAction: {
+                                        removeVolunteer(with: volunteer.uid)
+                                    }
+                                )
+                                showingConfirmation = true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .padding()
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(16)
+    }
+}
+
+// Confirmation dialog helper struct
+struct ConfirmationDialog {
+    let title: String
+    let message: String
+    let primaryButtonText: String
+    let primaryAction: () -> Void
 }
 
 // Skill toggle button component
