@@ -1,6 +1,6 @@
 import SwiftUI
 import FirebaseFirestore
-import FirebaseFirestoreSwift
+//import FirebaseFirestoreSwift
 
 // MARK: - Models & Supporting Structs
 
