@@ -1,4 +1,7 @@
 import SwiftUI
+import FirebaseFirestore
+
+// MARK: - Supporting Components
 
 struct StatisticCard: View {
     let title: String
@@ -24,16 +27,12 @@ struct StatisticCard: View {
                     .foregroundColor(trend >= 0 ? .green : .red)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
-                    .background(
-                        (trend >= 0 ? Color.green : Color.red)
-                            .opacity(0.1)
-                            .cornerRadius(8)
-                    )
+                    .background((trend >= 0 ? Color.green : Color.red).opacity(0.1))
+                    .cornerRadius(8)
                 }
             }
         }
         .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(uiColor: .systemBackground))
         .cornerRadius(16)
         .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
@@ -101,11 +100,7 @@ struct ChartCard<Content: View>: View {
     let subtitle: String?
     let content: Content
     
-    init(
-        title: String,
-        subtitle: String? = nil,
-        @ViewBuilder content: () -> Content
-    ) {
+    init(title: String, subtitle: String? = nil, @ViewBuilder content: () -> Content) {
         self.title = title
         self.subtitle = subtitle
         self.content = content()
@@ -134,10 +129,21 @@ struct ChartCard<Content: View>: View {
     }
 }
 
+// MARK: - AdminReportingView with Firebase Integration
+
 struct AdminReportingView: View {
     @State private var selectedDateRange: DateRange = .lastMonth
     @State private var showingExportOptions = false
     @State private var selectedExportFormat: ExportFormat = .pdf
+    
+    @State private var totalVolunteers: Int = 0
+    @State private var activeEvents: Int = 0
+    @State private var hoursDonated: Int = 0
+    @State private var successRate: Double = 0
+    @State private var skillDistribution: [(String, Double)] = []
+    @State private var eventStatus: [(String, Double)] = []
+    
+    private let db = Firestore.firestore()
     
     enum DateRange: String, CaseIterable {
         case lastWeek = "Last Week"
@@ -153,182 +159,61 @@ struct AdminReportingView: View {
         case excel = "Excel"
     }
     
-    // Sample data
-    let skillDistribution = [
-        ("Physical Labor", 80.0),
-        ("Technical", 60.0),
-        ("Customer Service", 90.0),
-        ("Medical", 40.0),
-        ("Teaching", 70.0)
-    ]
-    
-    let eventStatus = [
-        ("Completed", 45.0),
-        ("In Progress", 30.0),
-        ("Upcoming", 25.0)
-    ]
-    
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                // Header with export button
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Reports & Analytics")
-                            .font(.system(size: 32, weight: .bold))
-                        Text("Overview of volunteer performance")
-                            .font(.system(size: 17))
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    Spacer()
-                    
-                    Button(action: { showingExportOptions = true }) {
-                        HStack {
-                            Image(systemName: "square.and.arrow.up")
-                        }
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                    }
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                    StatisticCard(title: "Total Volunteers", value: "\(totalVolunteers)", trend: nil)
+                    StatisticCard(title: "Active Events", value: "\(activeEvents)", trend: nil)
+                    StatisticCard(title: "Hours Donated", value: "\(hoursDonated)", trend: nil)
+                    StatisticCard(title: "Success Rate", value: "\(Int(successRate))%", trend: nil)
                 }
                 .padding(.horizontal)
                 
-                // Date range picker
-                HStack {
-                    Picker("Date Range", selection: $selectedDateRange) {
-                        ForEach(DateRange.allCases, id: \.self) { range in
-                            Text(range.rawValue).tag(range)
-                        }
-                    }
-                    .pickerStyle(.menu)
-                    
-                    Spacer()
-                    
-                    if selectedDateRange == .custom {
-                        Button(action: {}) {
-                            HStack {
-                                Image(systemName: "calendar")
-                                Text("Select Dates")
-                            }
-                            .foregroundColor(.blue)
+                ChartCard(title: "Event Status Distribution", subtitle: "Current event status breakdown") {
+                    HStack {
+                        ForEach(eventStatus, id: \.0) { status in
+                            CircleProgressView(percentage: status.1, color: .blue, label: status.0)
                         }
                     }
                 }
-                .padding(.horizontal)
                 
-                // Key statistics
-                LazyVGrid(columns: [
-                    GridItem(.flexible()),
-                    GridItem(.flexible())
-                ], spacing: 16) {
-                    StatisticCard(
-                        title: "Total Volunteers",
-                        value: "248",
-                        trend: 12.5
-                    )
-                    StatisticCard(
-                        title: "Active Events",
-                        value: "12",
-                        trend: -5.0
-                    )
-                    StatisticCard(
-                        title: "Hours Donated",
-                        value: "1.2K",
-                        trend: 8.3
-                    )
-                    StatisticCard(
-                        title: "Success Rate",
-                        value: "94%",
-                        trend: 2.1
-                    )
+                ChartCard(title: "Volunteer Skills", subtitle: "Distribution of volunteer skills") {
+                    SimpleBarChart(data: skillDistribution, maxValue: skillDistribution.map { $0.1 }.max() ?? 100)
                 }
-                .padding(.horizontal)
-                
-                // Charts
-                VStack(spacing: 24) {
-                    // Event Status Distribution
-                    ChartCard(
-                        title: "Event Status Distribution",
-                        subtitle: "Current event status breakdown"
-                    ) {
-                        HStack(spacing: 0) {
-                            Spacer(minLength: 0)
-                            ForEach(eventStatus, id: \.0) { status in
-                                CircleProgressView(
-                                    percentage: status.1,
-                                    color: status.0 == "Completed" ? .green :
-                                          status.0 == "In Progress" ? .blue : .orange,
-                                    label: status.0
-                                )
-                                if status.0 != eventStatus.last?.0 {
-                                    Spacer(minLength: 0)
-                                }
-                            }
-                            Spacer(minLength: 0)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical)
-                    }
-                    
-                    // Skill Distribution
-                    ChartCard(
-                        title: "Volunteer Skills",
-                        subtitle: "Distribution of volunteer skills"
-                    ) {
-                        SimpleBarChart(
-                            data: skillDistribution,
-                            maxValue: skillDistribution.map { $0.1 }.max() ?? 100
-                        )
-                    }
-                }
-                .padding(.horizontal)
             }
             .padding(.vertical)
         }
         .background(Color(uiColor: .systemGroupedBackground))
-        .sheet(isPresented: $showingExportOptions) {
-            NavigationView {
-                List {
-                    Section(header: Text("Export Format")) {
-                        ForEach(ExportFormat.allCases, id: \.self) { format in
-                            Button(action: { exportReport(format: format) }) {
-                                HStack {
-                                    Text(format.rawValue)
-                                    Spacer()
-                                    if format == selectedExportFormat {
-                                        Image(systemName: "checkmark")
-                                            .foregroundColor(.blue)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                .navigationTitle("Export Report")
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(
-                    trailing: Button("Done") {
-                        showingExportOptions = false
-                    }
-                )
+        .onAppear {
+            Task {
+                await fetchReportData()
             }
         }
     }
     
-    private func exportReport(format: ExportFormat) {
-        selectedExportFormat = format
-        // Implement the actual export logic
-        showingExportOptions = false
+    private func fetchReportData() async {
+        do {
+            let volunteersSnapshot = try await db.collection("users").whereField("role", isEqualTo: "Volunteer").getDocuments()
+            totalVolunteers = volunteersSnapshot.documents.count
+
+            let eventsSnapshot = try await db.collection("events").whereField("status", isEqualTo: "Upcoming").getDocuments()
+            activeEvents = eventsSnapshot.documents.count
+
+            let allEvents = try await db.collection("events").getDocuments()
+            hoursDonated = allEvents.documents.reduce(0) { sum, document in
+                let assignedVolunteers = document.data()["assignedVolunteers"] as? [String] ?? []
+                return sum + (assignedVolunteers.count * 5)
+            }
+
+            let completedEvents = allEvents.documents.filter { ($0.data()["status"] as? String) == "Completed" }.count
+            let totalEvents = allEvents.documents.count
+            successRate = totalEvents > 0 ? (Double(completedEvents) / Double(totalEvents)) * 100 : 0
+
+        } catch {
+            print("Error fetching report data: \(error.localizedDescription)")
+        }
     }
 }
 
-struct AdminReportingView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-            AdminReportingView()
-        
-    }
-}
+
