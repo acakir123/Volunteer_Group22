@@ -112,13 +112,9 @@ struct VolunteerHistoryView: View {
                                     .foregroundColor(.secondary)
                                     .lineLimit(2)
 
-                                // Display Performance Data
+                                // Display Performance Data (Without "Performance" label)
                                 if !record.performance.isEmpty {
                                     VStack(alignment: .leading, spacing: 4) {
-                                        Text("Performance:")
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
-
                                         ForEach(record.performance.keys.sorted(), id: \.self) { key in
                                             HStack {
                                                 Text("\(key.capitalized):")
