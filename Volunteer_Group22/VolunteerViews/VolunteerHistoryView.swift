@@ -1,66 +1,7 @@
 import SwiftUI
 import FirebaseFirestore
 
-// Model for volunteer history records
-struct VolunteerHistoryRecord: Identifiable {
-    let id = UUID()
-    var documentId: String?
-    var eventId: String
-    var volunteerId: String
-    var dateCompleted: Date
-    var performance: [String: Any]
-    var feedback: String
-    var createdAt: Date?
-    
-    // Event details (populated after fetching event data)
-    var eventTitle: String = ""
-    var eventDescription: String = ""
-    var eventLocation: String = ""
-    var eventDate: Date = Date()
-    
-    // Participation status
-    var participationStatus: ParticipationStatus = .attended
-    
-    enum ParticipationStatus: String, CaseIterable {
-        case attended = "Attended"
-        case canceled = "Canceled"
-        case noShow = "No Show"
-        
-        var color: Color {
-            switch self {
-            case .attended:
-                return .green
-            case .canceled:
-                return .orange
-            case .noShow:
-                return .red
-            }
-        }
-    }
-    
-    // Initialize from Firestore document
-    init(documentId: String, data: [String: Any]) {
-        self.documentId = documentId
-        self.eventId = data["eventId"] as? String ?? ""
-        self.volunteerId = data["volunteerId"] as? String ?? ""
-        self.dateCompleted = (data["dateCompleted"] as? Timestamp)?.dateValue() ?? Date()
-        self.performance = data["performance"] as? [String: Any] ?? [:]
-        self.feedback = data["feedback"] as? String ?? ""
-        self.createdAt = (data["createdAt"] as? Timestamp)?.dateValue()
-        
-        // Determine participation status based on event data (default to attended)
-        if let performanceData = self.performance as? [String: String],
-           let status = performanceData["status"] {
-            if status == "canceled" {
-                self.participationStatus = .canceled
-            } else if status == "noShow" {
-                self.participationStatus = .noShow
-            } else {
-                self.participationStatus = .attended
-            }
-        }
-    }
-}
+
 
 // ViewModel for handling Volunteer History
 class VolunteerHistoryViewModel: ObservableObject {
@@ -82,39 +23,10 @@ class VolunteerHistoryViewModel: ObservableObject {
                 .whereField("volunteerId", isEqualTo: userId)
                 .getDocuments() // No index required
 
-            var records: [VolunteerHistoryRecord] = []
-            
-            for document in historySnapshot.documents {
-                var record = VolunteerHistoryRecord(documentId: document.documentID, data: document.data())
+            var records: [VolunteerHistoryRecord] = historySnapshot.documents.map { VolunteerHistoryRecord(document: $0) }
 
-                // Fetch the associated event data
-                if !record.eventId.isEmpty {
-                    if let eventData = try? await fetchEventDetails(eventId: record.eventId, db: db) {
-                        record.eventTitle = eventData["name"] as? String ?? "Unknown Event"
-                        record.eventDescription = eventData["description"] as? String ?? ""
-
-                        if let locationData = eventData["location"] as? [String: String] {
-                            let address = locationData["address"] ?? ""
-                            let city = locationData["city"] ?? ""
-                            let state = locationData["state"] ?? ""
-
-                            var locationComponents = [String]()
-                            if !address.isEmpty { locationComponents.append(address) }
-                            if !city.isEmpty { locationComponents.append(city) }
-                            if !state.isEmpty { locationComponents.append(state) }
-
-                            record.eventLocation = locationComponents.joined(separator: ", ")
-                        }
-
-                        record.eventDate = (eventData["dateTime"] as? Timestamp)?.dateValue() ?? Date()
-                    }
-                }
-                
-                records.append(record)
-            }
-            
             // Manually sort by dateCompleted in descending order
-            records.sort { $0.dateCompleted > $1.dateCompleted }
+            records.sort { ($0.dateCompleted ?? Date.distantPast) > ($1.dateCompleted ?? Date.distantPast) }
             
             DispatchQueue.main.async {
                 self.historyRecords = records
@@ -127,16 +39,6 @@ class VolunteerHistoryViewModel: ObservableObject {
                 self.isLoading = false
             }
         }
-    }
-
-    
-    // Helper function to fetch event details
-    private func fetchEventDetails(eventId: String, db: Firestore) async throws -> [String: Any]? {
-        let eventDoc = try await db.collection("events").document(eventId).getDocument()
-        if eventDoc.exists {
-            return eventDoc.data()
-        }
-        return nil
     }
 }
 
@@ -158,12 +60,9 @@ struct VolunteerHistoryView: View {
             
             // Content based on state
             ZStack {
-                // Loading state
                 if viewModel.isLoading {
                     ProgressView("Loading history...")
-                }
-                // Error state
-                else if let error = viewModel.errorMessage {
+                } else if let error = viewModel.errorMessage {
                     VStack {
                         Image(systemName: "exclamationmark.triangle")
                             .font(.largeTitle)
@@ -186,9 +85,7 @@ struct VolunteerHistoryView: View {
                         .padding()
                     }
                     .padding()
-                }
-                // Empty state
-                else if viewModel.historyRecords.isEmpty {
+                } else if viewModel.historyRecords.isEmpty {
                     VStack {
                         Image(systemName: "calendar.badge.clock")
                             .font(.system(size: 50))
@@ -205,47 +102,23 @@ struct VolunteerHistoryView: View {
                             .padding()
                     }
                     .padding()
-                }
-                // List of past activities
-                else {
+                } else {
                     List {
                         ForEach(viewModel.historyRecords) { record in
                             VStack(alignment: .leading, spacing: 8) {
-                                // Event Title
-                                Text(record.eventTitle)
+                                Text(record.fullName ?? "Unknown Volunteer")
                                     .font(.headline)
                                 
-                                // Event Description
-                                Text(record.eventDescription)
+                                Text(record.feedback)
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                                     .lineLimit(2)
                                 
-                                // Event Date and Location
                                 HStack {
                                     Image(systemName: "calendar")
                                         .foregroundColor(.blue)
-                                    Text(formatDate(record.eventDate))
+                                    Text(formatDate(record.dateCompleted ?? Date()))
                                         .font(.caption)
-                                    
-                                    Spacer()
-                                    
-                                    Image(systemName: "mappin.and.ellipse")
-                                        .foregroundColor(.blue)
-                                    Text(record.eventLocation)
-                                        .font(.caption)
-                                        .lineLimit(1)
-                                }
-                                
-                                // Participation Status
-                                HStack {
-                                    Text("Status:")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                    Text(record.participationStatus.rawValue)
-                                        .font(.caption)
-                                        .foregroundColor(record.participationStatus.color)
-                                        .fontWeight(.medium)
                                 }
                             }
                             .padding(.vertical, 8)
@@ -261,7 +134,6 @@ struct VolunteerHistoryView: View {
             }
         }
         .onAppear {
-            // Load data when view appears
             Task {
                 if let userId = authViewModel.userSession?.uid {
                     await viewModel.fetchVolunteerHistory(for: userId, db: authViewModel.db)
