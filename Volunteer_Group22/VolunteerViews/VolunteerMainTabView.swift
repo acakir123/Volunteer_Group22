@@ -35,3 +35,8 @@ struct VolunteerMainTabView: View {
     }
 }
 
+struct VolunteerMainTabView_Previews: PreviewProvider {
+    static var previews: some View {
+        VolunteerMainTabView()
+    }
+}
