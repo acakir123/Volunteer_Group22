@@ -315,4 +315,51 @@ class AuthViewModel: ObservableObject {
         
         return events
     }
+    
+    // Creates volunteerHistory documents for all events that have ended
+    func generateVolunteerHistoryRecords() async throws {
+        let now = Date()
+        
+        // Query all events with dateTime < now
+        let eventSnapshot = try await db.collection("events")
+            .whereField("dateTime", isLessThan: Timestamp(date: now))
+            .getDocuments()
+        
+        for eventDoc in eventSnapshot.documents {
+            let eventId = eventDoc.documentID
+            let eventData = eventDoc.data()
+            
+            // Get assigned volunteers
+            let assignedVolunteers = eventData["assignedVolunteers"] as? [String] ?? []
+            
+            for volunteerId in assignedVolunteers {
+                // Check if exists already
+                let historySnapshot = try await db.collection("volunteerHistory")
+                    .whereField("eventId", isEqualTo: eventId)
+                    .whereField("volunteerId", isEqualTo: volunteerId)
+                    .getDocuments()
+                
+                // Create if does not exist
+                if historySnapshot.documents.isEmpty {
+                    let historyData: [String: Any] = [
+                        "eventId": eventId,
+                        "volunteerId": volunteerId,
+                        "dateCompleted": Timestamp(date: now),
+                        "performance": [:],
+                        "feedback": "",
+                        "createdAt": Timestamp(date: now)
+                    ]
+                    
+                    // Create the document in Firestore
+                    _ = db.collection("volunteerHistory").addDocument(data: historyData)
+                }
+            }
+            
+            // Change event status to Completed
+            if let currentStatus = eventData["status"] as? String,currentStatus != Event.EventStatus.completed.rawValue {
+                try await db.collection("events").document(eventId)
+                    .updateData(["status": Event.EventStatus.completed.rawValue])
+            }
+        }
+    }
 }

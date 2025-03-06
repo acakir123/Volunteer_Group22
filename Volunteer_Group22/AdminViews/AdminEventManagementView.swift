@@ -254,6 +254,9 @@ struct AdminEventManagementView: View {
                 // Access the Firestore db from the AuthViewModel
                 let fetchedEvents = try await authViewModel.fetchEvents(db: authViewModel.db)
                 
+                // Check if any events have ended
+                try await authViewModel.generateVolunteerHistoryRecords()
+                
                 await MainActor.run {
                     events = fetchedEvents
                     isLoading = false
