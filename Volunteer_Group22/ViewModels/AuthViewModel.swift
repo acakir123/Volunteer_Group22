@@ -333,6 +333,11 @@ class AuthViewModel: ObservableObject {
             let assignedVolunteers = eventData["assignedVolunteers"] as? [String] ?? []
             
             for volunteerId in assignedVolunteers {
+                // Fetch volunteers doc to get name
+                let userDoc = try await db.collection("users").document(volunteerId).getDocument()
+                let userData = userDoc.data() ?? [:]
+                let volunteerName = userData["fullName"] as? String ?? ""
+                
                 // Check if exists already
                 let historySnapshot = try await db.collection("volunteerHistory")
                     .whereField("eventId", isEqualTo: eventId)
