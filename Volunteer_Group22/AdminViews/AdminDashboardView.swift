@@ -1,8 +1,6 @@
 import SwiftUI
 import FirebaseFirestore
 
-// MARK: - Structs (Keeping Your Original Structure Intact)
-
 // Quick stats for admin dashboard - shows key metrics in a clean, modern card layout
 struct StatCard: View {
     let title: String
