@@ -1,8 +1,6 @@
 import SwiftUI
 import FirebaseFirestore
 
-
-
 // ViewModel for handling Volunteer History
 class VolunteerHistoryViewModel: ObservableObject {
     @Published var historyRecords: [VolunteerHistoryRecord] = []
@@ -108,12 +106,32 @@ struct VolunteerHistoryView: View {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text(record.fullName ?? "Unknown Volunteer")
                                     .font(.headline)
-                                
+
                                 Text(record.feedback)
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                                     .lineLimit(2)
-                                
+
+                                // Display Performance Data
+                                if !record.performance.isEmpty {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("Performance:")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+
+                                        ForEach(record.performance.keys.sorted(), id: \.self) { key in
+                                            HStack {
+                                                Text("\(key.capitalized):")
+                                                    .font(.caption)
+                                                    .foregroundColor(.gray)
+                                                Text("\(String(describing: record.performance[key] ?? "N/A"))")
+                                                    .font(.caption)
+                                                    .fontWeight(.medium)
+                                            }
+                                        }
+                                    }
+                                }
+
                                 HStack {
                                     Image(systemName: "calendar")
                                         .foregroundColor(.blue)
