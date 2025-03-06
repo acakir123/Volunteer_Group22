@@ -1,39 +1,7 @@
 import SwiftUI
 import FirebaseFirestore
-//import FirebaseFirestoreSwift
 
-// MARK: - Models & Supporting Structs
-
-struct Activity {
-    let title: String
-    let timestamp: String
-    let type: ActivityType
-    
-    enum ActivityType: String {
-        case event = "event"
-        case volunteer = "volunteer"
-        case report = "report"
-        
-        var icon: String {
-            switch self {
-            case .event: return "calendar"
-            case .volunteer: return "person.2"
-            case .report: return "doc.text"
-            }
-        }
-        
-        var color: Color {
-            switch self {
-            case .event: return .blue
-            case .volunteer: return .green
-            case .report: return .orange
-            }
-        }
-    }
-}
-
-// MARK: - UI Components
-
+// Quick stats for admin dashboard - shows key metrics in a clean, modern card layout
 struct StatCard: View {
     let title: String
     let value: String
@@ -65,6 +33,7 @@ struct StatCard: View {
     }
 }
 
+// Quick actions for admin - Create Event, Match Volunteers, and Generate Report
 struct QuickActionButton: View {
     let title: String
     let icon: String
@@ -91,6 +60,7 @@ struct QuickActionButton: View {
     }
 }
 
+// Recent activities row - displays individual activity items with icons and timestamps
 struct RecentActivityRow: View {
     let activity: Activity
     
@@ -125,156 +95,229 @@ struct RecentActivityRow: View {
     }
 }
 
-// MARK: - ViewModel
-
-@MainActor
-class AdminDashboardViewModel: ObservableObject {
-    @Published var activeEventsCount: Int = 0
-    @Published var totalVolunteers: Int = 0
-    @Published var totalHours: Int = 0
-    @Published var successRate: Int = 0
-    @Published var recentActivities: [Activity] = []
+// Recent activities model
+struct Activity {
+    let title: String
+    let timestamp: String
+    let type: ActivityType
     
-    private let db = Firestore.firestore()
-    
-    init() {
-        Task {
-            await fetchDashboardStats()
-        }
-    }
-    
-    func fetchDashboardStats() async {
-        do {
-            let activeEventsCount = await fetchActiveEventsCount()
-            let totalVolunteers = await fetchTotalVolunteers()
-            let totalHoursDonated = await fetchTotalHoursDonated()
-            let successRate = await fetchSuccessRate()
-            await fetchRecentActivities()
-
-            DispatchQueue.main.async {
-                self.activeEventsCount = activeEventsCount
-                self.totalVolunteers = totalVolunteers
-                self.totalHours = totalHoursDonated
-                self.successRate = successRate
+    enum ActivityType: String {
+        case event = "event"
+        case volunteer = "volunteer"
+        case report = "report"
+        
+        var icon: String {
+            switch self {
+            case .event: return "calendar"
+            case .volunteer: return "person.2"
+            case .report: return "doc.text"
             }
-        } catch {
-            print("Error fetching dashboard statistics: \(error.localizedDescription)")
         }
-    }
-    
-    func fetchActiveEventsCount() async -> Int {
-        do {
-            let snapshot = try await db.collection("events")
-                .whereField("status", isEqualTo: "Upcoming")
-                .getDocuments()
-            return snapshot.documents.count
-        } catch {
-            print("Error fetching active events: \(error.localizedDescription)")
-            return 0
-        }
-    }
-
-    func fetchTotalVolunteers() async -> Int {
-        do {
-            let snapshot = try await db.collection("users")
-                .whereField("role", isEqualTo: "Volunteer")
-                .getDocuments()
-            return snapshot.documents.count
-        } catch {
-            print("Error fetching volunteers: \(error.localizedDescription)")
-            return 0
-        }
-    }
-
-    func fetchTotalHoursDonated() async -> Int {
-        do {
-            let snapshot = try await db.collection("events").getDocuments()
-            
-            let totalHours = snapshot.documents.reduce(0) { (sum, document) -> Int in
-                let data = document.data()
-                let volunteerCount = (data["assignedVolunteers"] as? [String])?.count ?? 0
-                let estimatedHoursPerVolunteer = 5
-                return sum + (volunteerCount * estimatedHoursPerVolunteer)
+        
+        var color: Color {
+            switch self {
+            case .event: return .blue
+            case .volunteer: return .green
+            case .report: return .orange
             }
-            
-            return totalHours
-        } catch {
-            print("Error fetching total hours donated: \(error.localizedDescription)")
-            return 0
-        }
-    }
-
-    func fetchSuccessRate() async -> Int {
-        do {
-            let snapshot = try await db.collection("events").getDocuments()
-
-            let completedEvents = snapshot.documents.filter { document in
-                let status = document.data()["status"] as? String ?? ""
-                return status == "Completed"
-            }.count
-
-            let totalEvents = snapshot.documents.count
-            let successRate = totalEvents > 0 ? (completedEvents * 100) / totalEvents : 0
-
-            return successRate
-        } catch {
-            print("Error fetching success rate: \(error.localizedDescription)")
-            return 0
-        }
-    }
-    
-    func fetchRecentActivities() async {
-        do {
-            let snapshot = try await db.collection("activities")
-                .order(by: "timestamp", descending: true)
-                .limit(to: 5)
-                .getDocuments()
-
-            let activities = snapshot.documents.compactMap { document -> Activity? in
-                let data = document.data()
-                
-                guard let title = data["title"] as? String,
-                      let timestamp = data["timestamp"] as? Timestamp,
-                      let typeString = data["type"] as? String,
-                      let type = Activity.ActivityType(rawValue: typeString) else {
-                    return nil
-                }
-
-                return Activity(
-                    title: title,
-                    timestamp: timestamp.dateValue().formatted(),
-                    type: type
-                )
-            }
-
-            DispatchQueue.main.async {
-                self.recentActivities = activities
-            }
-        } catch {
-            print("Error fetching recent activities: \(error.localizedDescription)")
         }
     }
 }
 
 // MARK: - Main View
-
 struct AdminDashboardView: View {
-    @StateObject private var viewModel = AdminDashboardViewModel()
-    
+    @EnvironmentObject var authViewModel: AuthViewModel
+    private let db = Firestore.firestore()
+
+    // Dynamic state variables
+    @State private var activeEventsCount: Int = 0
+    @State private var totalVolunteers: Int = 0
+    @State private var totalHours: Int = 0
+    @State private var successRate: Int = 0
+    @State private var activities: [Activity] = []
+
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text("Overview").font(.system(size: 24, weight: .bold)).padding(.horizontal)
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                        StatCard(title: "Active Events", value: "\(viewModel.activeEventsCount)", icon: "calendar", color: .blue)
-                        StatCard(title: "Total Volunteers", value: "\(viewModel.totalVolunteers)", icon: "person.2", color: .green)
+                VStack(spacing: 4) {
+                    HStack {
+                        Text("Welcome, Admin")
+                            .font(.system(size: 32, weight: .bold))
+                        
+                        Spacer()
+                        
+                        NavigationLink(destination: AdminProfileEditView()) {
+                            Image(systemName: "person.circle.fill")
+                                .font(.system(size: 32))
+                                .foregroundColor(.blue)
+                        }
                     }
-                }.padding(.horizontal)
-            }.padding(.vertical)
-        }.onAppear {
-            Task {
-                await viewModel.fetchDashboardStats()
+                    
+                    HStack {
+                        Text("Here's what's happening today")
+                            .font(.system(size: 17))
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.top, 8)
+                
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Overview")
+                        .font(.system(size: 24, weight: .bold))
+                        .padding(.horizontal)
+                    
+                    LazyVGrid(columns: [
+                        GridItem(.flexible()),
+                        GridItem(.flexible())
+                    ], spacing: 16) {
+                        StatCard(title: "Active Events", value: "\(activeEventsCount)", icon: "calendar", color: .blue)
+                        StatCard(title: "Total Volunteers", value: "\(totalVolunteers)", icon: "person.2", color: .green)
+                        StatCard(title: "Hours Donated", value: "\(totalHours)", icon: "clock", color: .orange)
+                        StatCard(title: "Success Rate", value: "\(successRate)%", icon: "chart.bar", color: .purple)
+                    }
+                    .padding(.horizontal)
+                }
+                
+                // Quick Actions section with navigation buttons
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Quick Actions")
+                        .font(.system(size: 24, weight: .bold))
+                        .padding(.horizontal)
+                    
+                    LazyVGrid(columns: [
+                        GridItem(.flexible()),
+                        GridItem(.flexible()),
+                        GridItem(.flexible())
+                    ], spacing: 16) {
+                        // Create Event button
+                        NavigationLink(destination: AdminCreateEventView()) {
+                            QuickActionButton(
+                                title: "Create Event",
+                                icon: "plus.circle.fill",
+                                action: {}
+                            )
+                        }
+                        
+                        // Match Volunteers button
+                        NavigationLink(destination: AdminVolunteerMatchView()) {
+                            QuickActionButton(
+                                title: "Match Volunteers",
+                                icon: "person.2.fill",
+                                action: {}
+                            )
+                        }
+                        
+                        // Generate Report button
+                        NavigationLink(destination: AdminReportingView()) {
+                            QuickActionButton(
+                                title: "Generate Report",
+                                icon: "doc.text.fill",
+                                action: {}
+                            )
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+                
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Recent Activities")
+                        .font(.system(size: 24, weight: .bold))
+                    
+                    VStack(spacing: 12) {
+                        ForEach(activities, id: \.title) { activity in
+                            RecentActivityRow(activity: activity)
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+            }
+            .padding(.vertical)
+        }
+        .onAppear {
+            fetchDashboardStats()
+            fetchRecentActivities()
+        }
+    }
+    
+    // MARK: - Fetch Data from Firestore
+    private func fetchDashboardStats() {
+        Task {
+            activeEventsCount = await fetchActiveEventsCount()
+            totalVolunteers = await fetchTotalVolunteers()
+            totalHours = await fetchTotalHoursDonated()
+            successRate = await fetchSuccessRate()
+        }
+    }
+    
+    private func fetchActiveEventsCount() async -> Int {
+        do {
+            let snapshot = try await db.collection("events").whereField("status", isEqualTo: "Upcoming").getDocuments()
+            return snapshot.documents.count
+        } catch {
+            return 0
+        }
+    }
+
+    private func fetchTotalVolunteers() async -> Int {
+        do {
+            let snapshot = try await db.collection("users").whereField("role", isEqualTo: "Volunteer").getDocuments()
+            return snapshot.documents.count
+        } catch {
+            return 0
+        }
+    }
+
+    private func fetchTotalHoursDonated() async -> Int {
+        do {
+            let snapshot = try await db.collection("events").getDocuments()
+            return snapshot.documents.reduce(0) { $0 + (($1.data()["assignedVolunteers"] as? [String])?.count ?? 0) * 5 }
+        } catch {
+            return 0
+        }
+    }
+
+    private func fetchSuccessRate() async -> Int {
+        do {
+            let snapshot = try await db.collection("events").whereField("status", isEqualTo: "Completed").getDocuments()
+            return snapshot.documents.count
+        } catch {
+            return 0
+        }
+    }
+
+    private func fetchRecentActivities() {
+        Task {
+            do {
+                let snapshot = try await db.collection("events")
+                    .whereField("status", isEqualTo: "Upcoming") // Fetch only active events
+                    .order(by: "createdAt", descending: true) // Sort by newest first
+                    .limit(to: 5) // Limit to 5 events
+                    .getDocuments()
+
+                let fetchedActivities = snapshot.documents.compactMap { document -> Activity? in
+                    let data = document.data()
+                    
+                    guard let title = data["name"] as? String,
+                          let timestamp = (data["createdAt"] as? Timestamp)?.dateValue() else {
+                        return nil
+                    }
+
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "MMM d, yyyy h:mm a"
+                    let formattedTimestamp = formatter.string(from: timestamp)
+
+                    return Activity(title: title, timestamp: formattedTimestamp, type: .event)
+                }
+
+                // Update UI state
+                DispatchQueue.main.async {
+                    self.activities = fetchedActivities
+                }
+
+            } catch {
+                print("Error fetching active events: \(error.localizedDescription)")
             }
         }
     }
