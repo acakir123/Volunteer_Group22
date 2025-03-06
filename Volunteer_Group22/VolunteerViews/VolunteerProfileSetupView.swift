@@ -301,3 +301,8 @@ struct VolunteerProfileSetupView: View {
 }
 
 
+struct VolunteerProfileSetupView_Previews: PreviewProvider {
+    static var previews: some View {
+        VolunteerProfileSetupView()
+    }
+}
