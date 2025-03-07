@@ -95,7 +95,8 @@ struct VolunteerEventListItem: View {
             HStack {
                 Image(systemName: "person.2.fill")
                     .foregroundColor(.gray)
-                Text("\(event.assignedVolunteers)/\(event.assignedVolunteers) participants")
+                //Text("\(event.assignedVolunteers)/\(event.assignedVolunteers) participants")
+                Text("\(event.assignedVolunteers.count)/\(event.volunteerRequirements) participants")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
