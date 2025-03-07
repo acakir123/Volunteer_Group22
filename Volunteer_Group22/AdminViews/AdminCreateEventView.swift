@@ -231,6 +231,7 @@ struct AdminCreateEventView: View {
                             .disabled(formData.volunteerRequirements >= 100 || isLoading)
                         }
                         .padding()
+                        .frame(maxWidth: .infinity)
                         .background(Color(uiColor: .systemGray6))
                         .cornerRadius(8)
                     }
@@ -241,12 +242,12 @@ struct AdminCreateEventView: View {
                         error: validation.dateError
                     ) {
                         DatePicker(
-                            "Select date",
+                            "Select date and time",
                             selection: $formData.date,
                             in: Date()...,
-                            displayedComponents: [.date]
+                            displayedComponents: [.date, .hourAndMinute]
                         )
-                        .datePickerStyle(.graphical)
+                        .datePickerStyle(.compact)
                         .disabled(isLoading)
                     }
                 }

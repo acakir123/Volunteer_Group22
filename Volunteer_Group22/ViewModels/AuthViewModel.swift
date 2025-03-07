@@ -352,7 +352,8 @@ class AuthViewModel: ObservableObject {
                         "dateCompleted": Timestamp(date: now),
                         "performance": [:],
                         "feedback": "",
-                        "createdAt": Timestamp(date: now)
+                        "createdAt": Timestamp(date: now),
+                        "fullName": volunteerName
                     ]
                     
                     // Create the document in Firestore

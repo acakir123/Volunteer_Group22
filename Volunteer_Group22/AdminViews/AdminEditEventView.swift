@@ -407,14 +407,15 @@ struct AdminEditEventView: View {
                     .disabled(formData.volunteerRequirements >= 100 || isLoading)
                 }
                 .padding()
+                .frame(maxWidth: .infinity)
                 .background(Color(uiColor: .systemGray6))
                 .cornerRadius(8)
             }
             
             // Event Date
             FormField(title: "Event Date", error: validation.dateError) {
-                DatePicker("Select date", selection: $formData.date, displayedComponents: [.date])
-                    .datePickerStyle(.graphical)
+                DatePicker("Select date", selection: $formData.date, displayedComponents: [.date, .hourAndMinute])
+                    .datePickerStyle(.compact)
                     .disabled(isLoading)
             }
             

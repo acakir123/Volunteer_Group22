@@ -10,7 +10,6 @@ struct VolunteerHistoryRecord: Identifiable {
     let dateCompleted: Date?
     let fullName: String?
     
-    // Maybe add name to volunteerHistory
     
     init(document: QueryDocumentSnapshot) {
         self.id = document.documentID
