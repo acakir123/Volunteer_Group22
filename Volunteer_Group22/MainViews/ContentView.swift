@@ -5,26 +5,28 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            // if no user signed in, show signinview
-            if authViewModel.userSession == nil {
-                SignInView()
-            } else {
-                // if user signed in, check email verification
-                if !authViewModel.isEmailVerified {
-                    emailVerificationView()
-                } else if !authViewModel.isProfileComplete {
-                    // route to appropriate profile setup view
-                    if authViewModel.user?.role == "Administrator" {
-                        AdminProfileSetupView()
-                    } else {
-                        VolunteerProfileSetupView()
-                    }
+            NavigationStack {
+                // if no user signed in, show signinview
+                if authViewModel.userSession == nil {
+                    SignInView()
                 } else {
-                    // route to appropriate main view
-                    if authViewModel.user?.role == "Administrator" {
-                        AdminMainTabView()
+                    // if user signed in, check email verification
+                    if !authViewModel.isEmailVerified {
+                        emailVerificationView()
+                    } else if !authViewModel.isProfileComplete {
+                        // route to appropriate profile setup view
+                        if authViewModel.user?.role == "Administrator" {
+                            AdminProfileSetupView()
+                        } else {
+                            VolunteerProfileSetupView()
+                        }
                     } else {
-                        VolunteerMainTabView()
+                        // route to appropriate main view
+                        if authViewModel.user?.role == "Administrator" {
+                            AdminMainTabView()
+                        } else {
+                            VolunteerMainTabView()
+                        }
                     }
                 }
             }
