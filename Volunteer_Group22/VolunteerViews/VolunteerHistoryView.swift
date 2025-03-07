@@ -21,13 +21,18 @@ class VolunteerHistoryViewModel: ObservableObject {
                 .whereField("volunteerId", isEqualTo: userId)
                 .getDocuments() // No index required
 
-            var records: [VolunteerHistoryRecord] = historySnapshot.documents.map { VolunteerHistoryRecord(document: $0) }
+            // var records: [VolunteerHistoryRecord] = historySnapshot.documents.map { VolunteerHistoryRecord(document: $0) }
+            
+            let records: [VolunteerHistoryRecord] = historySnapshot.documents.map { VolunteerHistoryRecord(document: $0) }
 
             // Manually sort by dateCompleted in descending order
-            records.sort { ($0.dateCompleted ?? Date.distantPast) > ($1.dateCompleted ?? Date.distantPast) }
+            //records.sort { ($0.dateCompleted ?? Date.distantPast) > ($1.dateCompleted ?? Date.distantPast) }
+            
+            let sortedRecords = records.sorted { ($0.dateCompleted ?? Date.distantPast) > ($1.dateCompleted ?? Date.distantPast) }
             
             DispatchQueue.main.async {
-                self.historyRecords = records
+                //self.historyRecords = records
+                self.historyRecords = sortedRecords
                 self.isLoading = false
             }
 

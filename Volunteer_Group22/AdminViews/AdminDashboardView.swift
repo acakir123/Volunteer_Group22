@@ -280,8 +280,13 @@ struct AdminDashboardView: View {
 
     private func fetchSuccessRate() async -> Int {
         do {
-            let snapshot = try await db.collection("events").whereField("status", isEqualTo: "Completed").getDocuments()
-            return snapshot.documents.count
+            let completedSnapshot = try await db.collection("events").whereField("status", isEqualTo: "Completed").getDocuments()
+            let totalSnapshot = try await db.collection("events").getDocuments()
+
+            let completedCount = completedSnapshot.documents.count
+            let totalCount = totalSnapshot.documents.count
+
+            return totalCount > 0 ? Int((Double(completedCount) / Double(totalCount)) * 100) : 0
         } catch {
             return 0
         }
