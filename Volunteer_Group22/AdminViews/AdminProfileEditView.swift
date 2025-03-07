@@ -2,6 +2,9 @@ import SwiftUI
 import FirebaseFirestore
 
 struct AdminProfileEditView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @Environment(\.presentationMode) var presentationMode
+
     // State variables for form fields
     @State private var fullName: String = ""
     @State private var address1: String = ""
@@ -12,23 +15,29 @@ struct AdminProfileEditView: View {
     @State private var selectedSkills: Set<String> = []
     @State private var preferences: String = ""
     @State private var availability: [Date] = []
+    @State private var availabilityDate: Date = Date()  
     
     // State for validation errors or success messages
-    @State private var showError = false
-    @State private var errorMessage = ""
-    
-    // Environment object for authentication
-    @EnvironmentObject var authViewModel: AuthViewModel
-    
-    // Firestore reference
+    @State private var showMessage = false
+    @State private var messageText = ""
+    @State private var isError = false
+
     private let db = Firestore.firestore()
+
+    // List of states
+    private let states = [
+        "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN",
+        "IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV",
+        "NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN",
+        "TX","UT","VT","VA","WA","WV","WI","WY"
+    ]
     
-    // List of states (2-character codes)
-    private let states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
-    
-    // List of skills (multi-select)
-    private let skills = ["Teaching", "Cooking", "First Aid", "Event Planning", "Fundraising", "Public Speaking", "Graphic Design", "Social Media Management"]
-    
+    // List of skills
+    private let skills = [
+        "Teaching","Cooking","First Aid","Event Planning","Fundraising","Public Speaking",
+        "Graphic Design","Social Media Management"
+    ]
+
     var body: some View {
         NavigationStack {
             Form {
@@ -87,15 +96,37 @@ struct AdminProfileEditView: View {
                         .frame(height: 100)
                 }
                 
-                // Availability (Date Picker)
+                // Availability (Same UI as AdminProfileSetupView)
                 Section(header: Text("Availability")) {
-                    Button("Add Today") {
-                        availability.append(Date())
+                    DatePicker("Select Date", selection: $availabilityDate, displayedComponents: .date)
+                        .datePickerStyle(GraphicalDatePickerStyle())
+
+                    Button("Add Date") {
+                        if !availability.contains(availabilityDate) {
+                            availability.append(availabilityDate)
+                        }
                     }
-                    ForEach(availability, id: \.self) { date in
-                        Text("\(date, formatter: dateFormatter)")
+                    
+                    if availability.isEmpty {
+                        Text("No availability added yet")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    } else {
+                        ForEach(availability, id: \.self) { date in
+                            HStack {
+                                Text("\(date, formatter: dateFormatter)")
+                                Spacer()
+                                Button(action: {
+                                    availability.removeAll { $0 == date }
+                                }) {
+                                    Image(systemName: "minus.circle.fill")
+                                        .foregroundColor(.red)
+                                }
+                            }
+                        }
                     }
                 }
+
                 
                 // Save Button
                 Section {
@@ -127,10 +158,10 @@ struct AdminProfileEditView: View {
                     }
                 }
                 
-                // Error Message
-                if showError {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
+                // Message display
+                if showMessage {
+                    Text(messageText)
+                        .foregroundColor(isError ? .red : .green)
                         .font(.caption)
                         .padding()
                 }
@@ -183,14 +214,12 @@ struct AdminProfileEditView: View {
     private func saveProfile() {
         // Validate fields
         if fullName.isEmpty || address1.isEmpty || city.isEmpty || state.isEmpty || zipCode.count < 5 || selectedSkills.isEmpty {
-            errorMessage = "Please fill in all required fields."
-            showError = true
+            showValidationError("Please fill in all required fields.")
             return
         }
         
         guard let uid = authViewModel.userSession?.uid else {
-            errorMessage = "User not found."
-            showError = true
+            showValidationError("User not found.")
             return
         }
         
@@ -208,18 +237,31 @@ struct AdminProfileEditView: View {
         
         db.collection("users").document(uid).updateData(updatedProfile) { error in
             if let error = error {
-                errorMessage = "Error saving profile: \(error.localizedDescription)"
-                showError = true
+                messageText = "Error saving profile: \(error.localizedDescription)"
+                isError = true
             } else {
-                errorMessage = "Profile updated successfully!"
-                showError = false
+                messageText = "Profile updated successfully!"
+                isError = false
+                
                 Task {
                     await authViewModel.fetchUser()
                 }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
             }
+            showMessage = true
         }
     }
+    
+    private func showValidationError(_ text: String) {
+        messageText = text
+        isError = true
+        showMessage = true
+    }
 }
+
 
 /*
 #Preview {
