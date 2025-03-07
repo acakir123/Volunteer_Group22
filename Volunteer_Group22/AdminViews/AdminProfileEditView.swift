@@ -113,7 +113,9 @@ struct AdminProfileEditView: View {
                 // Sign Out Button
                 Section {
                     Button(action: {
-                        authViewModel.signOut()
+                        Task {
+                            authViewModel.signOut()
+                        }
                     }) {
                         Text("Sign Out")
                             .frame(maxWidth: .infinity)
