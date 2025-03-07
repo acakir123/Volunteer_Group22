@@ -26,6 +26,8 @@
 		EB1B36B72D5D2EBF006AE2DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB1B36B62D5D2EBF006AE2DF /* LaunchScreen.storyboard */; };
 		EB799EC12D6AD0B0002F540C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB799EC02D6AD0AE002F540C /* User.swift */; };
 		EB7A157B2D51624E009A3DED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB7A157A2D51624E009A3DED /* GoogleService-Info.plist */; };
+		EB9623032D7BBAC200C3F5B2 /* AuthViewModelIntergrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9623022D7BBABA00C3F5B2 /* AuthViewModelIntergrationTests.swift */; };
+		EB9623052D7BBADA00C3F5B2 /* NotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9623042D7BBAD100C3F5B2 /* NotificationManagerTests.swift */; };
 		EBC9088A2D5B09130015DAC3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC908892D5B09070015DAC3 /* NotificationManager.swift */; };
 		EBF17FDC2D7A3AC800F08112 /* VolunteerHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF17FDB2D7A3AC300F08112 /* VolunteerHistory.swift */; };
 		EBF463782D52DAB7008BE921 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF463772D52DAB0008BE921 /* ForgotPasswordView.swift */; };
@@ -81,6 +83,8 @@
 		EB1B36B62D5D2EBF006AE2DF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB799EC02D6AD0AE002F540C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		EB7A157A2D51624E009A3DED /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EB9623022D7BBABA00C3F5B2 /* AuthViewModelIntergrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelIntergrationTests.swift; sourceTree = "<group>"; };
+		EB9623042D7BBAD100C3F5B2 /* NotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTests.swift; sourceTree = "<group>"; };
 		EBC908892D5B09070015DAC3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		EBF17FDB2D7A3AC300F08112 /* VolunteerHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerHistory.swift; sourceTree = "<group>"; };
 		EBF463772D52DAB0008BE921 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 		9DF9D79D2D4822B800AEAA82 /* Volunteer_Group22Tests */ = {
 			isa = PBXGroup;
 			children = (
+				EB9623042D7BBAD100C3F5B2 /* NotificationManagerTests.swift */,
+				EB9623022D7BBABA00C3F5B2 /* AuthViewModelIntergrationTests.swift */,
 				9DF9D79E2D4822B800AEAA82 /* Volunteer_Group22Tests.swift */,
 			);
 			path = Volunteer_Group22Tests;
@@ -426,7 +432,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB9623032D7BBAC200C3F5B2 /* AuthViewModelIntergrationTests.swift in Sources */,
 				9DF9D79F2D4822B800AEAA82 /* Volunteer_Group22Tests.swift in Sources */,
+				EB9623052D7BBADA00C3F5B2 /* NotificationManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
