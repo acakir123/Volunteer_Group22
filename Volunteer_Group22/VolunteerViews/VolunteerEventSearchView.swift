@@ -254,6 +254,11 @@ struct VolunteerEventDetailView: View {
     let event: Event
     @State private var activeAlert: VolunteerEventAlert?
     @Environment(\.presentationMode) var presentationMode
+    @State private var isLoading = false
+    @State private var selectedEvent: Event?
+    @State private var selectedVolunteer: Volunteer?
+    @State private var errorMessage: String?
+
     
     var body: some View {
         ScrollView {
@@ -269,46 +274,6 @@ struct VolunteerEventDetailView: View {
                     }
                 }
                 
-                // Event details section
-//                Group {
-//                    // Status
-//                    HStack {
-//                        Text(event.status.rawValue)
-//                            .font(.subheadline)
-//                            .padding(.horizontal, 12)
-//                            .padding(.vertical, 6)
-//                            .background(Color.blue)
-//                            .foregroundColor(Color.blue)
-//                            .cornerRadius(8)
-//                    }
-//                    
-//                    // Location
-//                    HStack {
-//                        Image(systemName: "mappin.circle.fill")
-//                            .foregroundColor(.gray)
-//                        Text(event.location)
-//                    }
-//                    
-//                    // Date
-//                    HStack {
-//                        Image(systemName: "calendar")
-//                            .foregroundColor(.gray)
-//                        Text(event.date, style: .date)
-//                    }
-//                    
-//                    // Capacity
-//                    HStack {
-//                        Image(systemName: "person.2.fill")
-//                            .foregroundColor(.gray)
-//                        Text("\(event.currentParticipants) of \(event.maxParticipants) spots filled")
-//                        if event.currentParticipants >= event.maxParticipants {
-//                            Text("(Full)")
-//                                .foregroundColor(.red)
-//                        } else {
-//                            EmptyView()
-//                        }
-//                    }
-//                }
                 
                 // About section
                 Group {
@@ -365,15 +330,20 @@ struct VolunteerEventDetailView: View {
                     title: Text("Sign Up Confirmation"),
                     message: Text("Would you like to sign up for this event?"),
                     primaryButton: .default(Text("Sign Up"), action: {
-                        // After sign up logic, show success alert.
                         Task {
-                            do {
-                                try await authViewModel.signUp(for: event)
-                                activeAlert = .signUpSuccess
-                            } catch {
-                                print("Error signing up for event: \(error.localizedDescription)")
+                                do {
+                                    if event.assignedVolunteers.count >= event.volunteerRequirements {
+                                        print("Event is full")
+                                    } else{
+                                        try await authViewModel.signUp(for: event)
+                                        // Handle success (e.g., show a confirmation alert or update the UI
+                                        activeAlert = .signUpSuccess
+                                    }
+                                } catch {
+                                    // Handle error (e.g., show an error message)
+                                    print("Error signing up: \(error.localizedDescription)")
+                                }
                             }
-                        }
                     }),
                     secondaryButton: .cancel()
                 )
@@ -387,7 +357,55 @@ struct VolunteerEventDetailView: View {
                 )
             }
         }
+
     }
+    
+    
+    //Function to create a volunteer match -- adding the volunteer to the 'assignedVolunteers' list in the event document in Firestore
+    private func createMatch() {
+        guard let volunteer = selectedVolunteer, let event = selectedEvent else { return }
+
+        isLoading = true
+
+        Task {
+            do {
+                guard let eventId = event.documentId else {
+                    throw NSError(domain: "VolunteerMatch", code: 1, userInfo: [NSLocalizedDescriptionKey: "Event has no document ID"])
+                }
+
+                var updatedAssignedVolunteers = event.assignedVolunteers
+
+                if !updatedAssignedVolunteers.contains(volunteer.user.uid) {
+                    updatedAssignedVolunteers.append(volunteer.user.uid)
+
+                    // Update the event document in Firestore
+                    try await authViewModel.db.collection("events").document(eventId).updateData([
+                        "assignedVolunteers": updatedAssignedVolunteers
+                    ])
+                } else {
+                    print("Volunteer (volunteer.user.uid) is already assigned to event (eventId)")
+                }
+
+                await MainActor.run {
+                    // Reset selection
+                    selectedVolunteer = nil
+                    selectedEvent = nil
+                    isLoading = false
+
+                    // Refresh data to update the UI
+                    //fetchData()
+                }
+            } catch {
+                await MainActor.run {
+                    errorMessage = "Failed to assign volunteer: (error.localizedDescription)"
+                    isLoading = false
+                }
+                print("ERROR assigning volunteer: (error)")
+            }
+        }
+    }
+    
+    
 }
 
 

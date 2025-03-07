@@ -8,6 +8,7 @@ class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var isEmailVerified: Bool = false
     @Published var user: User?
+    @Published var currentVolunteer: Volunteer? = nil
     
     public let db = Firestore.firestore()
     private var userRole: String = ""
@@ -167,12 +168,15 @@ class AuthViewModel: ObservableObject {
     
     // Update event when user sign up for an event
     func signUp(for event: Event) async throws {
-        guard let userId = self.user?.uid else { return }
-        let eventRef = db.collection("events").document(event.id.uuidString)
+        guard let userId = user?.uid else { return }
+        guard let documentId = event.documentId else { return }
+
+        let eventRef = db.collection("events").document(documentId)
         try await eventRef.updateData([
             "assignedVolunteers": FieldValue.arrayUnion([userId])
         ])
     }
+
     
     
     // MARK: Event management
