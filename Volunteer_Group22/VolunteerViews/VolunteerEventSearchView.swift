@@ -330,8 +330,7 @@ struct VolunteerEventDetailView: View {
                     title: Text("Sign Up Confirmation"),
                     message: Text("Would you like to sign up for this event?"),
                     primaryButton: .default(Text("Sign Up"), action: {
-                        Task {
-                                do {
+                        Task {                                do {
                                     if event.assignedVolunteers.count >= event.volunteerRequirements {
                                         print("Event is full")
                                     } else{
@@ -405,7 +404,6 @@ struct VolunteerEventDetailView: View {
         }
     }
     
-    
 }
 
 
@@ -413,60 +411,9 @@ struct VolunteerEventDetailView: View {
 struct VolunteerEventSearchView_Previews: PreviewProvider {
     static var previews: some View {
         VolunteerEventSearchView()
+            .environmentObject(AuthViewModel())
     }
 }
-
-//struct VolunteerEventDetailView_Previews: PreviewProvider {
-//    static var sampleEvent = VolunteerEvent(
-//        name: "Beach Cleanup",
-//        description: "Join us for our monthly beach cleanup event! Help keep our beaches clean and protect marine life. All cleaning supplies will be provided. Please wear comfortable clothes and bring water.",
-//        location: "Santa Monica Beach",
-//        requiredSkills: ["Physical Labor", "Environmental"],
-//        urgency: .medium,
-//        date: Date().addingTimeInterval(86400 * 7),
-//        status: .upcoming,
-//        maxParticipants: 50,
-//        currentParticipants: 32
-//    )
-//    
-//    static var previews: some View {
-//        NavigationStack {
-//            VolunteerEventDetailView(event: sampleEvent)
-//        }
-//    }
-//}
-//
-//struct VolunteerEventListItem_Previews: PreviewProvider {
-//    static var sampleEvent = VolunteerEvent(
-//        name: "Food Bank Distribution",
-//        description: "Help distribute food to families in need at our weekly food bank event.",
-//        location: "Downtown Food Bank",
-//        requiredSkills: ["Organization", "Customer Service"],
-//        urgency: .high,
-//        date: Date().addingTimeInterval(86400 * 2),
-//        status: .upcoming,
-//        maxParticipants: 30,
-//        currentParticipants: 25
-//    )
-//    
-//    static var previews: some View {
-//        VolunteerEventListItem(event: sampleEvent)
-//            .padding()
-//            .previewLayout(.sizeThatFits)
-//    }
-//}
-//
-//struct VolunteerStatusBadge_Previews: PreviewProvider {
-//    static var previews: some View {
-//        VStack(spacing: 20) {
-//            VolunteerStatusBadge(urgency: .low)
-//            VolunteerStatusBadge(urgency: .medium)
-//            VolunteerStatusBadge(urgency: .high)
-//        }
-//        .padding()
-//        .previewLayout(.sizeThatFits)
-//    }
-//}
 
 struct FilterChip_Previews: PreviewProvider {
     static var previews: some View {
@@ -478,6 +425,5 @@ struct FilterChip_Previews: PreviewProvider {
         .previewLayout(.sizeThatFits)
     }
 }
-
 
 
