@@ -183,6 +183,9 @@ struct VolunteerEventSearchView: View {
                 .padding(.vertical)
             }
             .background(Color(uiColor: .systemGroupedBackground))
+            .refreshable {
+                await refreshEvents()
+            }
             .onAppear {
                 fetchEvents()
             }
