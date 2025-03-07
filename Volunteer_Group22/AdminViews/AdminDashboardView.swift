@@ -130,6 +130,7 @@ struct AdminDashboardView: View {
     private let db = Firestore.firestore()
 
     // Dynamic state variables
+    @State private var adminName: String = "Admin"
     @State private var activeEventsCount: Int = 0
     @State private var totalVolunteers: Int = 0
     @State private var totalHours: Int = 0
@@ -141,7 +142,7 @@ struct AdminDashboardView: View {
             VStack(spacing: 24) {
                 VStack(spacing: 4) {
                     HStack {
-                        Text("Welcome, Admin")
+                        Text("Welcome, \(adminName)")
                             .font(.system(size: 32, weight: .bold))
                         
                         Spacer()
@@ -236,8 +237,44 @@ struct AdminDashboardView: View {
             .padding(.vertical)
         }
         .onAppear {
+            fetchAdminName()
             fetchDashboardStats()
             fetchRecentActivities()
+        }
+    }
+    
+    // MARK: - Fetch Admin's Name
+    private func fetchAdminName() {
+        guard let userId = authViewModel.userSession?.uid else {
+            print("User ID not found")
+            return
+        }
+
+        print("Fetching admin name for User ID: \(userId)")
+
+        db.collection("users").document(userId).getDocument { document, error in
+            if let error = error {
+                print("Error fetching admin name: \(error.localizedDescription)")
+            } else if let document = document, document.exists {
+                let data = document.data()
+                
+                // Ensure user is actually an admin
+                if let role = data?["role"] as? String, role == "Administrator" {
+                    if let fullName = data?["fullName"] as? String {
+                        let firstName = fullName.components(separatedBy: " ").first ?? fullName
+                        print("Admin first name fetched: \(firstName)")
+                        DispatchQueue.main.async {
+                            self.adminName = firstName
+                        }
+                    } else {
+                        print("Full Name field is missing in document")
+                    }
+                } else {
+                    print("User is not an administrator")
+                }
+            } else {
+                print("Admin document does not exist in users collection")
+            }
         }
     }
     
