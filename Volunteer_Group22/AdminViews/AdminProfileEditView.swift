@@ -219,4 +219,8 @@ struct AdminProfileEditView: View {
     }
 }
 
+#Preview {
+    AdminProfileEditView()
+        .environmentObject(AuthViewModel())
+}
 

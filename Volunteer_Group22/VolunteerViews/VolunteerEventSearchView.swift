@@ -340,11 +340,11 @@ struct VolunteerEventDetailView: View {
                 Spacer(minLength: 20)
                 
                 // Sign up button
-                if event.status == .upcoming {
+                if event.status == .upcoming {//only shows if event is upcoming
                     Button(action: {
                         activeAlert = .signUpConfirmation
                     }) {
-                        Text(event.volunteerRequirements >= event.volunteerRequirements ? "Join Waitlist" : "Sign Up")
+                        Text(event.assignedVolunteers.count >= event.volunteerRequirements ? "Join Waitlist" : "Sign Up")
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
@@ -366,7 +366,14 @@ struct VolunteerEventDetailView: View {
                     message: Text("Would you like to sign up for this event?"),
                     primaryButton: .default(Text("Sign Up"), action: {
                         // After sign up logic, show success alert.
-                        activeAlert = .signUpSuccess
+                        Task {
+                            do {
+                                try await authViewModel.signUp(for: event)
+                                activeAlert = .signUpSuccess
+                            } catch {
+                                print("Error signing up for event: \(error.localizedDescription)")
+                            }
+                        }
                     }),
                     secondaryButton: .cancel()
                 )

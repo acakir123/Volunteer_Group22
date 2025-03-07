@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct VolunteerProfileEditView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State var user: User?
     
     var body: some View {
@@ -24,7 +25,7 @@ struct VolunteerProfileEditView: View {
             
             List {
                 Section {
-                    NavigationLink(destination: Text("Personal Information")) {
+                    NavigationLink(destination: VolunteerProfileSetupView()) {
                         SettingsRow(icon: "person.crop.circle", title: "Personal Information")
                     }
                     
@@ -51,6 +52,16 @@ struct VolunteerProfileEditView: View {
                     }
                 }
             }
+            Section {
+                Button("Sign Out") {
+                    authViewModel.signOut()
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.red)
+                .controlSize(.large)
+            }
+
+
             .listStyle(InsetGroupedListStyle())
         }
         .navigationTitle("Voluntiir Account")
@@ -77,6 +88,7 @@ struct VolunteerProfileEdit_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             VolunteerProfileEditView()
+                .environmentObject(AuthViewModel())
         }
     }
 }

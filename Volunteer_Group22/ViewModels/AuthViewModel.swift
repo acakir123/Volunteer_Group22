@@ -165,6 +165,15 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    // Update event when user sign up for an event
+    func signUp(for event: Event) async throws {
+        guard let userId = self.user?.uid else { return }
+        let eventRef = db.collection("events").document(event.id.uuidString)
+        try await eventRef.updateData([
+            "assignedVolunteers": FieldValue.arrayUnion([userId])
+        ])
+    }
+    
     
     // MARK: Event management
     // Create an event
