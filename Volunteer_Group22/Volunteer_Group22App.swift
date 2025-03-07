@@ -2,6 +2,8 @@ import SwiftUI
 import FirebaseCore
 import FirebaseMessaging
 import UserNotifications
+import FirebaseAuth
+import FirebaseFirestore
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     let gcmMessageIDKey = "gcm.message_id"
@@ -105,8 +107,23 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
     
     private func sendFCMTokenToServer(_ token: String) {
-        // Send token to server
+        // Make sure user is signed in
+        guard let currentUserId = Auth.auth().currentUser?.uid else {
+            print("No user logged in, skipping FCM save")
+            return
+        }
+        
+        let db = Firestore.firestore()
+        
+        db.collection("users").document(currentUserId).updateData(["fcmToken": token]) { error in
+            if let error = error {
+                print("Error updating fcmToken: \(error.localizedDescription)")
+            } else {
+                print("Successfully updated fcmToken in user doc.")
+            }
+        }
     }
+    
 }
 
 @main

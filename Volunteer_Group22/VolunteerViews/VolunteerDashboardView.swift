@@ -1,5 +1,5 @@
 import SwiftUI
-
+import FirebaseFirestore
 
 // Quick actions for volunteers - View Events, Track Hours
 struct VolunteerActionButton: View {
@@ -55,7 +55,6 @@ struct VolunteerActivity {
     }
 }
 
-
 struct VolunteerActivityRow: View {
     let activity: VolunteerActivity
     
@@ -92,32 +91,28 @@ struct VolunteerActivityRow: View {
 
 struct VolunteerDashboardView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-    
-    // Sample activities for volunteer perspective
-    @State private var activities: [VolunteerActivity] = [
-        VolunteerActivity(title: "Signed up: Beach Cleanup", timestamp: "2 hours ago", type: .event),
-        VolunteerActivity(title: "Logged 4 Hours: Park Maintenance", timestamp: "1 day ago", type: .hours),
-        VolunteerActivity(title: "Achievement: 50 Hours Milestone", timestamp: "1 week ago", type: .achievement)
-    ]
-    
+    @StateObject private var viewModel = VolunteerHistoryViewModel()
+    @State private var eventNames: [String: String] = [:] // Map eventId -> eventName
+    private let db = Firestore.firestore()
+
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
                 // Header section with welcome message and profile button
                 VStack(spacing: 4) {
                     HStack {
-                        Text("Welcome, Volunteer")
+                        Text("Welcome, \(authViewModel.user?.fullName ?? "Volunteer")")
                             .font(.system(size: 32, weight: .bold))
-                        
+
                         Spacer()
-                        
+
                         NavigationLink(destination: VolunteerProfileEditView()) {
                             Image(systemName: "person.circle.fill")
                                 .font(.system(size: 32))
                                 .foregroundColor(.blue)
                         }
                     }
-                    
+
                     HStack {
                         Text("Track your impact")
                             .font(.system(size: 17))
@@ -127,100 +122,143 @@ struct VolunteerDashboardView: View {
                 }
                 .padding(.horizontal)
                 .padding(.top, 8)
-                
+
                 // Overview section with volunteer statistics
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Your Impact")
                         .font(.system(size: 24, weight: .bold))
                         .padding(.horizontal)
-                    
+
                     LazyVGrid(columns: [
                         GridItem(.flexible()),
                         GridItem(.flexible())
                     ], spacing: 16) {
-                        StatCard(
-                            title: "Hours This Month",
-                            value: "12",
-                            icon: "clock",
-                            color: .blue
-                        )
-                        StatCard(
-                            title: "Total Hours",
-                            value: "56",
-                            icon: "sum",
-                            color: .green
-                        )
-                        StatCard(
-                            title: "Events Joined",
-                            value: "8",
-                            icon: "calendar",
-                            color: .orange
-                        )
-                        StatCard(
-                            title: "Achievements",
-                            value: "5",
-                            icon: "star",
-                            color: .purple
-                        )
+                        StatCard(title: "Hours This Month", value: "12", icon: "clock", color: .blue)
+                        StatCard(title: "Total Hours", value: "56", icon: "sum", color: .green)
+                        StatCard(title: "Events Joined", value: "8", icon: "calendar", color: .orange)
+                        StatCard(title: "Achievements", value: "5", icon: "star", color: .purple)
                     }
                     .padding(.horizontal)
                 }
-                
-                // Quick Actions section with view-only actions
+
+                // Quick Actions section
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Quick Actions")
                         .font(.system(size: 24, weight: .bold))
                         .padding(.horizontal)
-                    
+
                     LazyVGrid(columns: [
                         GridItem(.flexible()),
                         GridItem(.flexible())
                     ], spacing: 16) {
                         NavigationLink(destination: VolunteerEventSearchView()) {
-                            VolunteerActionButton(
-                                title: "Browse Events",
-                                icon: "calendar",
-                                action: {}
-                            )
+                            VolunteerActionButton(title: "Browse Events", icon: "calendar", action: {})
                         }
-                        
+
                         NavigationLink(destination: VolunteerHistoryView()) {
-                            VolunteerActionButton(
-                                title: "Track Hours",
-                                icon: "clock",
-                                action: {}
-                            )
+                            VolunteerActionButton(title: "Track Hours", icon: "clock", action: {})
                         }
                     }
                     .padding(.horizontal)
                 }
-                
+
                 // Recent Activities section
                 VStack(alignment: .leading, spacing: 16) {
                     HStack {
                         Text("Recent Activities")
                             .font(.system(size: 24, weight: .bold))
-                        
+
                         Spacer()
-                        
-                        Button("See All") {
-                            // Navigate to full activity history
-                        }
-                        .foregroundColor(.blue)
+
+                        NavigationLink("See All", destination: VolunteerHistoryView())
+                            .foregroundColor(.blue)
                     }
                     .padding(.horizontal)
-                    
-                    VStack(spacing: 12) {
-                        ForEach(activities, id: \.title) { activity in
-                            VolunteerActivityRow(activity: activity)
+
+                    ZStack {
+                        if viewModel.isLoading {
+                            ProgressView("Loading activities...")
+                        } else if let error = viewModel.errorMessage {
+                            Text(error)
+                                .foregroundColor(.red)
+                                .padding()
+                        } else if viewModel.historyRecords.isEmpty {
+                            VStack {
+                                Image(systemName: "calendar.badge.clock")
+                                    .font(.system(size: 50))
+                                    .foregroundColor(.gray)
+                                    .padding()
+                                
+                                Text("No recent activities")
+                                    .font(.headline)
+                                
+                                Text("Your completed volunteer activities will appear here")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                            }
+                            .padding()
+                        } else {
+                            VStack(spacing: 12) {
+                                ForEach(viewModel.historyRecords.prefix(3)) { record in
+                                    let eventName = eventNames[record.eventId] ?? "Unknown Event"
+
+                                    VolunteerActivityRow(activity: VolunteerActivity(
+                                        title: eventName,
+                                        timestamp: formatDate(record.dateCompleted ?? Date()),
+                                        type: .event // Modify if different types exist
+                                    ))
+                                }
+                            }
+                            .padding(.horizontal)
                         }
                     }
-                    .padding(.horizontal)
                 }
             }
             .padding(.vertical)
         }
         .background(Color(uiColor: .systemGroupedBackground))
+        .onAppear {
+            Task {
+                if let userId = authViewModel.user?.uid {
+                    await viewModel.fetchVolunteerHistory(for: userId, db: authViewModel.db)
+                    await fetchEventNames() // Fetch event names after history records are loaded
+                }
+            }
+        }
+    }
+    
+    // Fetch event names from Firestore based on eventIds in history
+    private func fetchEventNames() async {
+        let eventIds = viewModel.historyRecords.map { $0.eventId }
+        var newEventNames: [String: String] = [:]
+
+        for eventId in eventIds {
+            do {
+                let eventDoc = try await db.collection("events").document(eventId).getDocument()
+                if let eventData = eventDoc.data(), let eventName = eventData["name"] as? String {
+                    newEventNames[eventId] = eventName
+                } else {
+                    newEventNames[eventId] = "Unknown Event"
+                }
+            } catch {
+                print("Error fetching event name for \(eventId): \(error.localizedDescription)")
+                newEventNames[eventId] = "Unknown Event"
+            }
+        }
+
+        DispatchQueue.main.async {
+            self.eventNames = newEventNames
+        }
+    }
+
+    // Helper method to format date
+    private func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter.string(from: date)
     }
 }
 
