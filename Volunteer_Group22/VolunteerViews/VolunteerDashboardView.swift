@@ -91,7 +91,9 @@ struct VolunteerActivityRow: View {
 
 struct VolunteerDashboardView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-    @StateObject private var viewModel = VolunteerHistoryViewModel() // Using ViewModel
+    @StateObject private var viewModel = VolunteerHistoryViewModel()
+    @State private var eventNames: [String: String] = [:] // Map eventId -> eventName
+    private let db = Firestore.firestore()
 
     var body: some View {
         ScrollView {
@@ -200,8 +202,10 @@ struct VolunteerDashboardView: View {
                         } else {
                             VStack(spacing: 12) {
                                 ForEach(viewModel.historyRecords.prefix(3)) { record in
+                                    let eventName = eventNames[record.eventId] ?? "Unknown Event"
+
                                     VolunteerActivityRow(activity: VolunteerActivity(
-                                        title: "Event ID: \(record.eventId)",
+                                        title: eventName,
                                         timestamp: formatDate(record.dateCompleted ?? Date()),
                                         type: .event // Modify if different types exist
                                     ))
@@ -219,11 +223,36 @@ struct VolunteerDashboardView: View {
             Task {
                 if let userId = authViewModel.user?.uid {
                     await viewModel.fetchVolunteerHistory(for: userId, db: authViewModel.db)
+                    await fetchEventNames() // Fetch event names after history records are loaded
                 }
             }
         }
     }
     
+    // Fetch event names from Firestore based on eventIds in history
+    private func fetchEventNames() async {
+        let eventIds = viewModel.historyRecords.map { $0.eventId }
+        var newEventNames: [String: String] = [:]
+
+        for eventId in eventIds {
+            do {
+                let eventDoc = try await db.collection("events").document(eventId).getDocument()
+                if let eventData = eventDoc.data(), let eventName = eventData["name"] as? String {
+                    newEventNames[eventId] = eventName
+                } else {
+                    newEventNames[eventId] = "Unknown Event"
+                }
+            } catch {
+                print("Error fetching event name for \(eventId): \(error.localizedDescription)")
+                newEventNames[eventId] = "Unknown Event"
+            }
+        }
+
+        DispatchQueue.main.async {
+            self.eventNames = newEventNames
+        }
+    }
+
     // Helper method to format date
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
