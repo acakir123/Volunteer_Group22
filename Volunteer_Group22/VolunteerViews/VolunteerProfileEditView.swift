@@ -16,6 +16,7 @@ struct VolunteerProfileEditView: View {
     // State for validation errors or success messages
     @State private var showError = false
     @State private var errorMessage = ""
+    @State private var showSuccess = false
     
     private let db = Firestore.firestore()
     
@@ -151,7 +152,14 @@ struct VolunteerProfileEditView: View {
                     }
                 }
                 
-                // Error Message
+                // Messages
+                if showSuccess {
+                    Text("Profile updated successfully!")
+                        .foregroundColor(.green)
+                        .font(.body)
+                        .padding()
+                }
+                
                 if showError {
                     Text(errorMessage)
                         .foregroundColor(.red)
@@ -173,6 +181,10 @@ struct VolunteerProfileEditView: View {
     
     // Save updated profile to Firestore
     private func saveProfile() {
+        // Reset error/success states
+        showError = false
+        showSuccess = false
+        
         // Validate fields
         if fullName.isEmpty || address1.isEmpty || city.isEmpty || state.isEmpty || zipCode.count < 5 || selectedSkills.isEmpty {
             errorMessage = "Please fill in all required fields."
@@ -216,15 +228,29 @@ struct VolunteerProfileEditView: View {
             "availability": availabilityDict
         ]
         
-        db.collection("users").document(uid).updateData(updatedProfile) { error in
+        // Save to Firestore without impacting auth state
+        db.collection("users").document(uid).setData(updatedProfile, merge: true) { error in
             if let error = error {
-                errorMessage = "Error saving profile: \(error.localizedDescription)"
-                showError = true
+                DispatchQueue.main.async {
+                    self.errorMessage = "Error saving profile: \(error.localizedDescription)"
+                    self.showError = true
+                }
             } else {
-                errorMessage = "Profile updated successfully!"
-                showError = false
-                Task {
-                    await authViewModel.fetchUser()
+                DispatchQueue.main.async {
+                    // Show success message
+                    self.showSuccess = true
+                    
+                    // Hide success message after 3 seconds
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        self.showSuccess = false
+                    }
+                    
+                    // Update local user data without triggering a full refresh or auth change
+                    if var currentUser = self.authViewModel.user {
+                        currentUser.fullName = self.fullName
+                        // Update additional fields as needed
+                        self.authViewModel.user = currentUser
+                    }
                 }
             }
         }
@@ -279,5 +305,11 @@ struct SettingsRow: View {
             Text(title)
                 .font(.body)
         }
+    }
+}
+
+struct VolunteerProfileEditView_Previews: PreviewProvider {
+    static var previews: some View {
+        VolunteerProfileEditView()
     }
 }
