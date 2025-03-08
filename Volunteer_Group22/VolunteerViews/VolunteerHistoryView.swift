@@ -72,12 +72,18 @@ struct HistoryEmptyView: View {
 
 struct HistoryItemView: View {
     let record: VolunteerHistoryRecord
+    let eventName: String?  // Added eventName property to display the event name
     
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
+            // Event Name
+            Text(eventName ?? "Unknown Event")  // Display the event name here
+                .font(.headline)
+            
             // Volunteer name
             Text(record.fullName ?? "Unknown Volunteer")
-                .font(.headline)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
             
             // Feedback text
             if !record.feedback.isEmpty {
@@ -173,13 +179,16 @@ struct PerformanceDataView: View {
 
 struct HistoryContentView: View {
     let records: [VolunteerHistoryRecord]
+    let eventDetails: [String: String]  // Add eventDetails as a parameter
     let refreshAction: () async -> Void
     
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 16) {
                 ForEach(records) { record in
-                    HistoryItemView(record: record)
+                    // Fetch the event name from eventDetails
+                    let eventName = eventDetails[record.eventId] ?? "Unknown Event"
+                    HistoryItemView(record: record, eventName: eventName)
                 }
             }
             .padding(.horizontal)
@@ -194,7 +203,9 @@ struct HistoryContentView: View {
 struct VolunteerHistoryView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject private var viewModel = VolunteerHistoryViewModel()
-    
+    @State private var eventDetails: [String: String] = [:]  // Dictionary to hold event names
+    private let db = Firestore.firestore()  // Add Firestore reference here
+
     var body: some View {
         VStack(spacing: 0) {
             headerView
@@ -232,7 +243,8 @@ struct VolunteerHistoryView: View {
             } else if viewModel.historyRecords.isEmpty {
                 HistoryEmptyView()
             } else {
-                HistoryContentView(records: viewModel.historyRecords) {
+                // Pass eventDetails to HistoryContentView
+                HistoryContentView(records: viewModel.historyRecords, eventDetails: eventDetails) {
                     await fetchHistory()
                 }
             }
@@ -243,6 +255,33 @@ struct VolunteerHistoryView: View {
     private func fetchHistory() async {
         if let userId = authViewModel.userSession?.uid {
             await viewModel.fetchVolunteerHistory(for: userId, db: authViewModel.db)
+            await fetchEventNames(for: userId)  // Fetch event names using eventId
+        }
+    }
+
+    // Fetch event names using eventId from "events" collection
+    private func fetchEventNames(for userId: String) async {
+        let eventIds = viewModel.historyRecords.map { $0.eventId }
+        
+        var newEventDetails: [String: String] = [:]
+
+        for eventId in eventIds {
+            do {
+                let eventDoc = try await db.collection("events").document(eventId).getDocument()
+
+                if let eventData = eventDoc.data() {
+                    let eventName = eventData["name"] as? String ?? "Unknown Event"
+                    newEventDetails[eventId] = eventName
+                } else {
+                    newEventDetails[eventId] = "Unknown Event"
+                }
+            } catch {
+                newEventDetails[eventId] = "Unknown Event"
+            }
+        }
+
+        await MainActor.run {
+            self.eventDetails = newEventDetails
         }
     }
 }
@@ -279,5 +318,11 @@ class VolunteerHistoryViewModel: ObservableObject {
                 self.isLoading = false
             }
         }
+    }
+}
+
+struct VolunteerHistoryView_Previews: PreviewProvider {
+    static var previews: some View {
+        VolunteerHistoryView()
     }
 }

@@ -357,3 +357,10 @@ struct VolunteerDashboardView: View {
         }
     }
 }
+struct VolunteerDashboardView_Previews: PreviewProvider {
+    static var previews: some View {
+        VolunteerDashboardView()
+            .environmentObject(AuthViewModel())
+    }
+}
+
