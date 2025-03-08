@@ -2,7 +2,6 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 
-
 @MainActor
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
@@ -13,15 +12,30 @@ class AuthViewModel: ObservableObject {
     public let db = Firestore.firestore()
     private var userRole: String = ""
     
-    init() {
-        self.userSession = Auth.auth().currentUser
+    private let isTestMode: Bool
+    
+    private var usersCollection: CollectionReference {
+        if isTestMode { return db.collection("testUsers") }
+        return db.collection("users")
+    }
+    private var eventsCollection: CollectionReference {
+        if isTestMode { return db.collection("testEvents") }
+        return db.collection("events")
+    }
+    private var volunteerHistoryCollection: CollectionReference {
+        if isTestMode { return db.collection("testVolunteerHistory") }
+        return db.collection("volunteerHistory")
+    }
+    
+    init(isTestMode: Bool = false) {
+        self.isTestMode = isTestMode
         
+        self.userSession = Auth.auth().currentUser
         if let user = self.userSession {
             Task {
                 do {
                     try await user.reload()
                     self.isEmailVerified = user.isEmailVerified
-                    
                     await fetchUser()
                 } catch {
                     print("Error reloading user: \(error.localizedDescription)")
@@ -30,16 +44,12 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    
-    // MARK: Account management
-    // Sign In Existing User
     func signIn(withEmail email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             try await result.user.reload()
             self.userSession = result.user
             self.isEmailVerified = result.user.isEmailVerified
-            
             await fetchUser()
         } catch {
             print("failed to sign in: \(error.localizedDescription)")
@@ -47,15 +57,12 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    // Create New User and Add to Firestore
     func signUp(withEmail email: String, password: String, role: String) async throws {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
             let userId = result.user.uid
             self.userRole = role
-            
-            // Create initial user document in Firestore
             try await createUserDocument(userId: userId, email: email, role: role)
         } catch {
             print("Failed to create user: \(error.localizedDescription)")
@@ -63,24 +70,20 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    // Function to Create Firestore User Document
     private func createUserDocument(userId: String, email: String, role: String) async throws {
         let userData: [String: Any] = [
             "email": email,
             "createdAt": Timestamp(date: Date()),
             "role": role
         ]
-        
-        try await db.collection("users").document(userId).setData(userData)
+        try await usersCollection.document(userId).setData(userData)
     }
     
-    // Check if profile is complete
     var isProfileComplete: Bool {
         guard let fullName = user?.fullName, !fullName.isEmpty else { return false }
         return true
     }
     
-    // Send password reset email
     func resetPassword(withEmail email: String) async throws {
         do {
             try await Auth.auth().sendPasswordReset(withEmail: email)
@@ -90,7 +93,6 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    // Sign Out Current User
     func signOut() {
         do {
             try Auth.auth().signOut()
@@ -100,7 +102,6 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    // Delete Current Users Account
     func deleteAccount() async throws {
         do {
             guard let currentUser = Auth.auth().currentUser else { return }
@@ -112,11 +113,10 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    // Fetch user profile data from Firestore
     func fetchUser() async {
         guard let uid = userSession?.uid else { return }
         do {
-            let snapshot = try await db.collection("users").document(uid).getDocument()
+            let snapshot = try await usersCollection.document(uid).getDocument()
             if let data = snapshot.data() {
                 let username = data["username"] as? String ?? ""
                 let fullName = data["fullName"] as? String ?? ""
@@ -132,18 +132,20 @@ class AuthViewModel: ObservableObject {
                 let country = locationData["country"] as? String ?? ""
                 let state = locationData["state"] as? String ?? ""
                 let zipCode = locationData["zipCode"] as? String ?? ""
-                let location = User.Location(address: address, city: city, country: country, state: state, zipCode: zipCode)
+                let location = User.Location(
+                    address: address,
+                    city: city,
+                    country: country,
+                    state: state,
+                    zipCode: zipCode
+                )
                 
                 let availabilityData = data["availability"] as? [String: [String: String]] ?? [:]
                 var availability: [String: User.Availability] = [:]
-                
                 for (day, dict) in availabilityData {
                     let startTime = dict["startTime"] ?? ""
                     let endTime   = dict["endTime"] ?? ""
-                    availability[day] = User.Availability(
-                        startTime: startTime,
-                        endTime:   endTime
-                    )
+                    availability[day] = User.Availability(startTime: startTime, endTime: endTime)
                 }
                 
                 self.user = User(
@@ -166,21 +168,15 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    // Update event when user sign up for an event
     func signUp(for event: Event) async throws {
         guard let userId = user?.uid else { return }
         guard let documentId = event.documentId else { return }
-
-        let eventRef = db.collection("events").document(documentId)
-        try await eventRef.updateData([
+        
+        try await eventsCollection.document(documentId).updateData([
             "assignedVolunteers": FieldValue.arrayUnion([userId])
         ])
     }
-
     
-    
-    // MARK: Event management
-    // Create an event
     public func createEvent(
         name: String,
         description: String,
@@ -194,11 +190,8 @@ class AuthViewModel: ObservableObject {
         urgency: Event.UrgencyLevel,
         volunteerRequirements: Int
     ) async throws {
-        
-        // Convert urgency enum to string value
         let urgencyString = urgency.rawValue
         
-        // Create location data map directly from the separate fields
         let locationData: [String: String] = [
             "address": address,
             "city": city,
@@ -207,7 +200,6 @@ class AuthViewModel: ObservableObject {
             "zipCode": zipCode
         ]
         
-        // Create event data for Firebase
         let eventData: [String: Any] = [
             "name": name,
             "description": description,
@@ -221,10 +213,9 @@ class AuthViewModel: ObservableObject {
             "createdAt": Timestamp(date: Date())
         ]
         
-        try await db.collection("events").addDocument(data: eventData)
+        try await eventsCollection.addDocument(data: eventData)
     }
     
-    // Update an event
     public func updateEvent(
         eventId: String,
         name: String,
@@ -240,12 +231,9 @@ class AuthViewModel: ObservableObject {
         volunteerRequirements: Int,
         status: Event.EventStatus
     ) async throws {
-        
-        // Convert urgency enum to string value
         let urgencyString = urgency.rawValue
         let statusString = status.rawValue
         
-        // Create location data map directly from the separate fields
         let locationData: [String: String] = [
             "address": address,
             "city": city,
@@ -254,7 +242,6 @@ class AuthViewModel: ObservableObject {
             "zipCode": zipCode
         ]
         
-        // Create event data for Firebase
         let eventData: [String: Any] = [
             "name": name,
             "description": description,
@@ -267,98 +254,81 @@ class AuthViewModel: ObservableObject {
             "updatedAt": Timestamp(date: Date())
         ]
         
-        // Update the document in Firestore
-        try await db.collection("events").document(eventId).updateData(eventData)
+        try await eventsCollection.document(eventId).updateData(eventData)
     }
     
-    // Delete an event
     public func deleteEvent(eventId: String) async throws {
-        try await db.collection("events").document(eventId).delete()
+        try await eventsCollection.document(eventId).delete()
     }
     
-    // Fetch events 
     public func fetchEvents(db: Firestore) async throws -> [Event] {
-        let snapshot = try await db.collection("events").getDocuments()
-        
-        return snapshot.documents.map { document in
-            return Event(documentId: document.documentID, data: document.data())
+        let snapshot = try await eventsCollection.getDocuments()
+        return snapshot.documents.map { doc in
+            Event(documentId: doc.documentID, data: doc.data())
         }
     }
     
-    // Fetch single event
     public func fetchEvent(db: Firestore, documentId: String) async throws -> Event? {
-        let document = try await db.collection("events").document(documentId).getDocument()
-        
-        guard document.exists, let data = document.data() else {
-            return nil
-        }
-        
-        return Event(documentId: document.documentID, data: data)
+        let doc = try await eventsCollection.document(documentId).getDocument()
+        guard doc.exists, let data = doc.data() else { return nil }
+        return Event(documentId: doc.documentID, data: data)
     }
     
-    
-    // Fetch filtered events
     public func fetchFilteredEvents(
         db: Firestore,
         status: Event.EventStatus? = nil,
         searchText: String? = nil
     ) async throws -> [Event] {
-        var query: Query = db.collection("events")
+        var query: Query = eventsCollection
         
-        // Apply status filter if provided
         if let status = status {
             query = query.whereField("status", isEqualTo: status.rawValue)
         }
         
         let snapshot = try await query.getDocuments()
-        
-        var events = snapshot.documents.map { document in
-            return Event(documentId: document.documentID, data: document.data())
+        var events = snapshot.documents.map { doc in
+            Event(documentId: doc.documentID, data: doc.data())
         }
         
-        // Apply text search filter if provided
         if let searchText = searchText, !searchText.isEmpty {
-            let lowercasedSearch = searchText.lowercased()
-            events = events.filter { event in
-                event.name.lowercased().contains(lowercasedSearch) ||
-                event.description.lowercased().contains(lowercasedSearch) ||
-                event.location.lowercased().contains(lowercasedSearch)
+            let lower = searchText.lowercased()
+            events = events.filter { e in
+                e.name.lowercased().contains(lower)
+                || e.description.lowercased().contains(lower)
+                || e.location.lowercased().contains(lower)
             }
         }
         
         return events
     }
     
-    // Creates volunteerHistory documents for all events that have ended
     func generateVolunteerHistoryRecords() async throws {
         let now = Date()
         
         // Query all events with dateTime < now
-        let eventSnapshot = try await db.collection("events")
+        let snapshot = try await eventsCollection
             .whereField("dateTime", isLessThan: Timestamp(date: now))
             .getDocuments()
         
-        for eventDoc in eventSnapshot.documents {
-            let eventId = eventDoc.documentID
-            let eventData = eventDoc.data()
+        for doc in snapshot.documents {
+            let eventId = doc.documentID
+            let data = doc.data()
             
-            // Get assigned volunteers
-            let assignedVolunteers = eventData["assignedVolunteers"] as? [String] ?? []
+            let assignedVolunteers = data["assignedVolunteers"] as? [String] ?? []
             
             for volunteerId in assignedVolunteers {
-                // Fetch volunteers doc to get name
-                let userDoc = try await db.collection("users").document(volunteerId).getDocument()
+                // fetch user doc for name
+                let userDoc = try await usersCollection.document(volunteerId).getDocument()
                 let userData = userDoc.data() ?? [:]
                 let volunteerName = userData["fullName"] as? String ?? ""
                 
-                // Check if exists already
-                let historySnapshot = try await db.collection("volunteerHistory")
+                // Check if a volunteerHistory doc exists
+                let existing = try await volunteerHistoryCollection
                     .whereField("eventId", isEqualTo: eventId)
                     .whereField("volunteerId", isEqualTo: volunteerId)
                     .getDocuments()
                 
-                // Create if does not exist
-                if historySnapshot.documents.isEmpty {
+                if existing.documents.isEmpty {
                     let historyData: [String: Any] = [
                         "eventId": eventId,
                         "volunteerId": volunteerId,
@@ -368,15 +338,14 @@ class AuthViewModel: ObservableObject {
                         "createdAt": Timestamp(date: now),
                         "fullName": volunteerName
                     ]
-                    
-                    // Create the document in Firestore
-                    _ = db.collection("volunteerHistory").addDocument(data: historyData)
+                    _ = try await volunteerHistoryCollection.addDocument(data: historyData)
                 }
             }
             
-            // Change event status to Completed
-            if let currentStatus = eventData["status"] as? String,currentStatus != Event.EventStatus.completed.rawValue {
-                try await db.collection("events").document(eventId)
+            // Mark event as completed if not already
+            if let currentStatus = data["status"] as? String,
+               currentStatus != Event.EventStatus.completed.rawValue {
+                try await eventsCollection.document(eventId)
                     .updateData(["status": Event.EventStatus.completed.rawValue])
             }
         }

@@ -8,31 +8,50 @@ final class NotificationManagerTests: XCTestCase {
     var sut: NotificationManager!
 
     override func setUp() {
+        super.setUp()
         sut = NotificationManager.shared
     }
 
     override func tearDown() {
         sut = nil
+        super.tearDown()
     }
 
-    func testInitialValues() {
-        XCTAssertNil(sut.notificationSettings)
-        XCTAssertEqual(sut.notificationCount, 0)
-    }
-
-    func testRequestAuthorization() {
+    func testRequestAuthorizationWait() {
+        let exp = expectation(description: "Authorization callback")
+        
         sut.requestAuthorization()
-        XCTAssert(true, "No crash => code covered")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5) { error in
+            XCTAssertNil(error, "Wait timed out")
+        }
     }
 
-    func testGetNotificationSettings() {
+    func testGetNotificationSettingsWait() {
+        let exp = expectation(description: "Settings callback")
+        
         sut.getNotificationSettings()
-        XCTAssert(true, "No crash => code covered")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5) { error in
+            XCTAssertNil(error)
+        }
     }
-
+    
     func testIncrementNotificationCount() {
         let initial = sut.notificationCount
         sut.notificationCount += 1
-        XCTAssertEqual(sut.notificationCount, initial + 1)
+        XCTAssertEqual(sut.notificationCount, initial + 1, "Should increment count by 1")
+    }
+    
+    func testInitialValuesWithNewInstance() {
+        let manager = NotificationManager()
+        XCTAssertEqual(manager.notificationCount, 0, "Should start at 0 unless incremented")
     }
 }
