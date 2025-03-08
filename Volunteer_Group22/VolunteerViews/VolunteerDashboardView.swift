@@ -335,18 +335,17 @@ struct VolunteerDashboardView: View {
     
     //Fetch completed events
     private func fetchEventsCompleted(firebaseDocID: String) async -> Int {
-            let now = Date()
-            do {
-                let snapshot = try await db.collection("events")
-                    .whereField("assignedVolunteers", arrayContains: firebaseDocID)
-                    .whereField("date", isLessThanOrEqualTo: now)
-                    .getDocuments()
-                return snapshot.documents.count
-            } catch {
-                print("Error fetching events completed: \(error.localizedDescription)")
-                return 0
-            }
+        do {
+            let snapshot = try await db.collection("events")
+                .whereField("assignedVolunteers", arrayContains: firebaseDocID)
+                .whereField("status", isEqualTo: "Completed")
+                .getDocuments()
+            return snapshot.documents.count
+        } catch {
+            print("Error fetching events completed: \(error.localizedDescription)")
+            return 0
         }
+    }
     
 }
 
