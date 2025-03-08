@@ -1,0 +1,1763 @@
+
+Showing Recent Messages
+Launch actions
+
+Launch Volunteer_Group22UITests
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+RUN_DESTINATION_DEVICE_NAME=Clone 2 of iPhone 16 Pro
+XCTestSessionIdentifier=F37DAFEC-A3CF-4573-AC00-B73B38BEDFFA
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22UITests.xctrunner/ABF335BA-5AE4-41C8-9A86-30F1B2218C9C-97174-0000065FC00735E9/E66B7D41-EBC5-4BD5-97E2-1353006478D0-%p%c.profraw
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+XCTestConfigurationFilePath=
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib
+RUN_DESTINATION_DEVICE_UDID=9C8BA98E-8F4F-48E4-9DEF-C5E0E88B5E49
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-15E64F69-5B8B-45ED-9AD5-A315CA48552E
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib
+SQLITE_ENABLE_THREAD_ASSERTIONS=1
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+RUN_DESTINATION_DEVICE_PLATFORM_IDENTIFIER=com.apple.platform.iphonesimulator
+XCTestBundlePath=PlugIns/Volunteer_Group22UITests.xctest
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22UITests.xctrunner/ABF335BA-5AE4-41C8-9A86-30F1B2218C9C-97174-0000065FC00735E9/E66B7D41-EBC5-4BD5-97E2-1353006478D0-%p%c.profraw
+TERM=dumb
+
+Launching debugserver and waiting for Group22.Volunteer-Group22UITests.xctrunner to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22UITests
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55233
+
+
+Launch Volunteer_Group22Tests
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+RUN_DESTINATION_DEVICE_NAME=Clone 3 of iPhone 16 Pro
+XCTestSessionIdentifier=FC024040-6756-4BCF-A06D-DD3E3B56E3EE
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/74F8C12E-B9A0-43E7-9979-FF47C178B412-97174-0000065FC2033392/10C23C1B-DFFA-4909-8255-5553B6A590AC-%p%c.profraw
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+XCTestConfigurationFilePath=
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/Volunteer_Group22.app/Frameworks/libXCTestBundleInject.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib
+XCInjectBundleInto=unused
+RUN_DESTINATION_DEVICE_UDID=12366F2D-A553-4746-B2D8-0FCDA5F098B5
+OS_LOG_DT_HOOK_PREFIX=OSLOG-6ADD3042-5631-4975-B184-C04140414B80
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib
+SQLITE_ENABLE_THREAD_ASSERTIONS=1
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+RUN_DESTINATION_DEVICE_PLATFORM_IDENTIFIER=com.apple.platform.iphonesimulator
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+XCTestBundlePath=PlugIns/Volunteer_Group22Tests.xctest
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/74F8C12E-B9A0-43E7-9979-FF47C178B412-97174-0000065FC2033392/10C23C1B-DFFA-4909-8255-5553B6A590AC-%p%c.profraw
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks
+TERM=dumb
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22Tests
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55266
+
+
+Launch Volunteer_Group22
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/FFB2D31B-3C0A-493C-9877-A6C0F6585076-97174-0000065FDD826C7A/D044BB71-9ABA-407B-912B-DEFEFB5D15AF-%p%c.profraw
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-3D2174AB-5C8A-4E11-A8F4-45270C71376D
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/FFB2D31B-3C0A-493C-9877-A6C0F6585076-97174-0000065FDD826C7A/D044BB71-9ABA-407B-912B-DEFEFB5D15AF-%p%c.profraw
+TERM=dumb
+OS_ACTIVITY_MODE=info
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55465
+
+
+Launch Volunteer_Group22UITests
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+RUN_DESTINATION_DEVICE_NAME=Clone 1 of iPhone 16 Pro
+XCTestSessionIdentifier=8B030860-11D9-40D0-A77E-456EEE5F862B
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22UITests.xctrunner/59BA3402-F90E-4796-9FCA-0BF562A7AEB7-97174-0000065FE34D12BF/48F43FB3-B9BB-478C-8DE7-982A2F593CC6-%p%c.profraw
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+XCTestConfigurationFilePath=
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib
+RUN_DESTINATION_DEVICE_UDID=B5684DBC-4493-4156-9522-B5815DFC019A
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-15E64F69-5B8B-45ED-9AD5-A315CA48552E
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib
+SQLITE_ENABLE_THREAD_ASSERTIONS=1
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+RUN_DESTINATION_DEVICE_PLATFORM_IDENTIFIER=com.apple.platform.iphonesimulator
+XCTestBundlePath=PlugIns/Volunteer_Group22UITests.xctest
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22UITests.xctrunner/59BA3402-F90E-4796-9FCA-0BF562A7AEB7-97174-0000065FE34D12BF/48F43FB3-B9BB-478C-8DE7-982A2F593CC6-%p%c.profraw
+TERM=dumb
+
+Launching debugserver and waiting for Group22.Volunteer-Group22UITests.xctrunner to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22UITests
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55896
+
+
+Launch Volunteer_Group22UITests
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+RUN_DESTINATION_DEVICE_NAME=Clone 4 of iPhone 16 Pro
+XCTestSessionIdentifier=A0E6693C-057D-439D-8FD2-84626A6BDF4E
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22UITests.xctrunner/A0D4B2EA-83AF-44B8-92B4-7015881573BE-97174-0000065FE43D0651/E4AAA460-3F90-4DF2-BFF9-4DBCDF62A3C7-%p%c.profraw
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+XCTestConfigurationFilePath=
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib
+RUN_DESTINATION_DEVICE_UDID=F92898BD-C922-4425-89CC-BAA6BF6961D9
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-15E64F69-5B8B-45ED-9AD5-A315CA48552E
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib
+SQLITE_ENABLE_THREAD_ASSERTIONS=1
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+RUN_DESTINATION_DEVICE_PLATFORM_IDENTIFIER=com.apple.platform.iphonesimulator
+XCTestBundlePath=PlugIns/Volunteer_Group22UITests.xctest
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22UITests.xctrunner/A0D4B2EA-83AF-44B8-92B4-7015881573BE-97174-0000065FE43D0651/E4AAA460-3F90-4DF2-BFF9-4DBCDF62A3C7-%p%c.profraw
+TERM=dumb
+
+Launching debugserver and waiting for Group22.Volunteer-Group22UITests.xctrunner to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22UITests
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55884
+
+
+Launch Volunteer_Group22Tests
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+RUN_DESTINATION_DEVICE_NAME=Clone 5 of iPhone 16 Pro
+XCTestSessionIdentifier=20587B15-B538-46CC-AFDA-ABD596904E32
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/B880B8C0-CCA9-47E0-A260-78F25A1DBA30-97174-0000065FE4DB5E82/604A95AD-7120-4F89-812C-9201598A36E6-%p%c.profraw
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+XCTestConfigurationFilePath=
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/Volunteer_Group22.app/Frameworks/libXCTestBundleInject.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib
+XCInjectBundleInto=unused
+RUN_DESTINATION_DEVICE_UDID=D9ADB98F-DAD7-4F55-86A2-65533A77B5CF
+OS_LOG_DT_HOOK_PREFIX=OSLOG-6ADD3042-5631-4975-B184-C04140414B80
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib
+SQLITE_ENABLE_THREAD_ASSERTIONS=1
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+RUN_DESTINATION_DEVICE_PLATFORM_IDENTIFIER=com.apple.platform.iphonesimulator
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+XCTestBundlePath=PlugIns/Volunteer_Group22Tests.xctest
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/B880B8C0-CCA9-47E0-A260-78F25A1DBA30-97174-0000065FE4DB5E82/604A95AD-7120-4F89-812C-9201598A36E6-%p%c.profraw
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks
+TERM=dumb
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22Tests
+
+
+Launch Volunteer_Group22
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/E1947722-2445-44BB-9F75-6E4AD89D1E76-97174-0000065FEA8C7984/85D9C947-2FB4-4821-840D-ACDD1492CAEA-%p%c.profraw
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-A711ACC2-511F-44E4-A594-4BB7C5964692
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/E1947722-2445-44BB-9F75-6E4AD89D1E76-97174-0000065FEA8C7984/85D9C947-2FB4-4821-840D-ACDD1492CAEA-%p%c.profraw
+TERM=dumb
+OS_ACTIVITY_MODE=info
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55650
+
+
+Launch Volunteer_Group22
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/3079AC52-EE41-43F4-88BA-5FC2323796FD-97174-0000065FF8FC3495/FBE5AF12-B8A0-44D7-A2F7-F9E15A9E9227-%p%c.profraw
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-DBF2E5F6-E10E-475F-8DDE-61B4F1FA79E3
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/3079AC52-EE41-43F4-88BA-5FC2323796FD-97174-0000065FF8FC3495/FBE5AF12-B8A0-44D7-A2F7-F9E15A9E9227-%p%c.profraw
+TERM=dumb
+OS_ACTIVITY_MODE=info
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55769
+
+
+Launch Volunteer_Group22
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/B33A65A7-7C80-4E0E-B7C5-711E583475BE-97174-0000065FFEC1041D/ACC45FE0-1C6C-4A2E-87CB-8317E475535D-%p%c.profraw
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-9C622E67-EC38-46A4-8308-F796883FF6BB
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/B33A65A7-7C80-4E0E-B7C5-711E583475BE-97174-0000065FFEC1041D/ACC45FE0-1C6C-4A2E-87CB-8317E475535D-%p%c.profraw
+TERM=dumb
+OS_ACTIVITY_MODE=info
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55808
+
+
+Launch Volunteer_Group22
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/5CB64597-447A-40CD-8060-4B5EC575F726-97174-0000066005B7A1BB/DC2BAEDB-5FCD-4408-BECD-FF18486EF65E-%p%c.profraw
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-CEEF2EFE-5021-4231-89DB-4AB9AD52FEF8
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/5CB64597-447A-40CD-8060-4B5EC575F726-97174-0000066005B7A1BB/DC2BAEDB-5FCD-4408-BECD-FF18486EF65E-%p%c.profraw
+TERM=dumb
+OS_ACTIVITY_MODE=info
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55843
+
+
+Launch Volunteer_Group22
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/38F02293-6CAA-404F-8C65-B5A6E8D54849-97174-000006600E7E7694/5255DBC0-83B0-4BF0-87E7-C5D63033FE81-%p%c.profraw
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-359C37E5-42D9-4EA6-A1E2-8A823A4FCE62
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/38F02293-6CAA-404F-8C65-B5A6E8D54849-97174-000006600E7E7694/5255DBC0-83B0-4BF0-87E7-C5D63033FE81-%p%c.profraw
+TERM=dumb
+OS_ACTIVITY_MODE=info
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55905
+
+
+Launch Volunteer_Group22
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/28B3C032-20E7-493B-9731-5A6FC79EE53F-97174-00000660168CB6C3/99F42C48-3CA4-4483-9147-F230C233BB9C-%p%c.profraw
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-46D64E43-DFA8-4797-A524-AD43E8CB8141
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/28B3C032-20E7-493B-9731-5A6FC79EE53F-97174-00000660168CB6C3/99F42C48-3CA4-4483-9147-F230C233BB9C-%p%c.profraw
+TERM=dumb
+OS_ACTIVITY_MODE=info
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55937
+
+
+Launch Volunteer_Group22
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/B1636C4F-E39C-4A79-8764-15C7D62F5C02-97174-0000066018879C0F/346EA938-B64B-447C-8449-DBA68FE37FB2-%p%c.profraw
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-0B50B7AD-7EB5-49BD-B722-31E2EB782B7A
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/B1636C4F-E39C-4A79-8764-15C7D62F5C02-97174-0000066018879C0F/346EA938-B64B-447C-8449-DBA68FE37FB2-%p%c.profraw
+TERM=dumb
+OS_ACTIVITY_MODE=info
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55960
+
+
+Launch Volunteer_Group22
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/2F70FCB9-454A-4011-A0F7-BEF57EAEBC40-97174-000006602618615C/57D54674-0555-4FA1-8475-235B65A72CDA-%p%c.profraw
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-EC8EA9EC-FDDF-42B8-B618-99C21EB45CD4
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/2F70FCB9-454A-4011-A0F7-BEF57EAEBC40-97174-000006602618615C/57D54674-0555-4FA1-8475-235B65A72CDA-%p%c.profraw
+TERM=dumb
+OS_ACTIVITY_MODE=info
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55976
+
+
+Launch Volunteer_Group22
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/05F24DC7-3394-4A48-821E-23217356B6A7-97174-000006602C977FB4/FD263DC7-11B9-45E9-963A-9BDEAFA48BBB-%p%c.profraw
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-B7B9BBAF-45EA-4962-B9CC-D44CA96AA71F
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/05F24DC7-3394-4A48-821E-23217356B6A7-97174-000006602C977FB4/FD263DC7-11B9-45E9-963A-9BDEAFA48BBB-%p%c.profraw
+TERM=dumb
+OS_ACTIVITY_MODE=info
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55986
+
+
+Launch Volunteer_Group22
+
+Platform: iOS Simulator
+
+Device Identifier: 09B0A31D-4A7C-46D8-A2C9-C9118C894548
+
+Operating System Version: 18.1 (22B81)
+
+Model: iPhone 16 Pro (iPhone17,1)
+
+Target Architecture: arm64
+
+Install Actions
+Installing on iPhone 16 Pro
+
+Successfully installed
+
+Environment variables:
+__XPC_DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_ASSERT_MAIN_THREAD_TRANSACTIONS=0
+SWIFTUI_VIEW_DEBUG=287
+NSApplicationQuitWithoutSuddenTermination=YES
+OS_ACTIVITY_TOOLS_OVERSIZE=YES
+IDE_DISABLED_OS_ACTIVITY_DT_MODE=1
+__XPC_DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_ACTIVITY_TOOLS_PRIVACY=YES
+__XCODE_BUILT_PRODUCTS_DIR_PATHS=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+CA_DEBUG_TRANSACTIONS=0
+CFLOG_FORCE_DISABLE_STDERR=1
+OS_LOG_DT_HOOK_MODE=0x07
+DYLD_INSERT_LIBRARIES=/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_22B81/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.1.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libLogRedirect.dylib
+DYLD_FRAMEWORK_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator:/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator/PackageFrameworks
+LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/4B34DAE9-FFCB-4079-82B2-EB86894B6FF1-97174-0000066033489F38/7335E7BF-CBF3-4DD3-955D-50B953AF68D9-%p%c.profraw
+DYLD_LIBRARY_PATH=/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/Products/Debug-iphonesimulator
+OS_LOG_DT_HOOK_PREFIX=OSLOG-AD1B658D-9A99-4E1F-B53C-215BA900FC5E
+OS_LOG_TRANSLATE_PRINT_MODE=0x80
+NSUnbufferedIO=YES
+APP_DISTRIBUTOR_ID_OVERRIDE=com.apple.AppStore
+__XPC_LLVM_PROFILE_FILE=/var/folders/b9/z4ks52n911g9q1n4r04_b8gr0000gn/T/Group22.Volunteer-Group22/4B34DAE9-FFCB-4079-82B2-EB86894B6FF1-97174-0000066033489F38/7335E7BF-CBF3-4DD3-955D-50B953AF68D9-%p%c.profraw
+TERM=dumb
+OS_ACTIVITY_MODE=info
+
+Launching debugserver and waiting for Group22.Volunteer-Group22 to attach
+
+Launching suspended and the debugger is responsible for resuming.
+
+Successfully launched Volunteer_Group22
+
+Console logging policy: Synchronously obtain os_logs via libLogRedirect, and read stdio from File Descriptors
+
+StoreKit Configuration sync
+
+StoreKit Configuration was not used because the application target does not support StoreKit Testing in Xcode.
+
+View debugging: enabled
+Insert view debugging dylib on launch: disabled
+Queue debugging: enabled
+Memory graph on resource exception: disabled
+Address sanitizer: disabled
+Thread sanitizer: disabled
+
+Using LLDBRPC. The LLDB framework is from /Applications/Xcode.app/Contents/SharedFrameworks
+
+Attached to process with pid 55998
+
+2025-03-07 20:25:19.831311-0600 Volunteer_Group22UITests-Runner[55233:12172155] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Volunteer_Group22UITests' started at 2025-03-07 20:25:22.696.
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testExample]' started.
+    t =     0.00s Start Test at 2025-03-07 20:25:22.697
+    t =     0.63s Set Up
+    t =     0.66s Open Group22.Volunteer-Group22
+    t =     0.66s     Launch Group22.Volunteer-Group22
+    t =     4.65s         Setting up automation session
+    t =     6.07s         Wait for Group22.Volunteer-Group22 to idle
+    t =     7.29s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testExample]' passed (7.528 seconds).
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testLaunchPerformance]' started.
+    t =     0.00s Start Test at 2025-03-07 20:25:30.225
+    t =     0.02s Set Up
+    t =     0.03s Open Group22.Volunteer-Group22
+    t =     0.03s     Launch Group22.Volunteer-Group22
+    t =     0.03s         Terminate Group22.Volunteer-Group22:55465
+    t =     4.70s         Setting up automation session
+    t =     6.45s         Wait for Group22.Volunteer-Group22 to idle
+    t =     9.11s Open Group22.Volunteer-Group22
+    t =     9.11s     Launch Group22.Volunteer-Group22
+    t =     9.12s         Terminate Group22.Volunteer-Group22:55650
+    t =    14.99s         Setting up automation session
+    t =    15.78s         Wait for Group22.Volunteer-Group22 to idle
+    t =    17.01s Open Group22.Volunteer-Group22
+    t =    17.01s     Launch Group22.Volunteer-Group22
+    t =    17.01s         Terminate Group22.Volunteer-Group22:55769
+    t =    19.03s         Setting up automation session
+    t =    20.19s         Wait for Group22.Volunteer-Group22 to idle
+    t =    22.04s Open Group22.Volunteer-Group22
+    t =    22.04s     Launch Group22.Volunteer-Group22
+    t =    22.04s         Terminate Group22.Volunteer-Group22:55808
+    t =    23.34s         Setting up automation session
+    t =    26.86s         Wait for Group22.Volunteer-Group22 to idle
+    t =    28.18s Open Group22.Volunteer-Group22
+    t =    28.19s     Launch Group22.Volunteer-Group22
+    t =    28.19s         Terminate Group22.Volunteer-Group22:55843
+    t =    30.36s         Setting up automation session
+    t =    32.41s         Wait for Group22.Volunteer-Group22 to idle
+    t =    33.76s Open Group22.Volunteer-Group22
+    t =    33.76s     Launch Group22.Volunteer-Group22
+    t =    33.76s         Terminate Group22.Volunteer-Group22:55905
+    t =    35.86s         Setting up automation session
+    t =    37.65s         Wait for Group22.Volunteer-Group22 to idle
+/Users/rvw/Desktop/Software Design App/IOS/Volunteer_Group22test/Volunteer_Group22UITests/Volunteer_Group22UITests.swift:36: Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testLaunchPerformance]' measured [Duration (AppLaunch), s] average: 2.890, relative standard deviation: 26.089%, values: [1.650809, 2.613127, 3.900246, 3.344867, 2.941085], performanceMetricID:com.apple.dt.XCTMetric_ApplicationLaunch-AppLaunch.duration, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+    t =    40.63s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testLaunchPerformance]' passed (40.845 seconds).
+Test Suite 'Volunteer_Group22UITests' passed at 2025-03-07 20:26:11.069.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 48.372 (48.374) seconds
+/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22UITests-81B5A365-AAE9-4045-A08D-F7C0F4AB6C54-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22UITests-184E699E-466A-462E-8A01-68D324982481/Session-Volunteer_Group22UITests-2025-03-07_202504-ZobZAV.log
+
+/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22UITests-81B5A365-AAE9-4045-A08D-F7C0F4AB6C54-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22UITests-184E699E-466A-462E-8A01-68D324982481/Session-Volunteer_Group22UITests-2025-03-07_202504-ZobZAV.log: /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22UITests-81B5A365-AAE9-4045-A08D-F7C0F4AB6C54-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22UITests-184E699E-466A-462E-8A01-68D324982481/Session-Volunteer_Group22UITests-2025-03-07_202504-ZobZAV.log
+
+2025-03-07 20:25:19.831311-0600 Volunteer_Group22UITests-Runner[55233:12172155] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Volunteer_Group22UITests' started at 2025-03-07 20:25:22.696.
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testExample]' started.
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testExample]' started.
+    t =     0.00s Start Test at 2025-03-07 20:25:22.697
+    t =     0.63s Set Up
+    t =     0.66s Open Group22.Volunteer-Group22
+    t =     0.66s     Launch Group22.Volunteer-Group22
+    t =     4.65s         Setting up automation session
+    t =     6.07s         Wait for Group22.Volunteer-Group22 to idle
+    t =     7.29s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testExample]' passed (7.528 seconds).
+    t =     0.00s Start Test at 2025-03-07 20:25:22.697
+    t =     0.63s Set Up
+    t =     0.66s Open Group22.Volunteer-Group22
+    t =     0.66s     Launch Group22.Volunteer-Group22
+    t =     4.65s         Setting up automation session
+    t =     6.07s         Wait for Group22.Volunteer-Group22 to idle
+    t =     7.29s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testExample]' passed (7.528 seconds).
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testLaunchPerformance]' started.
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testLaunchPerformance]' started.
+    t =     0.00s Start Test at 2025-03-07 20:25:30.225
+    t =     0.02s Set Up
+    t =     0.03s Open Group22.Volunteer-Group22
+    t =     0.03s     Launch Group22.Volunteer-Group22
+    t =     0.03s         Terminate Group22.Volunteer-Group22:55465
+    t =     4.70s         Setting up automation session
+    t =     6.45s         Wait for Group22.Volunteer-Group22 to idle
+    t =     9.11s Open Group22.Volunteer-Group22
+    t =     9.11s     Launch Group22.Volunteer-Group22
+    t =     9.12s         Terminate Group22.Volunteer-Group22:55650
+    t =    14.99s         Setting up automation session
+    t =    15.78s         Wait for Group22.Volunteer-Group22 to idle
+    t =    17.01s Open Group22.Volunteer-Group22
+    t =    17.01s     Launch Group22.Volunteer-Group22
+    t =    17.01s         Terminate Group22.Volunteer-Group22:55769
+    t =    19.03s         Setting up automation session
+    t =    20.19s         Wait for Group22.Volunteer-Group22 to idle
+    t =    22.04s Open Group22.Volunteer-Group22
+    t =    22.04s     Launch Group22.Volunteer-Group22
+    t =    22.04s         Terminate Group22.Volunteer-Group22:55808
+    t =    23.34s         Setting up automation session
+    t =    26.86s         Wait for Group22.Volunteer-Group22 to idle
+    t =    28.18s Open Group22.Volunteer-Group22
+    t =    28.19s     Launch Group22.Volunteer-Group22
+    t =    28.19s         Terminate Group22.Volunteer-Group22:55843
+    t =    30.36s         Setting up automation session
+    t =    32.41s         Wait for Group22.Volunteer-Group22 to idle
+    t =    33.76s Open Group22.Volunteer-Group22
+    t =    33.76s     Launch Group22.Volunteer-Group22
+    t =    33.76s         Terminate Group22.Volunteer-Group22:55905
+    t =    35.86s         Setting up automation session
+    t =    37.65s         Wait for Group22.Volunteer-Group22 to idle
+/Users/rvw/Desktop/Software Design App/IOS/Volunteer_Group22test/Volunteer_Group22UITests/Volunteer_Group22UITests.swift:36: Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testLaunchPerformance]' measured [Duration (AppLaunch), s] average: 2.890, relative standard deviation: 26.089%, values: [1.650809, 2.613127, 3.900246, 3.344867, 2.941085], performanceMetricID:com.apple.dt.XCTMetric_ApplicationLaunch-AppLaunch.duration, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+    t =     0.00s Start Test at 2025-03-07 20:25:30.225
+    t =     0.02s Set Up
+    t =     0.03s Open Group22.Volunteer-Group22
+    t =     0.03s     Launch Group22.Volunteer-Group22
+    t =     0.03s         Terminate Group22.Volunteer-Group22:55465
+    t =     4.70s         Setting up automation session
+    t =     6.45s         Wait for Group22.Volunteer-Group22 to idle
+    t =     9.11s Open Group22.Volunteer-Group22
+    t =     9.11s     Launch Group22.Volunteer-Group22
+    t =     9.12s         Terminate Group22.Volunteer-Group22:55650
+    t =    14.99s         Setting up automation session
+    t =    15.78s         Wait for Group22.Volunteer-Group22 to idle
+    t =    17.01s Open Group22.Volunteer-Group22
+    t =    17.01s     Launch Group22.Volunteer-Group22
+    t =    17.01s         Terminate Group22.Volunteer-Group22:55769
+    t =    19.03s         Setting up automation session
+    t =    20.19s         Wait for Group22.Volunteer-Group22 to idle
+    t =    22.04s Open Group22.Volunteer-Group22
+    t =    22.04s     Launch Group22.Volunteer-Group22
+    t =    22.04s         Terminate Group22.Volunteer-Group22:55808
+    t =    23.34s         Setting up automation session
+    t =    26.86s         Wait for Group22.Volunteer-Group22 to idle
+    t =    28.18s Open Group22.Volunteer-Group22
+    t =    28.19s     Launch Group22.Volunteer-Group22
+    t =    28.19s         Terminate Group22.Volunteer-Group22:55843
+    t =    30.36s         Setting up automation session
+    t =    32.41s         Wait for Group22.Volunteer-Group22 to idle
+    t =    33.76s Open Group22.Volunteer-Group22
+    t =    33.76s     Launch Group22.Volunteer-Group22
+    t =    33.76s         Terminate Group22.Volunteer-Group22:55905
+    t =    35.86s         Setting up automation session
+    t =    37.65s         Wait for Group22.Volunteer-Group22 to idle
+/Users/rvw/Desktop/Software Design App/IOS/Volunteer_Group22test/Volunteer_Group22UITests/Volunteer_Group22UITests.swift:36: Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testLaunchPerformance]' measured [Duration (AppLaunch), s] average: 2.890, relative standard deviation: 26.089%, values: [1.650809, 2.613127, 3.900246, 3.344867, 2.941085], performanceMetricID:com.apple.dt.XCTMetric_ApplicationLaunch-AppLaunch.duration, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+    t =    40.63s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testLaunchPerformance]' passed (40.845 seconds).
+    t =    40.63s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testLaunchPerformance]' passed (40.845 seconds).
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testExample]' started.
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testLaunchPerformance]' started.
+    t =     0.00s Start Test at 2025-03-07 20:25:30.225
+    t =     0.02s Set Up
+    t =     0.03s Open Group22.Volunteer-Group22
+    t =     0.03s     Launch Group22.Volunteer-Group22
+    t =     0.03s         Terminate Group22.Volunteer-Group22:55465
+    t =     4.70s         Setting up automation session
+    t =     6.45s         Wait for Group22.Volunteer-Group22 to idle
+    t =     9.11s Open Group22.Volunteer-Group22
+    t =     9.11s     Launch Group22.Volunteer-Group22
+    t =     9.12s         Terminate Group22.Volunteer-Group22:55650
+    t =    14.99s         Setting up automation session
+    t =    15.78s         Wait for Group22.Volunteer-Group22 to idle
+    t =    17.01s Open Group22.Volunteer-Group22
+    t =    17.01s     Launch Group22.Volunteer-Group22
+    t =    17.01s         Terminate Group22.Volunteer-Group22:55769
+    t =    19.03s         Setting up automation session
+    t =    20.19s         Wait for Group22.Volunteer-Group22 to idle
+    t =    22.04s Open Group22.Volunteer-Group22
+    t =    22.04s     Launch Group22.Volunteer-Group22
+    t =    22.04s         Terminate Group22.Volunteer-Group22:55808
+    t =    23.34s         Setting up automation session
+    t =    26.86s         Wait for Group22.Volunteer-Group22 to idle
+    t =    28.18s Open Group22.Volunteer-Group22
+    t =    28.19s     Launch Group22.Volunteer-Group22
+    t =    28.19s         Terminate Group22.Volunteer-Group22:55843
+    t =    30.36s         Setting up automation session
+    t =    32.41s         Wait for Group22.Volunteer-Group22 to idle
+    t =    33.76s Open Group22.Volunteer-Group22
+    t =    33.76s     Launch Group22.Volunteer-Group22
+    t =    33.76s         Terminate Group22.Volunteer-Group22:55905
+    t =    35.86s         Setting up automation session
+    t =    37.65s         Wait for Group22.Volunteer-Group22 to idle
+/Users/rvw/Desktop/Software Design App/IOS/Volunteer_Group22test/Volunteer_Group22UITests/Volunteer_Group22UITests.swift:36: Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITests testLaunchPerformance]' measured [Duration (AppLaunch), s] average: 2.890, relative standard deviation: 26.089%, values: [1.650809, 2.613127, 3.900246, 3.344867, 2.941085], performanceMetricID:com.apple.dt.XCTMetric_ApplicationLaunch-AppLaunch.duration, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Duration (AppLaunch) average: 2.890 s, relative standard deviation: 26.1%
+
+/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22UITests-81B5A365-AAE9-4045-A08D-F7C0F4AB6C54-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22UITests-EE1FAADC-B3FA-4E3C-AD67-F78CA12FEF9C/Session-Volunteer_Group22UITests-2025-03-07_202525-pAvo6V.log
+
+/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22UITests-81B5A365-AAE9-4045-A08D-F7C0F4AB6C54-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22UITests-EE1FAADC-B3FA-4E3C-AD67-F78CA12FEF9C/Session-Volunteer_Group22UITests-2025-03-07_202525-pAvo6V.log: /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22UITests-81B5A365-AAE9-4045-A08D-F7C0F4AB6C54-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22UITests-EE1FAADC-B3FA-4E3C-AD67-F78CA12FEF9C/Session-Volunteer_Group22UITests-2025-03-07_202525-pAvo6V.log
+
+2025-03-07 20:26:01.966005-0600 Volunteer_Group22UITests-Runner[55884:12182733] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Volunteer_Group22UITestsLaunchTests' started at 2025-03-07 20:26:05.017.
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.01s Setting device orientation to Portrait
+    t =     0.10s     Device orientation changed to Portrait
+    t =     0.16s     Wait for com.apple.springboard to idle
+    t =     0.37s Setting appearance mode to Light
+    t =     0.76s     Wait for com.apple.springboard to idle
+    t =     0.94s Start Test at 2025-03-07 20:26:05.955
+    t =     1.33s Set Up
+    t =     1.34s Open Group22.Volunteer-Group22
+    t =     1.34s     Launch Group22.Volunteer-Group22
+    t =     5.69s         Setting up automation session
+    t =     7.77s         Wait for Group22.Volunteer-Group22 to idle
+    t =     9.00s Find the Target Application 'Group22.Volunteer-Group22'
+    t =     9.19s Added attachment named 'Launch Screen'
+    t =     9.19s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' passed (9.436 seconds).
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.00s Setting device orientation to Landscape Right
+    t =     0.01s     Device orientation changed to Landscape Right
+    t =     0.06s     Interface orientation changed to Landscape Left
+    t =     0.06s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.07s Setting appearance mode to Light
+    t =     0.08s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.39s Start Test at 2025-03-07 20:26:14.848
+    t =     0.42s Set Up
+    t =     0.43s Open Group22.Volunteer-Group22
+    t =     0.43s     Launch Group22.Volunteer-Group22
+    t =     0.43s         Terminate Group22.Volunteer-Group22:55960
+    t =     0.83s             Interface orientation changed to Portrait
+    t =     1.67s         Setting up automation session
+    t =     1.78s             Interface orientation changed to Landscape Left
+    t =     2.96s         Wait for Group22.Volunteer-Group22 to idle
+    t =     4.18s Find the Target Application 'Group22.Volunteer-Group22'
+    t =     4.30s Added attachment named 'Launch Screen'
+    t =     4.30s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' passed (4.541 seconds).
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.00s Setting device orientation to Portrait
+    t =     0.01s     Device orientation changed to Portrait
+    t =     0.04s     Interface orientation changed to Portrait
+    t =     0.04s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.06s Setting appearance mode to Dark
+    t =     0.08s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.37s Start Test at 2025-03-07 20:26:19.369
+    t =     0.39s Set Up
+    t =     0.39s Open Group22.Volunteer-Group22
+    t =     0.39s     Launch Group22.Volunteer-Group22
+    t =     0.39s         Terminate Group22.Volunteer-Group22:55976
+    t =     2.09s         Setting up automation session
+    t =     3.03s         Wait for Group22.Volunteer-Group22 to idle
+    t =     4.26s Find the Target Application 'Group22.Volunteer-Group22'
+    t =     4.39s Added attachment named 'Launch Screen'
+    t =     4.39s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' passed (4.601 seconds).
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.00s Setting device orientation to Landscape Right
+    t =     0.01s     Device orientation changed to Landscape Right
+    t =     0.06s     Interface orientation changed to Landscape Left
+    t =     0.06s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.08s Setting appearance mode to Dark
+    t =     0.09s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.39s Start Test at 2025-03-07 20:26:23.986
+    t =     0.41s Set Up
+    t =     0.41s Open Group22.Volunteer-Group22
+    t =     0.41s     Launch Group22.Volunteer-Group22
+    t =     0.41s         Terminate Group22.Volunteer-Group22:55986
+    t =     0.78s             Interface orientation changed to Portrait
+    t =     1.88s         Interface orientation changed to Landscape Left
+    t =     2.12s         Setting up automation session
+    t =     3.02s         Wait for Group22.Volunteer-Group22 to idle
+    t =     4.22s Find the Target Application 'Group22.Volunteer-Group22'
+    t =     4.33s Added attachment named 'Launch Screen'
+    t =     4.33s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' passed (4.543 seconds).
+Test Suite 'Volunteer_Group22UITestsLaunchTests' passed at 2025-03-07 20:26:28.141.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 23.121 (23.123) seconds
+/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22UITests-81B5A365-AAE9-4045-A08D-F7C0F4AB6C54-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22UITests-6DDE1639-DC54-428D-A75E-50C965AEC1F0/Session-Volunteer_Group22UITests-2025-03-07_202524-G65999.log
+
+/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22UITests-81B5A365-AAE9-4045-A08D-F7C0F4AB6C54-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22UITests-6DDE1639-DC54-428D-A75E-50C965AEC1F0/Session-Volunteer_Group22UITests-2025-03-07_202524-G65999.log: /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22UITests-81B5A365-AAE9-4045-A08D-F7C0F4AB6C54-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22UITests-6DDE1639-DC54-428D-A75E-50C965AEC1F0/Session-Volunteer_Group22UITests-2025-03-07_202524-G65999.log
+
+2025-03-07 20:26:01.966005-0600 Volunteer_Group22UITests-Runner[55884:12182733] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Volunteer_Group22UITestsLaunchTests' started at 2025-03-07 20:26:05.017.
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.01s Setting device orientation to Portrait
+    t =     0.10s     Device orientation changed to Portrait
+    t =     0.16s     Wait for com.apple.springboard to idle
+    t =     0.37s Setting appearance mode to Light
+    t =     0.76s     Wait for com.apple.springboard to idle
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.01s Setting device orientation to Portrait
+    t =     0.10s     Device orientation changed to Portrait
+    t =     0.16s     Wait for com.apple.springboard to idle
+    t =     0.37s Setting appearance mode to Light
+    t =     0.76s     Wait for com.apple.springboard to idle
+    t =     0.94s Start Test at 2025-03-07 20:26:05.955
+    t =     1.33s Set Up
+    t =     1.34s Open Group22.Volunteer-Group22
+    t =     1.34s     Launch Group22.Volunteer-Group22
+    t =     5.69s         Setting up automation session
+    t =     7.77s         Wait for Group22.Volunteer-Group22 to idle
+    t =     9.00s Find the Target Application 'Group22.Volunteer-Group22'
+    t =     9.19s Added attachment named 'Launch Screen'
+    t =     9.19s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' passed (9.436 seconds).
+    t =     0.94s Start Test at 2025-03-07 20:26:05.955
+    t =     1.33s Set Up
+    t =     1.34s Open Group22.Volunteer-Group22
+    t =     1.34s     Launch Group22.Volunteer-Group22
+    t =     5.69s         Setting up automation session
+    t =     7.77s         Wait for Group22.Volunteer-Group22 to idle
+    t =     9.00s Find the Target Application 'Group22.Volunteer-Group22'
+    t =     9.19s Added attachment named 'Launch Screen'
+    t =     9.19s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' passed (9.436 seconds).
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.00s Setting device orientation to Landscape Right
+    t =     0.01s     Device orientation changed to Landscape Right
+    t =     0.06s     Interface orientation changed to Landscape Left
+    t =     0.06s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.07s Setting appearance mode to Light
+    t =     0.08s     Wait for Group22.Volunteer-Group22 to idle
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.00s Setting device orientation to Landscape Right
+    t =     0.01s     Device orientation changed to Landscape Right
+    t =     0.06s     Interface orientation changed to Landscape Left
+    t =     0.06s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.07s Setting appearance mode to Light
+    t =     0.08s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.39s Start Test at 2025-03-07 20:26:14.848
+    t =     0.42s Set Up
+    t =     0.43s Open Group22.Volunteer-Group22
+    t =     0.43s     Launch Group22.Volunteer-Group22
+    t =     0.43s         Terminate Group22.Volunteer-Group22:55960
+    t =     0.83s             Interface orientation changed to Portrait
+    t =     1.67s         Setting up automation session
+    t =     1.78s             Interface orientation changed to Landscape Left
+    t =     2.96s         Wait for Group22.Volunteer-Group22 to idle
+    t =     4.18s Find the Target Application 'Group22.Volunteer-Group22'
+    t =     4.30s Added attachment named 'Launch Screen'
+    t =     4.30s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' passed (4.541 seconds).
+    t =     0.39s Start Test at 2025-03-07 20:26:14.848
+    t =     0.42s Set Up
+    t =     0.43s Open Group22.Volunteer-Group22
+    t =     0.43s     Launch Group22.Volunteer-Group22
+    t =     0.43s         Terminate Group22.Volunteer-Group22:55960
+    t =     0.83s             Interface orientation changed to Portrait
+    t =     1.67s         Setting up automation session
+    t =     1.78s             Interface orientation changed to Landscape Left
+    t =     2.96s         Wait for Group22.Volunteer-Group22 to idle
+    t =     4.18s Find the Target Application 'Group22.Volunteer-Group22'
+    t =     4.30s Added attachment named 'Launch Screen'
+    t =     4.30s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' passed (4.541 seconds).
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.00s Setting device orientation to Portrait
+    t =     0.01s     Device orientation changed to Portrait
+    t =     0.04s     Interface orientation changed to Portrait
+    t =     0.04s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.06s Setting appearance mode to Dark
+    t =     0.08s     Wait for Group22.Volunteer-Group22 to idle
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.00s Setting device orientation to Portrait
+    t =     0.01s     Device orientation changed to Portrait
+    t =     0.04s     Interface orientation changed to Portrait
+    t =     0.04s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.06s Setting appearance mode to Dark
+    t =     0.08s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.37s Start Test at 2025-03-07 20:26:19.369
+    t =     0.39s Set Up
+    t =     0.39s Open Group22.Volunteer-Group22
+    t =     0.39s     Launch Group22.Volunteer-Group22
+    t =     0.39s         Terminate Group22.Volunteer-Group22:55976
+    t =     2.09s         Setting up automation session
+    t =     3.03s         Wait for Group22.Volunteer-Group22 to idle
+    t =     4.26s Find the Target Application 'Group22.Volunteer-Group22'
+    t =     4.39s Added attachment named 'Launch Screen'
+    t =     4.39s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' passed (4.601 seconds).
+    t =     0.37s Start Test at 2025-03-07 20:26:19.369
+    t =     0.39s Set Up
+    t =     0.39s Open Group22.Volunteer-Group22
+    t =     0.39s     Launch Group22.Volunteer-Group22
+    t =     0.39s         Terminate Group22.Volunteer-Group22:55976
+    t =     2.09s         Setting up automation session
+    t =     3.03s         Wait for Group22.Volunteer-Group22 to idle
+    t =     4.26s Find the Target Application 'Group22.Volunteer-Group22'
+    t =     4.39s Added attachment named 'Launch Screen'
+    t =     4.39s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' passed (4.601 seconds).
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.00s Setting device orientation to Landscape Right
+    t =     0.01s     Device orientation changed to Landscape Right
+    t =     0.06s     Interface orientation changed to Landscape Left
+    t =     0.06s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.08s Setting appearance mode to Dark
+    t =     0.09s     Wait for Group22.Volunteer-Group22 to idle
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.00s Setting device orientation to Landscape Right
+    t =     0.01s     Device orientation changed to Landscape Right
+    t =     0.06s     Interface orientation changed to Landscape Left
+    t =     0.06s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.08s Setting appearance mode to Dark
+    t =     0.09s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.39s Start Test at 2025-03-07 20:26:23.986
+    t =     0.41s Set Up
+    t =     0.41s Open Group22.Volunteer-Group22
+    t =     0.41s     Launch Group22.Volunteer-Group22
+    t =     0.41s         Terminate Group22.Volunteer-Group22:55986
+    t =     0.78s             Interface orientation changed to Portrait
+    t =     1.88s         Interface orientation changed to Landscape Left
+    t =     2.12s         Setting up automation session
+    t =     3.02s         Wait for Group22.Volunteer-Group22 to idle
+    t =     4.22s Find the Target Application 'Group22.Volunteer-Group22'
+    t =     4.33s Added attachment named 'Launch Screen'
+    t =     4.33s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' passed (4.543 seconds).
+    t =     0.39s Start Test at 2025-03-07 20:26:23.986
+    t =     0.41s Set Up
+    t =     0.41s Open Group22.Volunteer-Group22
+    t =     0.41s     Launch Group22.Volunteer-Group22
+    t =     0.41s         Terminate Group22.Volunteer-Group22:55986
+    t =     0.78s             Interface orientation changed to Portrait
+    t =     1.88s         Interface orientation changed to Landscape Left
+    t =     2.12s         Setting up automation session
+    t =     3.02s         Wait for Group22.Volunteer-Group22 to idle
+    t =     4.22s Find the Target Application 'Group22.Volunteer-Group22'
+    t =     4.33s Added attachment named 'Launch Screen'
+    t =     4.33s Tear Down
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' passed (4.543 seconds).
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.01s Setting device orientation to Portrait
+    t =     0.10s     Device orientation changed to Portrait
+    t =     0.16s     Wait for com.apple.springboard to idle
+    t =     0.37s Setting appearance mode to Light
+    t =     0.76s     Wait for com.apple.springboard to idle
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.00s Setting device orientation to Landscape Right
+    t =     0.01s     Device orientation changed to Landscape Right
+    t =     0.06s     Interface orientation changed to Landscape Left
+    t =     0.06s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.07s Setting appearance mode to Light
+    t =     0.08s     Wait for Group22.Volunteer-Group22 to idle
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.00s Setting device orientation to Portrait
+    t =     0.01s     Device orientation changed to Portrait
+    t =     0.04s     Interface orientation changed to Portrait
+    t =     0.04s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.06s Setting appearance mode to Dark
+    t =     0.08s     Wait for Group22.Volunteer-Group22 to idle
+Test Case '-[Volunteer_Group22UITests.Volunteer_Group22UITestsLaunchTests testLaunch]' started.
+    t =     0.00s Setting device orientation to Landscape Right
+    t =     0.01s     Device orientation changed to Landscape Right
+    t =     0.06s     Interface orientation changed to Landscape Left
+    t =     0.06s     Wait for Group22.Volunteer-Group22 to idle
+    t =     0.08s Setting appearance mode to Dark
+    t =     0.09s     Wait for Group22.Volunteer-Group22 to idle
+2025-03-07 20:25:22.697437-0600 Volunteer_Group22[55266:12173904] 10.0.0 - [FirebaseMessaging][I-FCM001000] FIRMessaging Remote Notifications proxy enabled, will swizzle remote notification receiver handlers. If you'd prefer to manually integrate Firebase Messaging, add "FirebaseAppDelegateProxyEnabled" to your Info.plist, and set it to NO. Follow the instructions at:
+https://firebase.google.com/docs/cloud-messaging/ios/client#method_swizzling_in_firebase_messaging
+to ensure proper integration.
+2025-03-07 20:25:23.597387-0600 Volunteer_Group22[55266:12173905] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2025-03-07 20:25:23.884300-0600 Volunteer_Group22[55266:12173943] 10.0.0 - [FirebaseMessaging][I-FCM023014] Running InstanceID on a simulator doesn't have APNS. Use prod profile by default.
+FCM token: f5S7Rcov6EgGjAO7mAY2p5:APA91bEAOVVuANh-UP0KSjwKnrM2DMJYdQyh9ej0XfuQ7T-LPfP8Qy1jTVXM_eEBVwlHA1jfo805MmwJtDwnlAFITnFytRfYpnzoNt_nHKSaKuz_WRpgH8U
+No user logged in, skipping FCM save
+2025-03-07 20:25:23.926099-0600 Volunteer_Group22[55266:12173906] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+Test Suite 'AuthViewModelIntegrationTests' started at 2025-03-07 20:25:25.520.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testCreateEvent]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testCreateEvent]' passed (0.038 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testFetchEventsAndFilteredEvents]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testFetchEventsAndFilteredEvents]' passed (1.006 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testGenerateVolunteerHistoryRecords]' started.
+Deleted test user: pRsZAO5ts8dqnKdxRU3GuW1wBhr1
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testGenerateVolunteerHistoryRecords]' passed (2.338 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testResetPassword]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testResetPassword]' passed (0.140 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignOut]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignOut]' passed (0.001 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpForEvent]' started.
+Deleted test user: CJ04nxo2W4cICVIxQIkkS8uKJaF2
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpForEvent]' passed (1.916 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpThenSignIn]' started.
+Deleted test user: nanGA4vyb6PLqS90vOJVRuSqjtB3
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpThenSignIn]' passed (1.734 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testUpdateAndDeleteEvent]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testUpdateAndDeleteEvent]' passed (0.442 seconds).
+Test Suite 'AuthViewModelIntegrationTests' passed at 2025-03-07 20:25:33.138.
+	 Executed 8 tests, with 0 failures (0 unexpected) in 7.615 (7.618) seconds
+Test Suite 'NotificationManagerTests' started at 2025-03-07 20:25:33.150.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testGetNotificationSettingsWait]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testGetNotificationSettingsWait]' passed (2.051 seconds).
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testIncrementNotificationCount]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testIncrementNotificationCount]' passed (0.002 seconds).
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testInitialValuesWithNewInstance]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testInitialValuesWithNewInstance]' passed (0.001 seconds).
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testRequestAuthorizationWait]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testRequestAuthorizationWait]' passed (2.063 seconds).
+Test Suite 'NotificationManagerTests' passed at 2025-03-07 20:25:37.267.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 4.116 (4.118) seconds
+Test Suite 'Volunteer_Group22Tests' started at 2025-03-07 20:25:37.272.
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testExample]' started.
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testExample]' passed (0.001 seconds).
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testPerformanceExample]' started.
+/Users/rvw/Desktop/Software Design App/IOS/Volunteer_Group22test/Volunteer_Group22Tests/Volunteer_Group22Tests.swift:31: Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testPerformanceExample]' measured [Time, seconds] average: 0.000, relative standard deviation: 123.022%, values: [0.000052, 0.000007, 0.000005, 0.000004, 0.000004, 0.000004, 0.000011, 0.000032, 0.000004, 0.000004], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testPerformanceExample]' passed (0.569 seconds).
+Test Suite 'Volunteer_Group22Tests' passed at 2025-03-07 20:25:37.843.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.570 (0.571) seconds
+/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22Tests-F3BFD0D7-5460-4A25-BEC7-E465EA13F0C6-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22Tests-6E260229-3670-4CB3-A17F-A8F978045E72/Session-Volunteer_Group22Tests-2025-03-07_202504-LNP5pD.log
+
+/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22Tests-F3BFD0D7-5460-4A25-BEC7-E465EA13F0C6-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22Tests-6E260229-3670-4CB3-A17F-A8F978045E72/Session-Volunteer_Group22Tests-2025-03-07_202504-LNP5pD.log: /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22Tests-F3BFD0D7-5460-4A25-BEC7-E465EA13F0C6-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22Tests-6E260229-3670-4CB3-A17F-A8F978045E72/Session-Volunteer_Group22Tests-2025-03-07_202504-LNP5pD.log
+
+2025-03-07 20:25:22.697437-0600 Volunteer_Group22[55266:12173904] 10.0.0 - [FirebaseMessaging][I-FCM001000] FIRMessaging Remote Notifications proxy enabled, will swizzle remote notification receiver handlers. If you'd prefer to manually integrate Firebase Messaging, add "FirebaseAppDelegateProxyEnabled" to your Info.plist, and set it to NO. Follow the instructions at:
+https://firebase.google.com/docs/cloud-messaging/ios/client#method_swizzling_in_firebase_messaging
+to ensure proper integration.
+2025-03-07 20:25:23.597387-0600 Volunteer_Group22[55266:12173905] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2025-03-07 20:25:23.884300-0600 Volunteer_Group22[55266:12173943] 10.0.0 - [FirebaseMessaging][I-FCM023014] Running InstanceID on a simulator doesn't have APNS. Use prod profile by default.
+FCM token: f5S7Rcov6EgGjAO7mAY2p5:APA91bEAOVVuANh-UP0KSjwKnrM2DMJYdQyh9ej0XfuQ7T-LPfP8Qy1jTVXM_eEBVwlHA1jfo805MmwJtDwnlAFITnFytRfYpnzoNt_nHKSaKuz_WRpgH8U
+No user logged in, skipping FCM save
+2025-03-07 20:25:23.926099-0600 Volunteer_Group22[55266:12173906] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+Test Suite 'AuthViewModelIntegrationTests' started at 2025-03-07 20:25:25.520.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testCreateEvent]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testCreateEvent]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testCreateEvent]' passed (0.038 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testCreateEvent]' passed (0.038 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testFetchEventsAndFilteredEvents]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testFetchEventsAndFilteredEvents]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testFetchEventsAndFilteredEvents]' passed (1.006 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testFetchEventsAndFilteredEvents]' passed (1.006 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testGenerateVolunteerHistoryRecords]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testGenerateVolunteerHistoryRecords]' started.
+Deleted test user: pRsZAO5ts8dqnKdxRU3GuW1wBhr1
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testGenerateVolunteerHistoryRecords]' passed (2.338 seconds).
+Deleted test user: pRsZAO5ts8dqnKdxRU3GuW1wBhr1
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testGenerateVolunteerHistoryRecords]' passed (2.338 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testResetPassword]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testResetPassword]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testResetPassword]' passed (0.140 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testResetPassword]' passed (0.140 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignOut]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignOut]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignOut]' passed (0.001 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignOut]' passed (0.001 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpForEvent]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpForEvent]' started.
+Deleted test user: CJ04nxo2W4cICVIxQIkkS8uKJaF2
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpForEvent]' passed (1.916 seconds).
+Deleted test user: CJ04nxo2W4cICVIxQIkkS8uKJaF2
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpForEvent]' passed (1.916 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpThenSignIn]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpThenSignIn]' started.
+Deleted test user: nanGA4vyb6PLqS90vOJVRuSqjtB3
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpThenSignIn]' passed (1.734 seconds).
+Deleted test user: nanGA4vyb6PLqS90vOJVRuSqjtB3
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpThenSignIn]' passed (1.734 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testUpdateAndDeleteEvent]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testUpdateAndDeleteEvent]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testUpdateAndDeleteEvent]' passed (0.442 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testUpdateAndDeleteEvent]' passed (0.442 seconds).
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testCreateEvent]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testFetchEventsAndFilteredEvents]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testGenerateVolunteerHistoryRecords]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testResetPassword]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignOut]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpForEvent]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testSignUpThenSignIn]' started.
+Test Case '-[Volunteer_Group22Tests.AuthViewModelIntegrationTests testUpdateAndDeleteEvent]' started.
+Test Suite 'NotificationManagerTests' started at 2025-03-07 20:25:33.150.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testGetNotificationSettingsWait]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testGetNotificationSettingsWait]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testGetNotificationSettingsWait]' passed (2.051 seconds).
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testGetNotificationSettingsWait]' passed (2.051 seconds).
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testIncrementNotificationCount]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testIncrementNotificationCount]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testIncrementNotificationCount]' passed (0.002 seconds).
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testIncrementNotificationCount]' passed (0.002 seconds).
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testInitialValuesWithNewInstance]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testInitialValuesWithNewInstance]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testInitialValuesWithNewInstance]' passed (0.001 seconds).
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testInitialValuesWithNewInstance]' passed (0.001 seconds).
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testRequestAuthorizationWait]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testRequestAuthorizationWait]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testRequestAuthorizationWait]' passed (2.063 seconds).
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testRequestAuthorizationWait]' passed (2.063 seconds).
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testGetNotificationSettingsWait]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testIncrementNotificationCount]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testInitialValuesWithNewInstance]' started.
+Test Case '-[Volunteer_Group22Tests.NotificationManagerTests testRequestAuthorizationWait]' started.
+Test Suite 'Volunteer_Group22Tests' started at 2025-03-07 20:25:37.272.
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testExample]' started.
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testExample]' started.
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testExample]' passed (0.001 seconds).
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testExample]' passed (0.001 seconds).
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testPerformanceExample]' started.
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testPerformanceExample]' started.
+/Users/rvw/Desktop/Software Design App/IOS/Volunteer_Group22test/Volunteer_Group22Tests/Volunteer_Group22Tests.swift:31: Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testPerformanceExample]' measured [Time, seconds] average: 0.000, relative standard deviation: 123.022%, values: [0.000052, 0.000007, 0.000005, 0.000004, 0.000004, 0.000004, 0.000011, 0.000032, 0.000004, 0.000004], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+/Users/rvw/Desktop/Software Design App/IOS/Volunteer_Group22test/Volunteer_Group22Tests/Volunteer_Group22Tests.swift:31: Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testPerformanceExample]' measured [Time, seconds] average: 0.000, relative standard deviation: 123.022%, values: [0.000052, 0.000007, 0.000005, 0.000004, 0.000004, 0.000004, 0.000011, 0.000032, 0.000004, 0.000004], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testPerformanceExample]' passed (0.569 seconds).
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testPerformanceExample]' passed (0.569 seconds).
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testExample]' started.
+Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testPerformanceExample]' started.
+/Users/rvw/Desktop/Software Design App/IOS/Volunteer_Group22test/Volunteer_Group22Tests/Volunteer_Group22Tests.swift:31: Test Case '-[Volunteer_Group22Tests.Volunteer_Group22Tests testPerformanceExample]' measured [Time, seconds] average: 0.000, relative standard deviation: 123.022%, values: [0.000052, 0.000007, 0.000005, 0.000004, 0.000004, 0.000004, 0.000011, 0.000032, 0.000004, 0.000004], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Time average: 0.000 seconds, relative standard deviation: 123.0%
+
+/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22Tests-F3BFD0D7-5460-4A25-BEC7-E465EA13F0C6-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22Tests-5BC27B43-07E3-4C34-801B-B3EBFE2E5BA3/Session-Volunteer_Group22Tests-2025-03-07_202525-BL2XB5.log
+
+/Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22Tests-F3BFD0D7-5460-4A25-BEC7-E465EA13F0C6-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22Tests-5BC27B43-07E3-4C34-801B-B3EBFE2E5BA3/Session-Volunteer_Group22Tests-2025-03-07_202525-BL2XB5.log: /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Logs/Test/Test-Volunteer_Group22-2025.03.07_20-25-01--0600.xcresult/Staging/1_Test/Diagnostics/Volunteer_Group22Tests-F3BFD0D7-5460-4A25-BEC7-E465EA13F0C6-Configuration-Test Scheme Action-Iteration-1/Volunteer_Group22Tests-5BC27B43-07E3-4C34-801B-B3EBFE2E5BA3/Session-Volunteer_Group22Tests-2025-03-07_202525-BL2XB5.log
+
+Downloading profiles for Group22.Volunteer-Group22UITests.xctrunner from 1 directory
+
+Downloading profiles for Group22.Volunteer-Group22 from 4 directories
+
+Downloading profiles for Group22.Volunteer-Group22 from 7 directories
+
+Downloading profiles for Group22.Volunteer-Group22UITests.xctrunner from 1 directory
+
+Downloading profiles for Group22.Volunteer-Group22 from 1 directory
+
+Downloading profiles for Group22.Volunteer-Group22UITests.xctrunner from 1 directory
+
+Downloading profiles for Group22.Volunteer-Group22 from 1 directory
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-profdata merge --failure-mode=all -o /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/Coverage.profdata /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/FBE5AF12-B8A0-44D7-A2F7-F9E15A9E9227-55769.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/DC2BAEDB-5FCD-4408-BECD-FF18486EF65E-55843.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/99F42C48-3CA4-4483-9147-F230C233BB9C-55937.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/E66B7D41-EBC5-4BD5-97E2-1353006478D0-55233.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/D044BB71-9ABA-407B-912B-DEFEFB5D15AF-55465.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/57D54674-0555-4FA1-8475-235B65A72CDA-55976.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/7335E7BF-CBF3-4DD3-955D-50B953AF68D9-55998.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/FD263DC7-11B9-45E9-963A-9BDEAFA48BBB-55986.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/5255DBC0-83B0-4BF0-87E7-C5D63033FE81-55905.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/E4AAA460-3F90-4DF2-BFF9-4DBCDF62A3C7-55884.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/48F43FB3-B9BB-478C-8DE7-982A2F593CC6-55896.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/ACC45FE0-1C6C-4A2E-87CB-8317E475535D-55808.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/85D9C947-2FB4-4821-840D-ACDD1492CAEA-55650.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/10C23C1B-DFFA-4909-8255-5553B6A590AC-55266.profraw /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/Build/ProfileData/09B0A31D-4A7C-46D8-A2C9-C9118C894548/346EA938-B64B-447C-8449-DBA68FE37FB2-55960.profraw
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseDatabase/Sources/Utilities/Tuples/FTupleOnDisconnect.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseMessaging/Sources/FIRMessagingConstants.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/Logger/Resources/PrivacyInfo.xcprivacy
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseAuth/Sources/MultiFactor/FIRMultiFactorAssertion.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseDatabase/Sources/Core/FListenProvider.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseDatabase/Sources/Utilities/FParsedUrl.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/AppDelegateSwizzler/Resources/PrivacyInfo.xcprivacy
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseAuth/Sources/AuthProvider/FIRAuthProvider.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseDatabase/Sources/Utilities/Tuples/FTupleTSN.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseStorage/Sources/Internal/StorageTaskState.swift
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseDatabase/Sources/Utilities/Tuples/FTupleCallbackStatus.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/Reachability/Resources/PrivacyInfo.xcprivacy
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/UserDefaults/Resources/PrivacyInfo.xcprivacy
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseAuth/Sources/MultiFactor/FIRMultiFactorConstants.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseDatabase/Sources/Utilities/Tuples/FTupleObjects.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/Environment/Resources/PrivacyInfo.xcprivacy
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseDatabase/Sources/Constants/FConstants.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/NSData+zlib/Resources/PrivacyInfo.xcprivacy
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseDatabase/Sources/Utilities/Tuples/FTupleFirebase.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseDatabase/Sources/Utilities/Tuples/FTupleBoolBlock.m
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseStorage/Sources/StorageConstants.swift
+
+Function records indicate zero executable lines for file /Users/rvw/Desktop/Software Design App/IOS/Volunteer_Group22test/Volunteer_Group22/ViewModels/User.swift
+
+Function records indicate zero executable lines for file /Users/rvw/Library/Developer/Xcode/DerivedData/Volunteer_Group22-byspzbdtmwmgyibxijcgwgdsoxgf/SourcePackages/checkouts/firebase-ios-sdk/FirebaseMessaging/Sources/Protogen/nanopb/me.nanopb.c
+
+Generating entry for target FirebaseAuth
+
+Generating entry for target FirebaseDatabase
+
+Generating entry for target FirebaseMessaging
+
+Generating entry for target FirebaseStorage
+
+Generating entry for target GULAppDelegateSwizzler
+
+Generating entry for target GULEnvironment
+
+Generating entry for target GULLogger
+
+Generating entry for target GULNSData
+
+Generating entry for target GULReachability
+
+Generating entry for target GULUserDefaults
+
+Generating entry for target Volunteer_Group22.app
+
+Generating entry for target Volunteer_Group22Tests.xctest
+
+Generating entry for target Volunteer_Group22UITests.xctest
+
+
+
+Testing Complete    3/7/25, 8:26 PM    91.0 seconds

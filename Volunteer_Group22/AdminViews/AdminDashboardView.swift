@@ -85,9 +85,6 @@ struct RecentActivityRow: View {
             }
             
             Spacer()
-            
-            Image(systemName: "chevron.right")
-                .foregroundColor(.gray)
         }
         .padding()
         .background(Color(uiColor: .systemBackground))
@@ -225,6 +222,7 @@ struct AdminDashboardView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Recent Activities")
                         .font(.system(size: 24, weight: .bold))
+                        .padding(.horizontal)
                     
                     VStack(spacing: 12) {
                         ForEach(activities, id: \.title) { activity in
