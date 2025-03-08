@@ -12,7 +12,6 @@ struct VolunteerProfileEditView: View {
     @State private var zipCode: String = ""
     @State private var selectedSkills: Set<String> = []
     @State private var preferences: String = ""
-    @State private var availability: [Date] = []
     
     // State for validation errors or success messages
     @State private var showError = false
@@ -26,131 +25,150 @@ struct VolunteerProfileEditView: View {
     // List of skills (multi-select)
     private let skills = ["Teaching", "Cooking", "First Aid", "Event Planning", "Fundraising", "Public Speaking", "Graphic Design", "Social Media Management"]
     
-    var body: some View {
+    // Days of the week
+    private let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    
+    // Time constraints (7 AM - 10 PM)
+    private let minTime = Date.createTime(hour: 7)
+    private let maxTime = Date.createTime(hour: 22)
+    
+    // Each day has a DayTimeRange
+    @State private var weeklyAvailability: [String: DayTimeRange] = {
+        var dict = [String: DayTimeRange]()
+        // 7 AM to 10 PM
+        let defaultStart = Date.createTime(hour: 7)
+        let defaultEnd   = Date.createTime(hour: 22)
         
-            
+        for day in ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"] {
+            dict[day] = DayTimeRange(start: defaultStart, end: defaultEnd, isActive: false)
+        }
+        return dict
+    }()
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                // Full Name
+                Section(header: Text("Full Name")) {
+                    TextField("Enter full name", text: $fullName)
+                        .autocapitalization(.words)
+                        .disableAutocorrection(true)
+                }
                 
-                NavigationStack {
-                    Form {
-                        // Full Name
-                        Section(header: Text("Full Name")) {
-                            TextField("Enter full name", text: $fullName)
-                                .autocapitalization(.words)
-                                .disableAutocorrection(true)
-                        }
-                        
-                        // Address
-                        Section(header: Text("Address")) {
-                            TextField("Address Line 1", text: $address1)
-                            TextField("Address Line 2 (Optional)", text: $address2)
-                        }
-                        
-                        // City, State, Zip Code
-                        Section(header: Text("City, State, Zip Code")) {
-                            TextField("City", text: $city)
-                            Picker("State", selection: $state) {
-                                Text("Select State").tag("")
-                                ForEach(states, id: \.self) { state in
-                                    Text(state).tag(state)
-                                }
-                            }
-                            .pickerStyle(MenuPickerStyle())
-                            TextField("Zip Code", text: $zipCode)
-                                .keyboardType(.numberPad)
-                        }
-                        
-                        // Skills (Multi-select)
-                        Section(header: Text("Skills")) {
-                            List(skills, id: \.self) { skill in
-                                Button(action: {
-                                    if selectedSkills.contains(skill) {
-                                        selectedSkills.remove(skill)
-                                    } else {
-                                        selectedSkills.insert(skill)
-                                    }
-                                }) {
-                                    HStack {
-                                        Text(skill)
-                                        Spacer()
-                                        if selectedSkills.contains(skill) {
-                                            Image(systemName: "checkmark")
-                                                .foregroundColor(.blue)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        
-                        // Preferences
-                        Section(header: Text("Preferences")) {
-                            TextEditor(text: $preferences)
-                                .frame(height: 100)
-                        }
-                        
-                        // Availability (Date Picker)
-                        Section(header: Text("Availability")) {
-                            Button("Add Today") {
-                                availability.append(Date())
-                            }
-                            ForEach(availability, id: \.self) { date in
-                                Text("\(date, formatter: dateFormatter)")
-                            }
-                        }
-                        
-                        // Save Button
-                        Section {
-                            VStack(spacing: 8) {
-                                Button(action: saveProfile) {
-                                    Text("Save Changes")
-                                        .frame(maxWidth: .infinity)
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .background(Color.blue)
-                                        .cornerRadius(10)
-                                }
-
-                                Button(action: {
-                                    authViewModel.signOut()
-                                }) {
-                                    Text("Sign Out")
-                                        .frame(maxWidth: .infinity)
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .background(Color.red)
-                                        .cornerRadius(10)
-                                }
-                            }
-                        }
-                        
-                        // Error Message
-                        if showError {
-                            Text(errorMessage)
-                                .foregroundColor(.red)
-                                .font(.caption)
-                                .padding()
+                // Address
+                Section(header: Text("Address")) {
+                    TextField("Address Line 1", text: $address1)
+                    TextField("Address Line 2 (Optional)", text: $address2)
+                }
+                
+                // City, State, Zip Code
+                Section(header: Text("City, State, Zip Code")) {
+                    TextField("City", text: $city)
+                    Picker("State", selection: $state) {
+                        Text("Select State").tag("")
+                        ForEach(states, id: \.self) { state in
+                            Text(state).tag(state)
                         }
                     }
-                    .navigationTitle("Edit Profile")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .onAppear {
-                        Task {
-                            await loadExistingProfile()
+                    .pickerStyle(MenuPickerStyle())
+                    TextField("Zip Code", text: $zipCode)
+                        .keyboardType(.numberPad)
+                }
+                
+                // Skills (Multi-select)
+                Section(header: Text("Skills")) {
+                    List(skills, id: \.self) { skill in
+                        Button(action: {
+                            if selectedSkills.contains(skill) {
+                                selectedSkills.remove(skill)
+                            } else {
+                                selectedSkills.insert(skill)
+                            }
+                        }) {
+                            HStack {
+                                Text(skill)
+                                Spacer()
+                                if selectedSkills.contains(skill) {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.blue)
+                                }
+                            }
                         }
                     }
                 }
                 
-                .listStyle(InsetGroupedListStyle())
+                // Preferences
+                Section(header: Text("Preferences")) {
+                    TextEditor(text: $preferences)
+                        .frame(height: 100)
+                }
+                
+                // Availability
+                Section("Availability") {
+                    Text("Which days are you available? (7AM - 10PM)")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    ForEach(daysOfWeek, id: \.self) { day in
+                        if let _ = weeklyAvailability[day] {
+                            DayAvailabilityRow(
+                                day: day,
+                                minTime: minTime,
+                                maxTime: maxTime,
+                                timeRange: Binding(
+                                    get: { weeklyAvailability[day]! },
+                                    set: { weeklyAvailability[day]! = $0 }
+                                )
+                            )
+                        }
+                    }
+                }
+                
+                // Save Button
+                Section {
+                    VStack(spacing: 8) {
+                        Button(action: saveProfile) {
+                            Text("Save Changes")
+                                .frame(maxWidth: .infinity)
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(10)
+                        }
+
+                        Button(action: {
+                            authViewModel.signOut()
+                        }) {
+                            Text("Sign Out")
+                                .frame(maxWidth: .infinity)
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(10)
+                        }
+                    }
+                }
+                
+                // Error Message
+                if showError {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .font(.caption)
+                        .padding()
+                }
             }
+            .navigationTitle("Edit Profile")
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                Task {
+                    await loadExistingProfile()
+                }
+            }
+        }
         
-    
-    
-    // Date formatter for displaying dates
-    private var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        return formatter
+        .listStyle(InsetGroupedListStyle())
     }
     
     // Save updated profile to Firestore
@@ -162,10 +180,28 @@ struct VolunteerProfileEditView: View {
             return
         }
         
+        // Check that at least one day is active
+        guard weeklyAvailability.values.contains(where: { $0.isActive }) else {
+            errorMessage = "Please select at least one day you're available."
+            showError = true
+            return
+        }
+        
         guard let uid = authViewModel.userSession?.uid else {
             errorMessage = "User not found."
             showError = true
             return
+        }
+        
+        // Build Firestore availability dictionary
+        var availabilityDict = [String: [String: Timestamp]]()
+        for (day, range) in weeklyAvailability {
+            if range.isActive {
+                availabilityDict[day] = [
+                    "startTime": Timestamp(date: range.start),
+                    "endTime":   Timestamp(date: range.end)
+                ]
+            }
         }
         
         let updatedProfile: [String: Any] = [
@@ -177,7 +213,7 @@ struct VolunteerProfileEditView: View {
             "zipCode": zipCode,
             "skills": Array(selectedSkills),
             "preferences": preferences,
-            "availability": availability.map { Timestamp(date: $0) }
+            "availability": availabilityDict
         ]
         
         db.collection("users").document(uid).updateData(updatedProfile) { error in
@@ -211,8 +247,18 @@ struct VolunteerProfileEditView: View {
                     self.selectedSkills = Set(data["skills"] as? [String] ?? [])
                     self.preferences = data["preferences"] as? String ?? ""
                     
-                    if let availabilityData = data["availability"] as? [Timestamp] {
-                        self.availability = availabilityData.map { $0.dateValue() }
+                    // Load availability
+                    if let availabilityData = data["availability"] as? [String: [String: Timestamp]] {
+                        for (day, timeData) in availabilityData {
+                            if let startTime = timeData["startTime"]?.dateValue(),
+                               let endTime = timeData["endTime"]?.dateValue() {
+                                self.weeklyAvailability[day] = DayTimeRange(
+                                    start: startTime,
+                                    end: endTime,
+                                    isActive: true
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -232,15 +278,6 @@ struct SettingsRow: View {
                 .foregroundColor(.blue)
             Text(title)
                 .font(.body)
-        }
-    }
-}
-
-struct VolunteerProfileEdit_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            VolunteerProfileEditView()
-                .environmentObject(AuthViewModel())
         }
     }
 }

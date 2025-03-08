@@ -1,7 +1,11 @@
 import SwiftUI
 import FirebaseFirestore
 
-// Quick actions for volunteers - View Events, Track Hours
+struct EventDetails {
+    let name: String
+    let eventDate: Date
+}
+
 struct VolunteerActionButton: View {
     let title: String
     let icon: String
@@ -28,7 +32,6 @@ struct VolunteerActionButton: View {
     }
 }
 
-// Modified activity type for volunteer perspective
 struct VolunteerActivity {
     let title: String
     let timestamp: String
@@ -79,9 +82,6 @@ struct VolunteerActivityRow: View {
             }
             
             Spacer()
-            
-            Image(systemName: "chevron.right")
-                .foregroundColor(.gray)
         }
         .padding()
         .background(Color(uiColor: .systemBackground))
@@ -92,17 +92,16 @@ struct VolunteerActivityRow: View {
 struct VolunteerDashboardView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject private var viewModel = VolunteerHistoryViewModel()
-    @State private var eventNames: [String: String] = [:] // Map eventId -> eventName
+    @State private var eventDetails: [String: EventDetails] = [:]
     private let db = Firestore.firestore()
     @State private var eventsJoinedCount: Int = 0
     @State private var totalHours: Int = 0
     @State private var hoursThisMonth: Int = 0
     @State private var eventsCompleted: Int = 0
-
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                // Header section with welcome message and profile button
                 VStack(spacing: 4) {
                     HStack {
                         Text("Welcome, \(authViewModel.user?.fullName ?? "Volunteer")")
@@ -127,7 +126,6 @@ struct VolunteerDashboardView: View {
                 .padding(.horizontal)
                 .padding(.top, 8)
                 
-                // Overview section with volunteer statistics
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Your Impact")
                         .font(.system(size: 24, weight: .bold))
@@ -145,7 +143,6 @@ struct VolunteerDashboardView: View {
                     .padding(.horizontal)
                 }
                 
-                // Quick Actions section
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Quick Actions")
                         .font(.system(size: 24, weight: .bold))
@@ -166,7 +163,6 @@ struct VolunteerDashboardView: View {
                     .padding(.horizontal)
                 }
                 
-                // Recent Activities section
                 VStack(alignment: .leading, spacing: 16) {
                     HStack {
                         Text("Recent Activities")
@@ -202,16 +198,18 @@ struct VolunteerDashboardView: View {
                                     .multilineTextAlignment(.center)
                                     .padding()
                             }
+                            .frame(maxWidth: .infinity)
                             .padding()
                         } else {
                             VStack(spacing: 12) {
                                 ForEach(viewModel.historyRecords.prefix(3)) { record in
-                                    let eventName = eventNames[record.eventId] ?? "Unknown Event"
+                                    let eventDetail = eventDetails[record.eventId] ??
+                                        EventDetails(name: "Unknown Event", eventDate: Date())
                                     
                                     VolunteerActivityRow(activity: VolunteerActivity(
-                                        title: eventName,
-                                        timestamp: formatDate(record.dateCompleted ?? Date()),
-                                        type: .event // Modify if different types exist
+                                        title: eventDetail.name,
+                                        timestamp: formatDate(eventDetail.eventDate),
+                                        type: .event
                                     ))
                                 }
                             }
@@ -226,52 +224,73 @@ struct VolunteerDashboardView: View {
         .onAppear {
             Task {
                 if let user = authViewModel.user {
-                    // First, fetch the Firestore user document to get its documentID.
-                    // We assume the user document is stored in "users" and uses user.uid as the document ID.
-                    let userDocSnapshot = try await db.collection("users").document(user.uid).getDocument()
-                    let firebaseDocID = userDocSnapshot.documentID
-                    
-                    // Fetch other data (volunteer history and event names)
-                    await viewModel.fetchVolunteerHistory(for: user.uid, db: authViewModel.db)
-                    await fetchEventNames()
-                    
-                    // Use the Firestore documentID (firebaseDocID) in the events query.
-                    await fetchEventsJoined(firebaseDocID: firebaseDocID)
-                    hoursThisMonth = await fetchHoursThisMonth(firebaseDocID: firebaseDocID)
-                    totalHours = await fetchTotalHoursDonated(firebaseDocID: firebaseDocID)
-                    eventsCompleted = await fetchEventsCompleted(firebaseDocID: firebaseDocID)
-    
+                    do {
+                        let userDocSnapshot = try await db.collection("users").document(user.uid).getDocument()
+                        
+                        let firebaseDocID = userDocSnapshot.documentID
+                        
+                        await viewModel.fetchVolunteerHistory(for: user.uid, db: authViewModel.db)
+                        
+                        await fetchEventDetails()
+                       
+                        await MainActor.run {
+                            self.hoursThisMonth = self.fetchHoursThisMonth(firebaseDocID: firebaseDocID)
+                        }
+                        
+                        await fetchEventsJoined(firebaseDocID: firebaseDocID)
+                        
+                        let hours = await fetchTotalHoursDonated(firebaseDocID: firebaseDocID)
+                        await MainActor.run {
+                            self.totalHours = hours
+                        }
+                        
+                        let completed = await fetchEventsCompleted(firebaseDocID: firebaseDocID)
+                        await MainActor.run {
+                            self.eventsCompleted = completed
+                        }
+                    } catch {
+                        print("Error loading dashboard data: \(error.localizedDescription)")
+                    }
                 }
             }
         }
     }
     
-
-    // Fetch event names from Firestore based on eventIds in history
-    private func fetchEventNames() async {
+    private func fetchEventDetails() async {
         let eventIds = viewModel.historyRecords.map { $0.eventId }
-        var newEventNames: [String: String] = [:]
-
+        
+        var newEventDetails: [String: EventDetails] = [:]
+        
         for eventId in eventIds {
             do {
                 let eventDoc = try await db.collection("events").document(eventId).getDocument()
-                if let eventData = eventDoc.data(), let eventName = eventData["name"] as? String {
-                    newEventNames[eventId] = eventName
+                
+                if let eventData = eventDoc.data() {
+                    let eventName = eventData["name"] as? String ?? "Unknown Event"
+                    var eventDate = Date()
+                    if let timestamp = eventData["dateTime"] as? Timestamp {
+                        eventDate = timestamp.dateValue()
+                    } else if let timestamp = eventData["date"] as? Timestamp {
+                        eventDate = timestamp.dateValue()
+                    } else {
+                        print("No date field found for event")
+                    }
+                    
+                    newEventDetails[eventId] = EventDetails(name: eventName, eventDate: eventDate)
                 } else {
-                    newEventNames[eventId] = "Unknown Event"
+                    print("No data found for event: \(eventId)")
+                    newEventDetails[eventId] = EventDetails(name: "Unknown Event", eventDate: Date())
                 }
             } catch {
-                print("Error fetching event name for \(eventId): \(error.localizedDescription)")
-                newEventNames[eventId] = "Unknown Event"
+                print("Error fetching event details for \(eventId): \(error.localizedDescription)")
+                newEventDetails[eventId] = EventDetails(name: "Unknown Event", eventDate: Date())
             }
         }
-
-        DispatchQueue.main.async {
-            self.eventNames = newEventNames
+        await MainActor.run {
+            self.eventDetails = newEventDetails
         }
     }
-
-    // Helper method to format date
+    
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -279,8 +298,6 @@ struct VolunteerDashboardView: View {
         return formatter.string(from: date)
     }
     
-    // Fetch events joined count by checking if the Firestore-generated user document ID
-    // is present in the "assignedVolunteers" array of each event.
     private func fetchEventsJoined(firebaseDocID: String) async {
         do {
             let snapshot = try await db.collection("events")
@@ -294,46 +311,39 @@ struct VolunteerDashboardView: View {
         }
     }
     
-    
     private func fetchTotalHoursDonated(firebaseDocID: String) async -> Int {
         do {
             let snapshot = try await db.collection("events")
                 .whereField("assignedVolunteers", arrayContains: firebaseDocID)
                 .getDocuments()
-            return snapshot.documents.count * 5
+            return snapshot.documents.count * 3
         } catch {
             print("Error fetching total hours donated: \(error.localizedDescription)")
             return 0
         }
     }
     
-    // Fetch hours donated this month by filtering events by their "date" field.
-        private func fetchHoursThisMonth(firebaseDocID: String) async -> Int {
-            let calendar = Calendar.current
-            let now = Date()
-            // Get the start of the current month.
-            guard let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: now)) else {
-                return 0
-            }
-            // Compute the end of the current month.
-            guard let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, second: -1), to: startOfMonth) else {
-                return 0
-            }
-            
-            do {
-                let snapshot = try await db.collection("events")
-                    .whereField("assignedVolunteers", arrayContains: firebaseDocID)
-                    .whereField("date", isGreaterThanOrEqualTo: startOfMonth)
-                    .whereField("date", isLessThanOrEqualTo: endOfMonth)
-                    .getDocuments()
-                return snapshot.documents.count * 5
-            } catch {
-                print("Error fetching hours this month: \(error.localizedDescription)")
-                return 0
-            }
+    private func fetchHoursThisMonth(firebaseDocID: String) -> Int {
+        let calendar = Calendar.current
+        let now = Date()
+        guard let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: now)) else {
+            return 0
         }
+        
+        guard let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, second: -1), to: startOfMonth) else {
+            return 0
+        }
+        
+        let thisMonthEvents = viewModel.historyRecords.filter { record in
+            if let eventDetail = eventDetails[record.eventId] {
+                return eventDetail.eventDate >= startOfMonth && eventDetail.eventDate <= endOfMonth
+            }
+            return false
+        }
+        
+        return thisMonthEvents.count * 3
+    }
     
-    //Fetch completed events
     private func fetchEventsCompleted(firebaseDocID: String) async -> Int {
         do {
             let snapshot = try await db.collection("events")
@@ -345,13 +355,5 @@ struct VolunteerDashboardView: View {
             print("Error fetching events completed: \(error.localizedDescription)")
             return 0
         }
-    }
-    
-}
-
-struct VolunteerDashboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        VolunteerDashboardView()
-            .environmentObject(AuthViewModel())
     }
 }

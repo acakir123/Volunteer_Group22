@@ -76,12 +76,14 @@ struct VolunteerEventListItem: View {
                 VolunteerStatusBadge(urgency: event.urgency)
             }
             
-            HStack {
+            HStack(alignment: .top) {
                 Image(systemName: "mappin.circle.fill")
                     .foregroundColor(.gray)
                 Text(event.location)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
+                    .multilineTextAlignment(.leading)
+                Spacer()
             }
             
             HStack {
@@ -90,6 +92,7 @@ struct VolunteerEventListItem: View {
                 Text(event.date, style: .date)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
+                Spacer()
             }
             
             HStack {
@@ -98,6 +101,7 @@ struct VolunteerEventListItem: View {
                 Text("\(event.assignedVolunteers.count) participants")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
+                Spacer()
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
