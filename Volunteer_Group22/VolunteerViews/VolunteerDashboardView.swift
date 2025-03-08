@@ -97,6 +97,7 @@ struct VolunteerDashboardView: View {
     @State private var eventsJoinedCount: Int = 0
     @State private var totalHours: Int = 0
     @State private var hoursThisMonth: Int = 0
+    @State private var eventsCompleted: Int = 0
 
     var body: some View {
         ScrollView {
@@ -139,7 +140,7 @@ struct VolunteerDashboardView: View {
                         StatCard(title: "Hours This Month", value: "\(hoursThisMonth)", icon: "clock", color: .blue)
                         StatCard(title: "Total Hours", value: "\(totalHours)", icon: "clock", color: .green)
                         StatCard(title: "Events Joined", value: "\(eventsJoinedCount)", icon: "calendar", color: .orange)
-                        StatCard(title: "Achievements", value: "5", icon: "star", color: .purple)
+                        StatCard(title: "Events Completed", value: "\(eventsCompleted)", icon: "checkmark.seal", color: .purple)
                     }
                     .padding(.horizontal)
                 }
@@ -236,8 +237,9 @@ struct VolunteerDashboardView: View {
                     
                     // Use the Firestore documentID (firebaseDocID) in the events query.
                     await fetchEventsJoined(firebaseDocID: firebaseDocID)
-                    fetchDashboardStats(firebaseDocID: firebaseDocID)
                     hoursThisMonth = await fetchHoursThisMonth(firebaseDocID: firebaseDocID)
+                    totalHours = await fetchTotalHoursDonated(firebaseDocID: firebaseDocID)
+                    eventsCompleted = await fetchEventsCompleted(firebaseDocID: firebaseDocID)
     
                 }
             }
@@ -245,12 +247,6 @@ struct VolunteerDashboardView: View {
     }
     
 
-    private func fetchDashboardStats(firebaseDocID: String) {
-        Task {
-            totalHours = await fetchTotalHoursDonated(firebaseDocID: firebaseDocID)
-        }
-    }
-    
     // Fetch event names from Firestore based on eventIds in history
     private func fetchEventNames() async {
         let eventIds = viewModel.historyRecords.map { $0.eventId }
@@ -333,6 +329,21 @@ struct VolunteerDashboardView: View {
                 return snapshot.documents.count * 5
             } catch {
                 print("Error fetching hours this month: \(error.localizedDescription)")
+                return 0
+            }
+        }
+    
+    //Fetch completed events
+    private func fetchEventsCompleted(firebaseDocID: String) async -> Int {
+            let now = Date()
+            do {
+                let snapshot = try await db.collection("events")
+                    .whereField("assignedVolunteers", arrayContains: firebaseDocID)
+                    .whereField("date", isLessThanOrEqualTo: now)
+                    .getDocuments()
+                return snapshot.documents.count
+            } catch {
+                print("Error fetching events completed: \(error.localizedDescription)")
                 return 0
             }
         }
