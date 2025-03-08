@@ -218,15 +218,18 @@ struct VolunteerProfileEditView: View {
         
         let updatedProfile: [String: Any] = [
             "fullName": fullName,
-            "address1": address1,
-            "address2": address2,
-            "city": city,
-            "state": state,
-            "zipCode": zipCode,
+            "location": [
+                "address": address1,
+                "address2": address2,
+                "city": city,
+                "state": state,
+                "zipCode": zipCode
+            ],
             "skills": Array(selectedSkills),
             "preferences": preferences,
             "availability": availabilityDict
         ]
+        
         
         // Save to Firestore without impacting auth state
         db.collection("users").document(uid).setData(updatedProfile, merge: true) { error in
@@ -237,15 +240,11 @@ struct VolunteerProfileEditView: View {
                 }
             } else {
                 DispatchQueue.main.async {
-                    // Show success message
                     self.showSuccess = true
-                    
-                    // Hide success message after 3 seconds
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         self.showSuccess = false
                     }
-                    
-                    // Update local user data without triggering a full refresh or auth change
+                    // Optionally, update AuthViewModel's user directly if needed:
                     if var currentUser = self.authViewModel.user {
                         currentUser.fullName = self.fullName
                         // Update additional fields as needed
