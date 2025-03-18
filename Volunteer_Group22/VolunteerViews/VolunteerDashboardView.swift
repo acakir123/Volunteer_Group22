@@ -104,7 +104,8 @@ struct VolunteerDashboardView: View {
             VStack(spacing: 24) {
                 VStack(spacing: 4) {
                     HStack {
-                        Text("Welcome, \(authViewModel.user?.fullName ?? "Volunteer")")
+                        //Text("Welcome, \(authViewModel.user?.fullName ?? "Volunteer")")
+                        Text("Welcome, \(authViewModel.user?.fullName.split(separator: " ").first.map(String.init) ?? "Volunteer")")
                             .font(.system(size: 32, weight: .bold))
                         
                         Spacer()
