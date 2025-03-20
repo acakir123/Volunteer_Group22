@@ -3,7 +3,7 @@ import SwiftUI
 struct AdminMainTabView: View {
     @State private var selectedTab = 0
     @State private var adminProfileFinished = true
-    @StateObject private var authViewModel = AuthViewModel()
+    
     
     var body: some View {
         Group {
@@ -51,7 +51,7 @@ struct AdminMainTabView: View {
             }
             .tint(.blue)
         }
-        .environmentObject(authViewModel)
+        
     }
 }
 
