@@ -57,7 +57,7 @@ struct SignInView: View {
                             Text("Password")
                                 .font(.subheadline)
                                 .foregroundColor(.primary)
-                            SecureField("Enter your password", text: $password)
+                            SecureField("********", text: $password)
                                 .textFieldStyle(PlainTextFieldStyle())
                                 .padding()
                                 .frame(height: 50)
