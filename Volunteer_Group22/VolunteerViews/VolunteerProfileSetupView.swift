@@ -239,13 +239,11 @@ struct VolunteerProfileSetupView: View {
             return
         }
         
-        // Check that at least one day is active
         guard weeklyAvailability.values.contains(where: { $0.isActive }) else {
             showError("Please select at least one day you’re available.")
             return
         }
         
-        // Build Firestore availability dictionary
         var availabilityDict = [String: [String: Timestamp]]()
         for (day, range) in weeklyAvailability {
             if range.isActive {
@@ -256,18 +254,21 @@ struct VolunteerProfileSetupView: View {
             }
         }
         
-        // Build final doc data
         let profileData: [String: Any] = [
             "fullName": fullName,
-            "address1": address1,
-            "address2": address2,
-            "city": city,
-            "state": state,
-            "zipCode": zipCode,
+            "location": [
+                 "address": address1,
+                 "address2": address2,
+                 "city": city,
+                 "country": "",
+                 "state": state,
+                 "zipCode": zipCode
+            ],
             "skills": Array(selectedSkills),
-            "preferences": preferences,
+            "preferences": [preferences],
             "availability": availabilityDict
         ]
+
         
         guard let uid = authViewModel.userSession?.uid else {
             showError("User not found.")

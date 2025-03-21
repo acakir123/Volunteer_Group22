@@ -118,35 +118,52 @@ class AuthViewModel: ObservableObject {
         do {
             let snapshot = try await usersCollection.document(uid).getDocument()
             if let data = snapshot.data() {
-                let username = data["username"] as? String ?? ""
-                let fullName = data["fullName"] as? String ?? ""
-                let email = data["email"] as? String ?? ""
+                let username  = data["username"] as? String ?? ""
+                let fullName  = data["fullName"] as? String ?? ""
+                let email     = data["email"] as? String ?? ""
                 let createdAt = (data["createdAt"] as? Timestamp)?.dateValue() ?? Date()
-                let role = data["role"] as? String ?? ""
+                let role      = data["role"] as? String ?? ""
                 let preferences = data["preferences"] as? [String] ?? []
-                let skills = data["skills"] as? [String] ?? []
+                let skills    = data["skills"] as? [String] ?? []
                 
                 let locationData = data["location"] as? [String: Any] ?? [:]
-                let address = locationData["address"] as? String ?? ""
-                let city = locationData["city"] as? String ?? ""
-                let country = locationData["country"] as? String ?? ""
-                let state = locationData["state"] as? String ?? ""
-                let zipCode = locationData["zipCode"] as? String ?? ""
-                let location = User.Location(
+                let address  = locationData["address"]  as? String ?? ""
+                let address2 = locationData["address2"] as? String ?? ""
+                let city     = locationData["city"]     as? String ?? ""
+                let country  = locationData["country"]  as? String ?? ""
+                let state    = locationData["state"]    as? String ?? ""
+                let zipCode  = locationData["zipCode"]  as? String ?? ""
+                
+                let availabilityData = data["availability"] as? [String: [String: Timestamp]] ?? [:]
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "h:mm a"
+                
+                var availability: [String: User.Availability] = [:]
+                for (day, dict) in availabilityData {
+                    if let startTS = dict["startTime"],
+                       let endTS   = dict["endTime"] {
+                        
+                        let startDate = startTS.dateValue()
+                        let endDate   = endTS.dateValue()
+                        
+                        let startString = dateFormatter.string(from: startDate)
+                        let endString   = dateFormatter.string(from: endDate)
+                        
+                        availability[day] = User.Availability(
+                            startTime: startString,
+                            endTime:   endString
+                        )
+                    }
+                }
+                
+                let userLocation = User.Location(
                     address: address,
                     city: city,
                     country: country,
                     state: state,
                     zipCode: zipCode
                 )
-                
-                let availabilityData = data["availability"] as? [String: [String: String]] ?? [:]
-                var availability: [String: User.Availability] = [:]
-                for (day, dict) in availabilityData {
-                    let startTime = dict["startTime"] ?? ""
-                    let endTime   = dict["endTime"] ?? ""
-                    availability[day] = User.Availability(startTime: startTime, endTime: endTime)
-                }
                 
                 self.user = User(
                     uid: uid,
@@ -157,7 +174,7 @@ class AuthViewModel: ObservableObject {
                     role: role,
                     preferences: preferences,
                     skills: skills,
-                    location: location,
+                    location: userLocation,
                     availability: availability
                 )
             } else {
@@ -167,6 +184,8 @@ class AuthViewModel: ObservableObject {
             print("Error fetching user data: \(error.localizedDescription)")
         }
     }
+
+
     
     func signUp(for event: Event) async throws {
         guard let userId = user?.uid else { return }

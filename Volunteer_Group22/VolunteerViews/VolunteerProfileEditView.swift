@@ -127,28 +127,29 @@ struct VolunteerProfileEditView: View {
                 
                 // Save Button
                 Section {
-                    VStack(spacing: 8) {
-                        Button(action: saveProfile) {
-                            Text("Save Changes")
-                                .frame(maxWidth: .infinity)
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.blue)
-                                .cornerRadius(10)
-                        }
-
-                        Button(action: {
-                            authViewModel.signOut()
-                        }) {
-                            Text("Sign Out")
-                                .frame(maxWidth: .infinity)
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.red)
-                                .cornerRadius(10)
-                        }
+                    Button(action: saveProfile) {
+                        Text("Save Changes")
+                            .frame(maxWidth: .infinity)
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                    }
+                }
+                
+                // Sign Out Button
+                Section {
+                    Button(action: {
+                        authViewModel.signOut()
+                    }) {
+                        Text("Sign Out")
+                            .frame(maxWidth: .infinity)
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(10)
                     }
                 }
                 
@@ -181,18 +182,15 @@ struct VolunteerProfileEditView: View {
     
     // Save updated profile to Firestore
     private func saveProfile() {
-        // Reset error/success states
         showError = false
         showSuccess = false
         
-        // Validate fields
         if fullName.isEmpty || address1.isEmpty || city.isEmpty || state.isEmpty || zipCode.count < 5 || selectedSkills.isEmpty {
             errorMessage = "Please fill in all required fields."
             showError = true
             return
         }
         
-        // Check that at least one day is active
         guard weeklyAvailability.values.contains(where: { $0.isActive }) else {
             errorMessage = "Please select at least one day you're available."
             showError = true
@@ -205,7 +203,6 @@ struct VolunteerProfileEditView: View {
             return
         }
         
-        // Build Firestore availability dictionary
         var availabilityDict = [String: [String: Timestamp]]()
         for (day, range) in weeklyAvailability {
             if range.isActive {
@@ -222,16 +219,15 @@ struct VolunteerProfileEditView: View {
                 "address": address1,
                 "address2": address2,
                 "city": city,
+                "country": "",
                 "state": state,
                 "zipCode": zipCode
             ],
             "skills": Array(selectedSkills),
-            "preferences": preferences,
+            "preferences": [preferences],
             "availability": availabilityDict
         ]
         
-        
-        // Save to Firestore without impacting auth state
         db.collection("users").document(uid).setData(updatedProfile, merge: true) { error in
             if let error = error {
                 DispatchQueue.main.async {
@@ -244,16 +240,16 @@ struct VolunteerProfileEditView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         self.showSuccess = false
                     }
-                    // Optionally, update AuthViewModel's user directly if needed:
                     if var currentUser = self.authViewModel.user {
                         currentUser.fullName = self.fullName
-                        // Update additional fields as needed
                         self.authViewModel.user = currentUser
                     }
                 }
             }
         }
     }
+
+
     
     // Load existing profile from Firestore
     private func loadExistingProfile() async {
@@ -264,11 +260,13 @@ struct VolunteerProfileEditView: View {
             if let data = snapshot.data() {
                 DispatchQueue.main.async {
                     self.fullName = data["fullName"] as? String ?? ""
-                    self.address1 = data["address1"] as? String ?? ""
-                    self.address2 = data["address2"] as? String ?? ""
-                    self.city = data["city"] as? String ?? ""
-                    self.state = data["state"] as? String ?? ""
-                    self.zipCode = data["zipCode"] as? String ?? ""
+                    if let location = data["location"] as? [String: Any] {
+                        self.address1 = location["address"] as? String ?? ""
+                        self.address2 = location["address2"] as? String ?? ""
+                        self.city = location["city"] as? String ?? ""
+                        self.state = location["state"] as? String ?? ""
+                        self.zipCode = location["zipCode"] as? String ?? ""
+                    }
                     self.selectedSkills = Set(data["skills"] as? [String] ?? [])
                     self.preferences = data["preferences"] as? String ?? ""
                     
