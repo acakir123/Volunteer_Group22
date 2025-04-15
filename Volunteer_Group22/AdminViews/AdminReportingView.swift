@@ -484,12 +484,18 @@ struct AdminReportingView: View {
             let snapshot = try await db.collection("users")
                 .whereField("role", isEqualTo: "Volunteer")
                 .getDocuments()
-            var map: [String: String] = [:]
+            // Moved the section below inside MainActor.run
+            /*var map: [String: String] = [:]
             for document in snapshot.documents {
                 let fullName = document.data()["fullName"] as? String ?? "Unknown Volunteer"
                 map[document.documentID] = fullName
-            }
+            }*/
             await MainActor.run {
+                var map: [String: String] = [:]
+                for document in snapshot.documents {
+                    let fullName = document.data()["fullName"] as? String ?? "Unknown Volunteer"
+                    map[document.documentID] = fullName
+                }
                 self.volunteerNameMap = map
             }
         } catch {
@@ -772,6 +778,3 @@ struct ShareSheet: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
 }
 
-#Preview {
-    AdminReportingView()
-}
